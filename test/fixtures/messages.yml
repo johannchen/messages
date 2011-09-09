@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  mdate: 2011-09-09
+  speaker: MyString
+  summary: MyText
+  url: MyString
+
+two:
+  title: MyString
+  mdate: 2011-09-09
+  speaker: MyString
+  summary: MyText
+  url: MyString

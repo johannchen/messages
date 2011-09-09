@@ -5,7 +5,7 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
 
 
 # Gems used only for assets and not required
@@ -29,5 +29,11 @@ gem 'jquery-rails'
 
 group :test do
   # Pretty printed test output
-  gem 'turn', :require => false
+  # gem 'turn', :require => false
+
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'guard-test'
+  gem 'ruby-prof'
+  gem 'libnotify'
 end
