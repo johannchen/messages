@@ -18,3 +18,11 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
 end
+
+# config OmniAuth
+#OmniAuth.config.test_mode = true
+#OmniAuth.config.mock_auth[:google] = {
+#  'provider' => 'google',
+#  'uid' => '123545'
+#}
+

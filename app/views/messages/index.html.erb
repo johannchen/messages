@@ -1,31 +1,17 @@
 <h1>Listing messages</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Mdate</th>
-    <th>Speaker</th>
-    <th>Summary</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div id="messages">
+<% if @messages.present? %>
+<ul>
 <% @messages.each do |message| %>
-  <tr>
-    <td><%= message.title %></td>
-    <td><%= message.mdate %></td>
-    <td><%= message.speaker %></td>
-    <td><%= message.summary %></td>
-    <td><%= message.url %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <li>
+    <%= message.title %>
+    <%= message.speaker %>
+    <%= message.mdate %>
+  </li>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Message', new_message_path %>
+</ul>
+<% else %>
+<p>no messages found.</p>
+<% end %>
+</div>
