@@ -2,7 +2,11 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    if params[:search]
+      @messages = Message.search(params[:search]).page(params[:page]).per(10)
+    else
+      @messages = Message.order("mdate DESC").page(params[:page]).per(10)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

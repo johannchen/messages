@@ -5,7 +5,11 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+# postgre
 gem 'pg'
+
+# pagination
+gem 'kaminari'
 
 # authentication
 # gem 'omniauth'
@@ -29,13 +33,17 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'rspec-rails', :group => [:test, :development]
+
 group :test do
   # Pretty printed test output
   # gem 'turn', :require => false
 
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'guard-test'
-  gem 'ruby-prof'
+  gem 'guard-rspec'
   gem 'libnotify'
+
+#  gem 'guard-test'
+#  gem 'ruby-prof'
 end
