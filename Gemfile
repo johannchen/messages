@@ -41,6 +41,7 @@ group :test do
 
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
   gem 'guard-rspec'
   gem 'libnotify'
   gem 'rb-inotify'

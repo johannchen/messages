@@ -1,5 +1,12 @@
 Messages::Application.routes.draw do
+  get "categories/index"
+
+  get "categories/create"
+
+  get "categories/update"
+
   resources :messages
+  resources :categories
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

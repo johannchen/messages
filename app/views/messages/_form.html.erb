@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :categories %> [ <%= link_to "add new category", categories_path %> ] <br />
+    <%= f.text_field :category_tokens %>
+  </div>
+
+  <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>

@@ -47,14 +47,26 @@ describe "Messages" do
       message = Factory(:message)
       visit message_path(message)
       page.should have_content("what a message!")
+      page.should have_content("faith, love")
       #page.should have_content("John 3:16")
       #page.should have_content("God so loved the world")
     end 
   end 
  
   describe "create a new message" do
-    it "creates message" do
+    before :each do 
+      @c1 = Factory(:category)
+      @c2 = Factory(:category, :name => "suffering")
       visit new_message_path
+    end
+
+    #it "autocompletes category", :js => true do
+    #  fill_in "Category", :with => "su"
+    #  page.should have_content("suffering")
+    #end
+
+    it "creates message" do
+      page.should have_link("add new category")
       click_button "Create"
       page.should have_content("Title can't be blank")
       page.should have_content("Speaker can't be blank")
@@ -62,9 +74,11 @@ describe "Messages" do
       fill_in "Title", :with => "sunday message"
       fill_in "Speaker", :with => "bob"
       fill_in "Mdate", :with => "2011-09-01"
+      fill_in "message_category_tokens", :with => "#{@c1.id},#{@c2.id}"
       click_button "Create"
       page.should have_content("Message was successfully created")
       current_path.should eq(message_path(Message.last))
+      page.should have_content("love, suffering")
     end
   end
   

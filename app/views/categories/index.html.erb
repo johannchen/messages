@@ -1,0 +1,19 @@
+<h1>Categories</h1>
+<p id="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+<div id="categories">
+<% if @categories.present? %>
+<ul>
+<% @categories.each do |category| %>
+  <li>
+    <%= category.name%> <%= link_to 'edit', edit_category_path(category) %>
+  </li>
+<% end %>
+</ul>
+<% else %>
+<p>no category found.</p>
+<% end %>
+</div>
+
