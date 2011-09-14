@@ -43,7 +43,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'libnotify'
-
+  gem 'rb-inotify'
 #  gem 'guard-test'
 #  gem 'ruby-prof'
 end
