@@ -21,6 +21,14 @@
 </p>
 
 <p>
+  <b>Verses:</b>
+  <% @message.verses.each do |verse| %>
+    <%= verse.ref %><br />
+    <%= verse.esv_passage %><br />
+  <% end %>
+</p>
+
+<p>
   <b>Category:</b>
   <%= @message.category_names %>
 </p>

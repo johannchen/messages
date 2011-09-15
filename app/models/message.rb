@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :verses
 
   attr_reader :category_tokens
 
@@ -15,6 +16,10 @@ class Message < ActiveRecord::Base
 
   def category_names
     self.categories.order(:name).map(&:name).join(', ') if self.categories
+  end
+
+  def verse_refs
+    self.verses.map(&:ref).join('; ') if self.verses
   end
 
 end

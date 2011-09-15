@@ -3,6 +3,10 @@ FactoryGirl.define do
     name "love"
   end
 
+  factory :verse do
+    ref "John 3:16"
+  end
+
   factory :message do
     mdate "2011-01-01"
     title "message"
@@ -11,6 +15,7 @@ FactoryGirl.define do
     summary "what a message!"
     url "http://www.gracedimension.com"
     categories {[Factory(:category), Factory(:category, :name => 'faith')]}
+    verses {[Factory(:verse), Factory(:verse, :ref => 'Matthew 1,2')]}
   end
 
 # factory :message_with_categories, :parent => :message do |message|

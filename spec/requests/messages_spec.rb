@@ -48,8 +48,8 @@ describe "Messages" do
       visit message_path(message)
       page.should have_content("what a message!")
       page.should have_content("faith, love")
-      #page.should have_content("John 3:16")
-      #page.should have_content("God so loved the world")
+      page.should have_content("John 3:16")
+      page.should have_content("God so loved the world")
     end 
   end 
  
