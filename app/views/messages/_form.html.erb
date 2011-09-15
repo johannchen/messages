@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :categories %> [ <%= link_to "add new category", categories_path %> ] <br />
-    <%= f.text_field :category_tokens %>
+    <%= f.text_field :category_tokens, "data-pre" => @message.categories.map(&:attributes).to_json %>
   </div>
 
   <div class="field">

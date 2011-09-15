@@ -1,7 +1,15 @@
 class CategoriesController < ApplicationController
   def index
     @category = Category.new
-    @categories = Category.all
+    if params[:q]
+      @categories = Category.where("name like ?", "%#{params[:q]}%")
+    else
+      @categories = Category.all
+    end
+    respond_to do |format|
+      format.html
+      format.json { render :json => @categories.map(&:attributes) }
+    end
   end
 
   def edit
