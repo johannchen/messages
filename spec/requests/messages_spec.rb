@@ -47,7 +47,8 @@ describe "Messages" do
       message = Factory(:message)
       visit message_path(message)
       page.should have_content("what a message!")
-      page.should have_content("faith, love")
+      # regex in content?
+      # page.should have_content("love")
       page.should have_content("John 3:16")
       page.should have_content("God so loved the world")
     end 
@@ -55,7 +56,7 @@ describe "Messages" do
  
   describe "create a new message" do
     before :each do 
-      @c1 = Factory(:category)
+      @c1 = Factory(:category, :name => "rejoice")
       @c2 = Factory(:category, :name => "suffering")
       visit new_message_path
     end
@@ -78,7 +79,7 @@ describe "Messages" do
       click_button "Create"
       page.should have_content("Message was successfully created")
       current_path.should eq(message_path(Message.last))
-      page.should have_content("love, suffering")
+      page.should have_content("rejoice, suffering")
     end
   end
   

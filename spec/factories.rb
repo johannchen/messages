@@ -1,6 +1,10 @@
 FactoryGirl.define do
+  sequence :name do |n|
+    "love#{n}"
+  end
+
   factory :category do
-    name "love"
+    name
   end
 
   factory :verse do
@@ -11,10 +15,9 @@ FactoryGirl.define do
     mdate "2011-01-01"
     title "message"
     speaker "foo lee"
-#    verses "John 3:16, Matthew 6:19-21"
     summary "what a message!"
     url "http://www.gracedimension.com"
-    categories {[Factory(:category), Factory(:category, :name => 'faith')]}
+    # categories {[Factory(:category), Factory(:category)]}
     verses {[Factory(:verse), Factory(:verse, :ref => 'Matthew 1,2')]}
   end
 

@@ -4,4 +4,5 @@
 jQuery ->
   $("#message_category_tokens").tokenInput "/categories.json",
     crossDomain: false
+    prePopulate: $("#message_category_tokens").data("pre")
     theme: "facebook"
