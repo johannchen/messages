@@ -55,8 +55,8 @@ describe "Messages" do
  
   describe "create a new message" do
     before :each do 
-      @c1 = Factory(:category)
-      @c2 = Factory(:category, :name => "suffering")
+      @c1 = Factory(:category, :name => "peace")
+      @c2 = Factory(:category, :name => "kindness")
       visit new_message_path
     end
 
@@ -66,7 +66,6 @@ describe "Messages" do
     #end
 
     it "creates message" do
-      page.should have_link("add new category")
       click_button "Create"
       page.should have_content("Title can't be blank")
       page.should have_content("Speaker can't be blank")
@@ -74,11 +73,11 @@ describe "Messages" do
       fill_in "Title", :with => "sunday message"
       fill_in "Speaker", :with => "bob"
       fill_in "Mdate", :with => "2011-09-01"
-      fill_in "message_category_tokens", :with => "#{@c1.id},#{@c2.id}"
+      fill_in "message_category_names", :with => "#{@c1.name},#{@c2.name}"
       click_button "Create"
       page.should have_content("Message was successfully created")
       current_path.should eq(message_path(Message.last))
-      page.should have_content("love, suffering")
+      page.should have_content("kindness, peace")
     end
   end
   

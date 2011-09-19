@@ -7,9 +7,18 @@ describe Message do
       message.category_names.should eq("faith, love")
     end
   end
-  context "with 2 or more verses" do
-    it "displays them" do
-      message.verse_refs.should eq("John 3:16; Matthew 1,2")
+
+  context "with new category names" do
+    it "creates them in categories table and then assigns them to message" do
+      message.category_names = "faith, love, peace, kind"
+      message.category_names.should eq("faith, kind, love, peace")
+    end
+  end
+
+  context "with new verses" do
+    it "creates them in verses table and then assigns them to message" do
+      message.verse_refs = "John 3:16; 1 Corinthians 10:13"
+      message.verse_refs.should eq("John 3:16; 1 Corinthians 10:13")
     end
   end
 end

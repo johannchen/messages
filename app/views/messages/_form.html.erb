@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :categories %> [ <%= link_to "add new category", categories_path %> ] <br />
-    <%= f.text_field :category_tokens, "data-pre" => @message.categories.map(&:attributes).to_json %>
-  </div>
-
-  <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
@@ -35,6 +30,14 @@
   <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url %>
+  </div>
+  <div clas="ui-widget">
+    <%= f.label :verses %><br />
+    <%= f.text_field :verse_refs %>
+  </div>
+  <div clas="ui-widget">
+    <%= f.label :category_names %><br />
+    <%= f.text_field :category_names %>
   </div>
   <div class="actions">
     <%= f.submit %>

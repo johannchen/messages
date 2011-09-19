@@ -1,14 +1,15 @@
 class CategoriesController < ApplicationController
   def index
     @category = Category.new
-    if params[:q]
-      @categories = Category.where("name like ?", "%#{params[:q]}%")
+    if params[:term]
+      # jquery autocomplete
+      @categories = Category.where("name like ?", "%#{params[:term]}%")
     else
       @categories = Category.all
     end
     respond_to do |format|
       format.html
-      format.json { render :json => @categories.map(&:attributes) }
+      format.json { render :json => @categories.order(:name).map(&:name) }
     end
   end
 
