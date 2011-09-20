@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Categories" do
   describe "GET /categories" do
     it "displays categories" do
-      Factory(:category)
+      Factory(:category, :name => "love")
       visit categories_path
       page.should have_content("love")
       page.should have_link("edit")
@@ -24,7 +24,7 @@ describe "Categories" do
 
   describe "PUT /categories" do
     it "updates category" do
-      Factory(:category)
+      Factory(:category, :name => "love")
       visit categories_path
       click_link "edit"
       page.should have_field("category_name", :with => "love")

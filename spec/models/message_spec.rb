@@ -4,6 +4,9 @@ describe Message do
   let(:message) { Factory(:message) }
   context "with 2 or more categories" do
     it "displays them in alphbetical order" do
+      c1 = Factory.build(:category, :name => "love")
+      c2 = Factory.build(:category, :name => "faith")
+      message.categories << [c1, c2]
       message.category_names.should eq("faith, love")
     end
   end
