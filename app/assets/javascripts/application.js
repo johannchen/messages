@@ -7,5 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.tokeninput
+//= require jquery.validate
 //= require_tree .

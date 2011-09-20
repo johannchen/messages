@@ -1,27 +1,15 @@
-<%= form_for(@message) do |f| %>
-  <% if @message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
-      <% @message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for @message, :html => {:id => "message_form"} do |f| %>
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :class => "required" %>
   </div>
   <div class="field">
     <%= f.label :mdate %><br />
-    <%= f.text_field :mdate %>
+    <%= f.text_field :mdate, :class => "required" %>
   </div>
   <div class="field">
     <%= f.label :speaker %><br />
-    <%= f.text_field :speaker %>
+    <%= f.text_field :speaker, :class => "required" %>
   </div>
   <div class="field">
     <%= f.label :summary %><br />

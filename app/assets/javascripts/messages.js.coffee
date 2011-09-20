@@ -11,3 +11,9 @@
 
 jQuery ->
   $("#message_mdate").datepicker dateFormat: 'yy-mm-dd'
+  $("#message_form").validate
+    rules:
+      message_mdate:
+        required: true
+        dateISO: true
+        
