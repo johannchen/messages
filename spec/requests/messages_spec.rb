@@ -66,30 +66,31 @@ describe "Messages" do
     #  page.should have_content("suffering")
     #end
 
-    it "creates message" do
+    it "creates message", :js => true do
       click_button "Create"
-      page.should have_content("Title can't be blank")
-      page.should have_content("Speaker can't be blank")
-      page.should have_content("Mdate can't be blank")
+      page.should have_content("This field is required")
       fill_in "Title", :with => "sunday message"
       fill_in "Speaker", :with => "bob"
       fill_in "Mdate", :with => "2011-09-01"
+      fill_in "message_verse_refs", :with => "John 1:4; Matthew 3:2"
       fill_in "message_category_names", :with => "#{@c1.name},#{@c2.name}"
       click_button "Create"
       page.should have_content("Message was successfully created")
       current_path.should eq(message_path(Message.last))
+      page.should have_content("John 1:4")
+      page.should have_content("Matthew 3:2")
       page.should have_content("kindness, peace")
     end
   end
   
   describe "update a specific message" do
-    it "updates message" do
+    it "updates message", :js => true  do
       message = Factory(:message)
       visit edit_message_path(message)
       page.should have_field("Speaker", :with => "foo lee")
       fill_in "Speaker", :with => ""
       click_button "Update"
-      page.should have_content("Speaker can't be blank")
+      page.should have_content("This field is required")
       fill_in "Speaker", :with => "bob"
       click_button "Update"
       page.should have_content("Message was successfully updated")

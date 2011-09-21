@@ -18,7 +18,7 @@ FactoryGirl.define do
     summary "what a message!"
     url "http://www.gracedimension.com"
     # categories {[Factory(:category), Factory(:category)]}
-    verses {[Factory(:verse), Factory(:verse, :ref => 'Matthew 1,2')]}
+    verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
   end
 
 # factory :message_with_categories, :parent => :message do |message|
