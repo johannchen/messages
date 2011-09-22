@@ -6,8 +6,8 @@ describe "Messages" do
       10.times do 
         Factory(:message)
       end
-      @m1 = Factory(:message, :title => "my message", :speaker => "Jonathan", :mdate => "2011-08-01")
-      @m2 = Factory(:message, :title => "your message", :speaker => "my Eric", :mdate => "2011-08-02")
+      @m1 = Factory(:message, :title => "my message", :mdate => "2011-08-01")
+      @m2 = Factory(:message, :title => "your message", :mdate => "2011-08-02")
       visit messages_path
     end
 
@@ -29,7 +29,6 @@ describe "Messages" do
         click_button "Search"
         page.all("#messages li").count.should eq(2)
         page.should have_content("my message")
-        page.should have_content("my Eric")
         page.should have_no_link("Next")
       end
       it "displays no messages found when no record returns" do

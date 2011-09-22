@@ -1,26 +1,35 @@
-<h1>Listing messages</h1>
-
-<%= form_tag messages_path, :method => 'get' do %>
-  <div><label for="search">Search for:</label>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "Search", :name => nil %>
-  </div> 
-<% end %>
-
-<div id="messages">
+<div class="side">
+  <div class="categories">
+    <h2>Categories</h2>
+    <ul>
+      <li>Love</li>
+      <li>Joy</li>
+      <li>Peace</li>
+    </ul>
+  </div>
+</div>
+<div class="messages">
+  <div class="full">
 <% if @messages.present? %>
-<ul>
-<% @messages.each do |message| %>
-  <li>
-    <%= message.title %>
-    <%= message.speaker %>
-    <%= message.mdate %>
-  </li>
+  <% @messages.each do |message| %>
+    <div class="message">
+      <div class="main">
+        <div class="info">
+          <span class="speaker"><%= message.speaker %></span>
+          <span class="created_at"></span>
+        </div>
+        <h2><%= message.title %></h2>
+        <div class="summary">
+          <%= message.summary %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
 <% end %>
-</ul>
 <% else %>
 <p>no messages found.</p>
 <% end %>
+  </div>
 </div>
 
 <%= paginate @messages %>
