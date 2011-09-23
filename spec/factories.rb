@@ -29,7 +29,7 @@ FactoryGirl.define do
     url "http://www.gracedimension.com"
     speaker
     # categories {[Factory(:category), Factory(:category)]}
-    # verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
+    verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
   end
 
 # factory :message_with_categories, :parent => :message do |message|

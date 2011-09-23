@@ -9,8 +9,16 @@ class Message < ActiveRecord::Base
     where(['title like ? or speaker like ?', "%#{search}%", "%#{search}%"]).order("mdate desc") if search
   end 
 
+  def speaker_name
+    speaker.name if speaker
+  end
+
+  def speaker_name=(name)
+    self.speaker = Speaker.find_or_create_by_name(name) if name.present? 
+  end
+
   def category_names
-    self.categories.order("name ASC").map(&:name).join(', ') if self.categories
+    categories.order("name ASC").map(&:name).join(', ') if categories
   end
 
   def category_names=(names)

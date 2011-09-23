@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Message do
   let(:message) { Factory(:message) }
+
   context "with 2 or more categories" do
     it "displays them in alphbetical order" do
       c1 = Factory.build(:category, :name => "love")
@@ -15,6 +16,13 @@ describe Message do
     it "creates them in categories table and then assigns them to message" do
       message.category_names = "faith, love, peace, kind"
       message.category_names.should eq("faith, kind, love, peace")
+    end
+  end
+
+  context "with new speaker name" do
+    it "creates speaker and then assigns it to message" do
+      message.speaker_name = "Rick Warren"
+      message.speaker_name.should eq("Rick Warren")
     end
   end
 
