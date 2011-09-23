@@ -140,10 +140,8 @@ label.check_box {
   position: relative;
 }
 
-#top .logo {
-  margin-top: 50px;
+#top h1 {
   margin-left: 100px;
-  padding-bottom: 10px;
 }
 
 #nav_bar {
