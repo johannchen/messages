@@ -1,22 +1,9 @@
 Messages::Application.routes.draw do
-  get "verses/show"
-
-  get "verses/new"
-
-  get "verses/edit"
-
-  get "verses/create"
-
-  get "verses/update"
-
-  get "categories/index"
-
-  get "categories/create"
-
-  get "categories/update"
 
   resources :messages
   resources :categories
+  resources :verses
+  resources :speakers, :only => :index
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
