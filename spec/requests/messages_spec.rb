@@ -85,14 +85,14 @@ describe "Messages" do
     it "updates message", :js => true  do
       message = Factory(:message)
       visit edit_message_path(message)
-      page.should have_field("message_speaker_name", :with => "Tim Keller")
-      fill_in "message_speaker_name", :with => ""
+      page.should have_field("Title", :with => "message")
+      fill_in "Title", :with => "my message"
       click_button "Update"
       page.should have_content("This field is required")
-      fill_in "message_speaker_name", :with => "bob"
+      fill_in "Title", :with => "my message"
       click_button "Update"
       page.should have_content("Message was successfully updated")
-      page.should have_content("bob")
+      page.should have_content("my message")
       current_path.should eq(message_path(message))
     end
   end
