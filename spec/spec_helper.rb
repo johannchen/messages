@@ -25,6 +25,9 @@ Spork.prefork do
     # config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rr
+    #
+    config.include IntegrationSpecHelper, :type => :request
+
     config.mock_with :rspec
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
@@ -50,6 +53,14 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
   end
+
+  Capybara.default_host = 'http://example.org'
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:twitter, {
+    :uid => '12345',
+    :nickname => 'jchen'
+  })
 
 end
 

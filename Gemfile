@@ -12,7 +12,7 @@ gem 'pg'
 gem 'kaminari'
 
 # authentication
-# gem 'omniauth'
+gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :branch => "0-3-stable"
 
 # Gems used only for assets and not required
 # in production environments by default.
