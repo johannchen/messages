@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110922233455) do
+ActiveRecord::Schema.define(:version => 20110926184814) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "categories_messages", :id => false, :force => true do |t|
@@ -32,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20110922233455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "speaker_id"
+    t.date     "listened_on"
+    t.integer  "user_id"
   end
 
   create_table "messages_verses", :id => false, :force => true do |t|
@@ -44,10 +47,21 @@ ActiveRecord::Schema.define(:version => 20110922233455) do
     t.string   "church"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "verses", :force => true do |t|
-    t.string "ref"
+    t.string  "ref"
+    t.integer "user_id"
   end
 
 end

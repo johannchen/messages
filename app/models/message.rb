@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :verses
   belongs_to :speaker
+  belongs_to :user
 
   validates_presence_of :title, :speaker, :mdate
 
