@@ -140,8 +140,18 @@ label.check_box {
   position: relative;
 }
 
-#top h1 {
+#top .title {
+  margin-top: 20px;
   margin-left: 100px;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#top .user_nav {
+  position: absolute;
+  bottom: 10px;
+  right: 100px;
 }
 
 #nav_bar {
