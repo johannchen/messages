@@ -4,9 +4,12 @@ FactoryGirl.define do
   end
 
   factory :user do
-   email "bob@example.com"
-   first_name "bob"
+   provider "twitter"
+   uid "12345"
+   email "jchen@example.com"
+   first_name "j"
    last_name "chen"
+   name "jchen"
   end
 
   factory :speaker do

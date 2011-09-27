@@ -59,7 +59,7 @@ Spork.prefork do
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(:twitter, {
     :uid => '12345',
-    :nickname => 'jchen'
+    :user_info => {:name => 'jchen'}
   })
 
 end

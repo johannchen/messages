@@ -54,48 +54,48 @@ describe "Messages" do
     end 
   end 
  
-  describe "create a new message" do
-    before :each do 
-      visit new_message_path
-    end
+# describe "create a new message" do
+#   before :each do 
+#     visit new_message_path
+#   end
 
-    #it "autocompletes category", :js => true do
-    #  fill_in "Category", :with => "su"
-    #  page.should have_content("suffering")
-    #end
+#   #it "autocompletes category", :js => true do
+#   #  fill_in "Category", :with => "su"
+#   #  page.should have_content("suffering")
+#   #end
 
-    it "creates message", :js => true do
-      click_button "Create"
-      page.should have_content("This field is required")
-      fill_in "Title", :with => "sunday message"
-      fill_in "message_speaker_name", :with => "bob"
-      fill_in "Mdate", :with => "2011-09-01"
-      fill_in "message_verse_refs", :with => "John 1:4; Matthew 3:2"
-      fill_in "message_category_names", :with => "peace, kindness"
-      click_button "Create"
-      page.should have_content("Message was successfully created")
-      current_path.should eq(message_path(Message.last))
-      page.should have_content("John 1:4")
-      page.should have_content("Matthew 3:2")
-      page.should have_content("kindness, peace")
-    end
-  end
-  
-  describe "update a specific message" do
-    it "updates message", :js => true  do
-      message = Factory(:message)
-      visit edit_message_path(message)
-      page.should have_field("Title", :with => "message")
-      fill_in "Title", :with => "my message"
-      click_button "Update"
-      page.should have_content("This field is required")
-      fill_in "Title", :with => "my message"
-      click_button "Update"
-      page.should have_content("Message was successfully updated")
-      page.should have_content("my message")
-      current_path.should eq(message_path(message))
-    end
-  end
+#   it "creates message", :js => true do
+#     click_button "Create"
+#     page.should have_content("This field is required")
+#     fill_in "Title", :with => "sunday message"
+#     fill_in "message_speaker_name", :with => "bob"
+#     fill_in "Mdate", :with => "2011-09-01"
+#     fill_in "message_verse_refs", :with => "John 1:4; Matthew 3:2"
+#     fill_in "message_category_names", :with => "peace, kindness"
+#     click_button "Create"
+#     page.should have_content("Message was successfully created")
+#     current_path.should eq(message_path(Message.last))
+#     page.should have_content("John 1:4")
+#     page.should have_content("Matthew 3:2")
+#     page.should have_content("kindness, peace")
+#   end
+# end
+# 
+# describe "update a specific message" do
+#   it "updates message", :js => true  do
+#     message = Factory(:message)
+#     visit edit_message_path(message)
+#     page.should have_field("Title", :with => "message")
+#     fill_in "Title", :with => ""
+#     click_button "Update"
+#     page.should have_content("This field is required")
+#     fill_in "Title", :with => "my message"
+#     click_button "Update"
+#     page.should have_content("Message was successfully updated")
+#     page.should have_content("my message")
+#     current_path.should eq(message_path(message))
+#   end
+# end
 
 #  describe "DELETE /messages" do 
 #    it "destroys message", :js => true do

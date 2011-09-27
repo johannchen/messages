@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :speaker
   belongs_to :user
 
-  validates_presence_of :title, :speaker, :mdate
+  validates_presence_of :title, :speaker, :mdate, :user
 
   def self.search(search)
     where(['title like ? or speaker like ?', "%#{search}%", "%#{search}%"]).order("mdate desc") if search
@@ -26,7 +26,7 @@ class Message < ActiveRecord::Base
     self.categories.clear
     if names.present? 
       names.split(", ").each do |n|
-        name = Category.find_or_create_by_name(n)
+        name = Category.find_or_create_by_name_and_user_id(n, self.user_id)
         self.categories << name    
       end
     end

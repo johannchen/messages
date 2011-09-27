@@ -3,6 +3,26 @@ require 'spec_helper'
 describe Message do
   let(:message) { Factory(:message) }
 
+  it "should not be valid with blank title" do
+    message.title = "" 
+    message.should_not be_valid
+  end
+
+  it "should not be valid with blank mdate" do
+    message.mdate = "" 
+    message.should_not be_valid
+  end
+
+  it "should not be valid with blank speaker" do
+    message.speaker = nil 
+    message.should_not be_valid
+  end
+
+  it "should not be valid with blank user" do
+    message.user = nil
+    message.should_not be_valid
+  end
+
   context "with 2 or more categories" do
     it "displays them in alphbetical order" do
       c1 = Factory.build(:category, :name => "love")

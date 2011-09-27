@@ -9,6 +9,7 @@
   </div>
 </div>
 <div class="messages">
+  <%= link_to "New Message", new_message_path %>
   <div class="full">
 <% if @messages.present? %>
   <% @messages.each do |message| %>
