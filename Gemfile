@@ -36,7 +36,10 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem 'rspec-rails', :group => [:test, :development]
+group :development do
+  gem 'pry'
+end
+
 
 group :test do
   # Pretty printed test output
@@ -53,3 +56,5 @@ group :test do
 #  gem 'guard-test'
 #  gem 'ruby-prof'
 end
+
+gem 'rspec-rails', :group => [:test, :development]
