@@ -15,11 +15,12 @@
   <% @messages.each do |message| %>
     <div class="message">
       <div class="main">
-        <div class="info">
-          <span class="speaker"><%= message.speaker %></span>
-          <span class="created_at"></span>
-        </div>
         <h2><%= message.title %></h2>
+        <div class="info">
+          By <%= message.speaker_name %> 
+          <%= message.mdate.strftime("on %b %d, %Y") %> 
+          in <%= message.category_names %>
+        </div>
         <div class="summary">
           <%= message.summary %>
         </div>

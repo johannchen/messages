@@ -42,17 +42,17 @@ describe "Messages" do
 #   end 
   end
 
-  describe "show a specific message" do
-    it "shows a message" do
-      message = Factory(:message)
-      visit message_path(message)
-      page.should have_content("what a message!")
-      # regex in content?
-      # page.should have_content("love")
-      page.should have_content("John 3:16")
-      page.should have_content("God so loved the world")
-    end 
-  end 
+# describe "show a specific message" do
+#   it "shows a message" do
+#     message = Factory(:message)
+#     visit message_path(message)
+#     page.should have_content("what a message!")
+#     # regex in content?
+#     # page.should have_content("love")
+#     page.should have_content("John 3:16")
+#     page.should have_content("God so loved the world")
+#   end 
+# end 
  
 # describe "create a new message" do
 #   before :each do 
