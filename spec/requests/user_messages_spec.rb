@@ -29,7 +29,7 @@ describe "UserMessages" do
       page.should have_content("What a message!")
       page.should have_content("John 3:16")
       page.should have_content("God so loved the world")
-      page.should have_content("kindness, peace")
+      page.should have_content("peace, kindness")
       page.should have_link("Edit")
       page.should have_link("Browse")
       click_link "Edit"
@@ -37,7 +37,9 @@ describe "UserMessages" do
       # edit
       page.should have_field("Title", :with => "my message")
       page.should have_field("message_speaker_name", :with => "Eric")
-      page.should have_field("Listened_on", :with => "2011-09-03")
+      page.should have_field("Listened on", :with => "2011-09-03")
+      page.should have_field("message_verse_refs", :with => "John 3:16; Matthew 3:2")
+      page.should have_field("message_category_names", :with => "peace, kindness")
     end
   end
 end

@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  sequence :name do |n|
-    "love#{n}"
-  end
+#  sequence :name do |n|
+#    "love#{n}"
+#  end
 
   factory :user do
    provider "twitter"
@@ -19,7 +19,7 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name
+    name "love"
     user
   end
 
@@ -35,8 +35,8 @@ FactoryGirl.define do
     url "http://www.gracedimension.com"
     speaker
     user
-    # categories {[Factory(:category), Factory(:category)]}
-    verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
+    #categories {[Factory(:category), Factory(:category, :name => "joy")]}
+    #verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
   end
 
 # factory :message_with_categories, :parent => :message do |message|

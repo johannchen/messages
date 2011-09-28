@@ -44,8 +44,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(params[:message])
-    @message.user_id = current_user.id
+    @message = current_user.messages.build(params[:message])
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }

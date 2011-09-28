@@ -19,6 +19,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(params[:category])
+    @category.user_id = current_user.id
     if @category.save
       redirect_to categories_path, notice: 'Successfully added category.'
     end
