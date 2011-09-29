@@ -13,7 +13,7 @@ describe "Login" do
 
     it "cannot access to other pages" do
       visit messages_path
-      page.should have_content("You don't have the privilege to access this page. Please sign in first")
+      page.should have_content("Not authorized to index message. Please sign in first")
     end
   end
 

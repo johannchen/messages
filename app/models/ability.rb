@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
     else
       can :manage, :all, :user_id => user.id 
+      cannot :manage, :all if user.id.nil?
     end
   end
 end

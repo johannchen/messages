@@ -1,11 +1,13 @@
 class CategoriesController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @category = Category.new
     if params[:term]
       # jquery autocomplete
-      @categories = Category.where("name like ?", "%#{params[:term]}%")
+      @categories = current_user.categories.where("name like ?", "%#{params[:term]}%") if current_user.categories
     else
-      @categories = Category.all
+      @categories = current_user.categories 
     end
     respond_to do |format|
       format.html
@@ -14,19 +16,16 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def create
-    @category = Category.new(params[:category])
-    @category.user_id = current_user.id
+    @category = current_user.categories.build(params[:category])
     if @category.save
       redirect_to categories_path, notice: 'Successfully added category.'
     end
   end
 
   def update
-    @category = Category.find(params[:id])
     if @category.update_attributes(params[:category])
       redirect_to categories_path, notice: 'Successfully updated category.'
     else

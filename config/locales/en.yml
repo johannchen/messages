@@ -4,4 +4,4 @@
 en:
   unauthorized:
     manage:
-      all: "Not authorized to %{action} %{subject}." 
+      all: "Not authorized to %{action} %{subject}. Please sign in first" 

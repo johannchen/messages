@@ -13,9 +13,8 @@ describe Category do
     category.should_not be_valid
   end
 
-# it "should not have duplicate name" do
-#   Factory(:category, :name => "joy")
-#   category = Category.new(:name => "joy")
-#   category.should_not be_valid
-# end
+  it "should not have duplicate name by the same user" do
+    dup_category = Category.new(:name => "love", :user => category.user)
+    dup_category.should_not be_valid
+  end
 end
