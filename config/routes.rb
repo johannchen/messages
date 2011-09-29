@@ -5,7 +5,7 @@ Messages::Application.routes.draw do
   resources :messages
   resources :categories
   resources :verses
-  resources :speakers, :only => :index
+  resources :speakers
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

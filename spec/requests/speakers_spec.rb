@@ -9,24 +9,25 @@ describe "Speakers" do
     it "creates, updates and lists speaker" do
       # create
       visit speakers_path 
-      fill_in "Name", :with => "Eric Li"
-      fill_in "Church", :with => "DCCC"
+      page.should have_content("no speaker found")
+      fill_in "Name", :with => "Jonathan L"
+      fill_in "Church", :with => "Gracepoint"
+      fill_in "Link", :with => "http://joonglee.wordpress.org"
       click_button "Create"
       page.should have_content("Successfully added speaker.")
       # list on the same page
-      page.should have_content("Eric Li")
-      page.should have_content("DCCC")
+      page.should have_content("Jonathan L")
+      page.should have_content("Gracepoint")
       click_link "edit"
       current_path.should eq(edit_speaker_path(Speaker.last)) 
       # edit
-      page.should have_field("Name", :with => "Eric Li")
-      page.should have_field("Church", :with => "DCCC")
-      fill_in "Name", :with => "Phillip G"
+      page.should have_field("Name", :with => "Jonathan L")
+      page.should have_field("Church", :with => "Gracepoint")
+      fill_in "Name", :with => "Ed K"
       click_button "Update"
       page.should have_content("Successfully updated speaker.")
       current_path.should eq(speakers_path) 
-      page.should have_content("Phillip G")
-      page.should have_field("Name", :with => "")
+      page.should have_content("Ed K")
     end
   end
 end
