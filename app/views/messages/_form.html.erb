@@ -1,34 +1,34 @@
 <%= form_for @message, :html => {:id => "message_form"} do |f| %>
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title, :class => "required" %>
   </div>
   <div class="field">
-    <%= f.label :mdate %><br />
+    <%= f.label :mdate %>
     <%= f.text_field :mdate, :class => "required" %>
   </div>
   <div class="field">
-    <%= f.label :speaker %><br />
+    <%= f.label :speaker %>
     <%= f.text_field :speaker_name, :class => "required" %>
   </div>
   <div class="field">
-    <%= f.label :summary %><br />
+    <%= f.label :summary %>
     <%= f.text_area :summary %>
   </div>
   <div class="field">
-    <%= f.label :url %><br />
+    <%= f.label :url %>
     <%= f.text_field :url %>
   </div>
   <div class="field">
-    <%= f.label :listened_on %><br />
+    <%= f.label :listened_on %>
     <%= f.text_field :listened_on %>
   </div>
   <div clas="ui-widget">
-    <%= f.label :verses %><br />
+    <%= f.label :verses %>
     <%= f.text_field :verse_refs %>
   </div>
   <div clas="ui-widget">
-    <%= f.label :category_names %><br />
+    <%= f.label :category_names %>
     <%= f.text_field :category_names %>
   </div>
   <div class="actions">
