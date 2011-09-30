@@ -13,10 +13,10 @@ describe Message do
     message.should_not be_valid
   end
 
-  it "should not be valid with blank speaker" do
-    message.speaker = nil 
-    message.should_not be_valid
-  end
+#  it "should not be valid with blank speaker" do
+#    message.speaker = nil 
+#    message.should_not be_valid
+#  end
 
   it "should not be valid with blank user" do
     message.user = nil
@@ -43,4 +43,14 @@ describe Message do
       message.verse_refs.should eq("John 3:16; 1 Corinthians 10:13")
     end
   end
+
+#  context "with many messages" do
+#    m1 = Factory(:message, :listened_on => "")
+#    m2 = Factory(:message, :listened_on => "2011-09-30")
+#    m3 = Factory(:message, :listened_on => "2011-09-29")
+#    it "sorts them by listened date with to listen on top" do
+#      Message.all.count.should eq(3)
+#      Message.order_by_listened_date.should eq([m1, m2, m3])
+#    end
+#  end
 end

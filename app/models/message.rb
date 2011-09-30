@@ -4,9 +4,11 @@ class Message < ActiveRecord::Base
   belongs_to :speaker
   belongs_to :user
 
-  validates_presence_of :title, :speaker, :mdate, :user
+  validates_presence_of :title, :mdate, :user
 
-  attr_writer :category_names, :verse_refs
+  scope :order_by_listened_date, order("listened_on DESC")
+  attr_writer :speaker_name, :category_names, :verse_refs
+  before_save :assign_speaker
   after_save :assign_categories, :assign_verses
 
   def self.search(search)
@@ -14,11 +16,7 @@ class Message < ActiveRecord::Base
   end 
 
   def speaker_name
-    speaker.name if speaker
-  end
-
-  def speaker_name=(name)
-    self.speaker = Speaker.find_or_create_by_name_and_user_id(name, self.user_id) if name.present? 
+    @speaker_name || speaker.name if speaker
   end
 
   def category_names
@@ -30,6 +28,12 @@ class Message < ActiveRecord::Base
   end
 
   private
+
+  def assign_speaker
+    if @speaker_name
+      self.speaker = Speaker.find_or_create_by_name_and_user_id(@speaker_name, self.user_id) 
+    end
+  end
 
   def assign_categories
     if @category_names

@@ -23,7 +23,12 @@
 
   <div id="nav_bar">
     <ul class="nav horizontal">
-      <li><%= link_to 'Browse Messages', messages_path if current_user %></li>
+    <% if current_user %>
+      <li><%= link_to 'Messages', messages_path %></li>
+      <!-- <li><%= link_to 'Verses', verses_path %></li> -->
+      <li><%= link_to 'Speakers', speakers_path %></li>
+      <li><%= link_to 'Categories', categories_path %></li>
+    <% end %>
       <li><%= link_to 'About' %></li>
       <li><%= link_to 'Feedback' %></li>
     </ul>

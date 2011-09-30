@@ -15,7 +15,7 @@
   <% @messages.each do |message| %>
     <div class="message">
       <div class="main">
-        <h2><%= message.title %></h2>
+        <h2><%= link_to message.title, message_path(message) %></h2>
         <div class="info">
           By <%= message.speaker_name %> 
           <%= message.mdate.strftime("on %b %d, %Y") %> 

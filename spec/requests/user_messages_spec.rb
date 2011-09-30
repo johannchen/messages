@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "UserMessages" do
   before :each do
     login_with_oauth 
+    @user = User.last
   end
 
   describe "Single Message Flows" do
@@ -22,6 +23,7 @@ describe "UserMessages" do
       fill_in "message_verse_refs", :with => "John 3:16; Matthew 3:2"
       fill_in "message_category_names", :with => "peace, kindness"
       click_button "Create"
+      # save_and_open_page
       page.should have_content("Message was successfully created")
       current_path.should eq(message_path(Message.last))
       # display
@@ -34,7 +36,7 @@ describe "UserMessages" do
       page.should have_content("God so loved the world")
       page.should have_content("peace, kindness")
       page.should have_link("Edit")
-      page.should have_link("Browse")
+      page.should have_link("Messages")
       click_link "Edit"
       current_path.should eq(edit_message_path(Message.last))
       # edit
@@ -62,14 +64,40 @@ describe "UserMessages" do
       page.should have_content("John 1:4")
       page.should have_content("joy, leadership")
       page.should have_link("Edit")
-      page.should have_link("Browse")
+      page.should have_link("Messages")
       # list message
-      click_link "Browse"
+      click_link "Messages"
       current_path.should eq(messages_path)
       page.should have_content("edit message")
       page.should have_content("By Mondy on Feb 03, 2011")
       page.should have_content("joy, leadership")
       page.should have_content("good message!")
+    end
+  end
+  
+  describe "Messages Index View" do
+    it "paginates every 10 messages" do
+      22.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
+      visit messages_path
+      page.should have_no_link("Prev")
+      page.should have_link("Next")
+      click_link "Next"
+      page.should have_link("Prev")
+      page.should have_link("Next")
+      click_link "Next"
+      page.should have_no_link("Next")
+      page.should have_link("Prev")
+    end
+  end
+
+  describe "Messages Calendar View" do
+    it "displays messages in a calendar by listened date" do
+      #Factory(:message)
+      m1 = Factory(:message, :title => "one", :listened_on => "2011-09-08", :user => @user)
+      m2 = Factory(:message, :title => "two", :listened_on => "2011-09-30", :user => @user)
+      visit messages_path
+      page.should have_content("one")
+      page.should have_content("two")
     end
   end
 end

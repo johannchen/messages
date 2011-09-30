@@ -125,6 +125,8 @@ GEM
       spruz (~> 0.2.8)
     kaminari (0.12.4)
       rails (>= 3.0.0)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     libnotify (0.5.7)
       ffi (= 1.0.9)
     log4r (1.1.9)
@@ -253,6 +255,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails
   kaminari
+  launchy
   libnotify
   omniauth!
   pg

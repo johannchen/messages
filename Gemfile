@@ -53,6 +53,7 @@ group :test do
   gem 'rb-inotify'
   gem 'spork', '> 0.9.0.rc'
   gem 'guard-spork'
+  gem 'launchy'
 #  gem 'guard-test'
 #  gem 'ruby-prof'
 end
