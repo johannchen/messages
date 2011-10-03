@@ -39,6 +39,10 @@ FactoryGirl.define do
     #verses {[Factory(:verse), Factory(:verse, :ref => 'Romans 8:28')]}
   end
 
+  factory :message_with_category, :parent => :message do |message|
+    message.after_create { |m| Factory(:category, :message => m) }
+  end
+
 # factory :message_with_categories, :parent => :message do |message|
 #   message.after_create do |m| 
 #     factory(:category, :message => m) 

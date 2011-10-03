@@ -1,0 +1,11 @@
+<div class="side">
+  <div class="categories">
+    <h2>Categories</h2>
+    <ul>
+      <% @categories.each do |cat| %>
+        <li><%= link_to cat.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

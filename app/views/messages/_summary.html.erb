@@ -1,0 +1,26 @@
+  <div class="full">
+<% if @messages.present? %>
+  <% @messages.each do |message| %>
+    <div class="message">
+      <div class="main">
+        <h2><%= link_to message.title, message_path(message) %></h2>
+        <div class="info">
+          By <%= message.speaker_name %> 
+          <%= message.mdate.strftime("on %b %d, %Y") %> 
+          in <%= message.category_names %>
+        </div>
+        <div class="summary">
+          <%= message.summary %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+<% end %>
+<% else %>
+<p>no messages found.</p>
+<% end %>
+  </div>
+</div>
+
+<%= paginate @messages %>
+

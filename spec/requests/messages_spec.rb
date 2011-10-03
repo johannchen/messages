@@ -16,7 +16,7 @@ describe "Messages" do
     # end
 
     it "paginates with every 10 messages" do
-      paginate_with_every_10_messages
+      # paginate_with_every_10_messages
     end
    
 #   describe "search messages" do

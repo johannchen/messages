@@ -7,6 +7,8 @@ class MessagesController < ApplicationController
     else
       @messages = current_user.messages.order("mdate DESC").page(params[:page]).per(10)
     end
+
+    @categories = current_user.categories
   end
 
   def show

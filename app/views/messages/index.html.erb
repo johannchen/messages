@@ -1,40 +1,13 @@
-<div class="side">
-  <div class="categories">
-    <h2>Categories</h2>
-    <ul>
-      <li>Love</li>
-      <li>Joy</li>
-      <li>Peace</li>
-    </ul>
-  </div>
-</div>
 <div class="messages">
-  <%= link_to "New Message", new_message_path %>
+  <%= link_to "New Message", new_message_path %> 
+  Views: 
+  <%= link_to "Calendar", messages_path(:view => "calendar") %> |
+  <%= link_to "List" %> |
+  <%= link_to "Summary" %>
+<% if params[:view] == "calendar" %>
   <div id="calendar">
   </div>
-
-  <div class="full">
-<% if @messages.present? %>
-  <% @messages.each do |message| %>
-    <div class="message">
-      <div class="main">
-        <h2><%= link_to message.title, message_path(message) %></h2>
-        <div class="info">
-          By <%= message.speaker_name %> 
-          <%= message.mdate.strftime("on %b %d, %Y") %> 
-          in <%= message.category_names %>
-        </div>
-        <div class="summary">
-          <%= message.summary %>
-        </div>
-        <div class="clear"></div>
-      </div>
-    </div>
-<% end %>
 <% else %>
-<p>no messages found.</p>
+  <%= render 'side' %>
+  <%= render 'summary' %>
 <% end %>
-  </div>
-</div>
-
-<%= paginate @messages %>

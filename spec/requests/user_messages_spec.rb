@@ -10,8 +10,12 @@ describe "UserMessages" do
     it "creates, displays and lists message by user" do
       # list
       visit messages_path 
-      page.should have_content "no messages found"
+      # page.should have_content "no messages found"
+      # view links
       page.should have_link "New Message"
+      page.should have_link "Calendar"
+      page.should have_link "List"
+      page.should have_link "Summary"
       click_link "New Message"
       current_path.should eq(new_message_path)
       # new
@@ -75,10 +79,11 @@ describe "UserMessages" do
     end
   end
   
-  describe "Messages Index View" do
+  describe "Messages Summary View" do
     it "paginates every 10 messages" do
       22.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
       visit messages_path
+      click_link "Summary"
       page.should have_no_link("Prev")
       page.should have_link("Next")
       click_link "Next"
@@ -90,14 +95,32 @@ describe "UserMessages" do
     end
   end
 
+  describe "Messages List View" do
+    it "paginates every 30 messages" do
+      visit messages_path
+      click_link "List"
+    end
+  end
+
   describe "Messages Calendar View" do
     it "displays messages in a calendar by listened date" do
       #Factory(:message)
-      m1 = Factory(:message, :title => "one", :listened_on => "2011-09-08", :user => @user)
-      m2 = Factory(:message, :title => "two", :listened_on => "2011-09-30", :user => @user)
+      m1 = Factory(:message, :title => "one", :listened_on => "2011-10-08", :user => @user)
+      m2 = Factory(:message, :title => "two", :listened_on => "2011-10-10", :user => @user)
       visit messages_path
+      click_link "Calendar"
       page.should have_content("one")
       page.should have_content("two")
+    end
+  end
+
+  describe "Messages Sidebar" do
+    it "displays categories", :focus => true do
+      Factory(:category, :name => "Kindness", :user => @user)
+      Factory(:category, :name => "Faithfullness", :user => @user)
+      visit messages_path
+      page.should have_link("Kindness")
+      page.should have_link("Faithfullness")
     end
   end
 end
