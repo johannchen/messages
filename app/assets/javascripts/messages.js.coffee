@@ -11,6 +11,7 @@
 
 jQuery ->
   $("#message_mdate").datepicker dateFormat: 'yy-mm-dd'
+  $("#message_listened_on").datepicker dateFormat: 'yy-mm-dd'
   $("#message_speaker_name").autocomplete source: "/speakers"
   $("#message_form").validate
     rules:

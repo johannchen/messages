@@ -3,9 +3,9 @@ class MessagesController < ApplicationController
 
   def index
     if params[:search]
-      @messages = Message.search(params[:search]).page(params[:page]).per(10)
+      @messages = current_user.messages.search(params[:search]).page(params[:page]).per(10)
     else
-      @messages = Message.order("mdate DESC").page(params[:page]).per(10)
+      @messages = current_user.messages.order("mdate DESC").page(params[:page]).per(10)
     end
   end
 
