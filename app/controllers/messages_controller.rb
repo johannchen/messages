@@ -45,4 +45,13 @@ class MessagesController < ApplicationController
       format.html { redirect_to messages_url }
     end
   end
+
+  def calendar
+    @messages = current_user.messages
+    messages = []
+    @messages.each do |message|
+      messages << {:id => message.id, :title => message.title, :start => message.listened_on, :allDay => true}
+    end
+    render :text => messages.to_json
+  end
 end

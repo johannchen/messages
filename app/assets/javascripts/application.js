@@ -8,4 +8,5 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.validate
+//= require fullcalendar
 //= require_tree .

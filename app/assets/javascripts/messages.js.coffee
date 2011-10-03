@@ -10,6 +10,20 @@
 #
 
 jQuery ->
+  $("#calendar").fullCalendar
+    editable: false
+    header:
+      left: 'prev,next today'
+      center: 'title'
+    defaultView: 'month'
+    height: 500
+    loading: (bool) -> 
+      if bool then $("#loading").show() else $("#loading").hide()
+    events: "/messages/calendar"
+    eventClick: (event) ->
+      window.location = '/messages/' + event.id
+      false
+
   $("#message_mdate").datepicker dateFormat: 'yy-mm-dd'
   $("#message_listened_on").datepicker dateFormat: 'yy-mm-dd'
   $("#message_speaker_name").autocomplete source: "/speakers"
