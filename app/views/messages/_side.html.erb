@@ -3,7 +3,9 @@
     <h2>Categories</h2>
     <ul>
       <% @categories.each do |cat| %>
-        <li><%= link_to cat.name %></li>
+        <li>
+          <%= link_to_unless params[:cat].to_i == cat.id, cat.name, messages_path(:cat => cat.id) %>
+        </li>
       <% end %>
     </ul>
   </div>

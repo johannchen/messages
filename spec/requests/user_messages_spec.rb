@@ -115,12 +115,22 @@ describe "UserMessages" do
   end
 
   describe "Messages Sidebar" do
-    it "displays categories", :focus => true do
-      Factory(:category, :name => "Kindness", :user => @user)
-      Factory(:category, :name => "Faithfullness", :user => @user)
+    it "filter messages by category", :focus => true do
+      # todo: factories mtm
+      c1 = Factory(:category, :name => "Kindness", :user => @user)
+      c2 = Factory(:category, :name => "Faithfullness", :user => @user)
+      m1 = Factory(:message, :title => "one", :user => @user)
+      m2 = Factory(:message, :title => "two", :user => @user)
+      m1.categories << c1
+      m2.categories << [c1, c2]
+
       visit messages_path
       page.should have_link("Kindness")
       page.should have_link("Faithfullness")
+      click_link "Faithfullness"
+      page.should have_no_link("Faithfullness")
+      page.should have_no_content("one")
+      page.should have_content("two")
     end
   end
 end

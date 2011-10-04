@@ -2,13 +2,17 @@ class MessagesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @categories = current_user.categories
+
     if params[:search]
-      @messages = current_user.messages.search(params[:search]).page(params[:page]).per(10)
+      @messages = current_user.messages.search(params[:search])
+    elsif params[:cat]
+      @messages = @categories.find(params[:cat]).messages
     else
-      @messages = current_user.messages.order("mdate DESC").page(params[:page]).per(10)
+      @messages = current_user.messages.order("mdate DESC")
     end
 
-    @categories = current_user.categories
+    @messages.page(params[:page]).per(10)
   end
 
   def show

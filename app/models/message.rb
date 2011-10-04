@@ -7,6 +7,7 @@ class Message < ActiveRecord::Base
   validates_presence_of :title, :mdate, :user
 
   scope :order_by_listened_date, order("listened_on DESC")
+
   attr_writer :speaker_name, :category_names, :verse_refs
   before_save :assign_speaker
   after_save :assign_categories, :assign_verses
@@ -14,6 +15,7 @@ class Message < ActiveRecord::Base
   def self.search(search)
     where(['title like ? or speaker like ?', "%#{search}%", "%#{search}%"]).order("mdate desc") if search
   end 
+
 
   def speaker_name
     @speaker_name || speaker.name if speaker
