@@ -72,6 +72,10 @@ label.error {
   font-weight: normal;
 }
 
+.top_links {
+  margin-bottom: 15px;
+}
+
 .full .message {
   padding-bottom: 18px;
   border-bottom: solid 1px #E5E5E5;
@@ -103,3 +107,34 @@ label.error {
   margin-bottom: 17px;
 }
 
+/*** SHOW MESSAGE ***/
+#message {
+  margin: 0 auto;
+  width: 962px;
+}
+
+#message .info h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+#message .info .details {
+  color: #777;
+  font-size: 12px;
+}
+
+#message .info .summary {
+  margin-top: 6px;
+  margin-right: 140px;
+  margin-bottom: 10px;
+}
+
+#message .info .verses {
+  margin-bottom: 10px;
+}
+
+#message .info .url {
+  margin-bottom: 10px;
+}

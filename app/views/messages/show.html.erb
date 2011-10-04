@@ -1,46 +1,25 @@
-<p>
-  <b>Title:</b>
-  <%= @message.title %>
-</p>
-
-<p>
-  <b>Message Date:</b>
-  <%= @message.mdate %>
-</p>
-
-<p>
-  <b>Speaker:</b>
-  <%= @message.speaker_name %>
-</p>
-
-<p>
-  <b>Listened Date:</b>
-  <%= @message.listened_on %>
-</p>
-
-<p>
-  <b>Summary:</b>
-  <%= @message.summary %>
-</p>
-
-<p>
-  <b>Verses:</b>
+<div id="message">
+  <div class="info">
+    <h1><%= @message.title %></h1>
+    <div class="details">
+      by <%= @message.speaker_name %> 
+      <%= @message.mdate.strftime("on %b %d, %Y") %> 
+      in <%= @message.category_names %> | 
+      <%= @message.listened_on.strftime("listened on %b %d, %Y") %> 
+    </div>
+    <div class="summary">
+      <%= @message.summary %>
+    </div>
+    <div class="url">
+      <%= @message.url %>
+    </div>
+    <div class="verses">
   <% @message.verses.each do |verse| %>
     <%= verse.ref %><br />
     <%= verse.esv_passage %><br />
   <% end %>
-</p>
+    </div>
+  </div>
+<%= link_to 'Edit', edit_message_path(@message) %>
+</div>
 
-<p>
-  <b>Category:</b>
-  <%= @message.category_names %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @message.url %>
-</p>
-
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
