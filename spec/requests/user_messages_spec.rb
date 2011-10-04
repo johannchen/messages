@@ -115,7 +115,7 @@ describe "UserMessages" do
   end
 
   describe "Messages Sidebar" do
-    it "filter messages by category", :focus => true do
+    it "filter messages by category" do
       # todo: factories mtm
       c1 = Factory(:category, :name => "Kindness", :user => @user)
       c2 = Factory(:category, :name => "Faithfullness", :user => @user)
@@ -132,5 +132,21 @@ describe "UserMessages" do
       page.should have_no_content("one")
       page.should have_content("two")
     end
+
+    it "filter messages by speaker", :focus => true do
+      s1 = Factory(:speaker, :name => "Bob", :user => @user)
+      s2 = Factory(:speaker, :name => "Steve", :user => @user)
+      m1 = Factory(:message, :title => "one", :speaker => s1, :user => @user)
+      m2 = Factory(:message, :title => "two", :speaker => s2, :user => @user)
+
+      visit messages_path
+      page.should have_link("Bob")
+      page.should have_link("Steve")
+      click_link "Bob"
+      page.should have_no_link("Bob")
+      page.should have_content("one")
+      page.should have_no_content("two")
+    end
   end
+
 end

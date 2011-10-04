@@ -2,12 +2,15 @@ class MessagesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @speakers = current_user.speakers
     @categories = current_user.categories
 
     if params[:search]
       @messages = current_user.messages.search(params[:search])
     elsif params[:cat]
       @messages = @categories.find(params[:cat]).messages
+    elsif params[:speaker]
+      @messages = @speakers.find(params[:speaker]).messages
     else
       @messages = current_user.messages.order("mdate DESC")
     end

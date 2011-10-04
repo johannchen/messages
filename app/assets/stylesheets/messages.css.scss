@@ -18,9 +18,9 @@ label.error {
   top: 0;
 }
 
-/*** CATEGORIES ***/
+/*** TAGS ***/
 
-.categories ul {
+.tags ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -35,12 +35,12 @@ label.error {
   -moz-border-radius-bottomright: 5px;
 }
 
-.categories li {
+.tags li {
   margin: 5px 0;
   font-size: 14px;
 }
 
-.categories h2 {
+.tags h2 {
   padding: 4px 20px;
   margin: 0;
   font-weight: normal;
