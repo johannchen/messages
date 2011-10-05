@@ -17,11 +17,12 @@
       </div>
     </div>
 <% end %>
+<%= paginate @messages %>
+
 <% else %>
 <p>no messages found.</p>
 <% end %>
   </div>
 </div>
 
-<%= paginate @messages %>
 
