@@ -8,6 +8,8 @@ class MessagesController < ApplicationController
     messages = current_user.messages.order("mdate DESC")
     if params[:search]
       messages = current_user.messages.search(params[:search])
+    elsif params[:cat] && params[:speaker]
+      messages = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker])
     elsif params[:cat]
       messages = @categories.find(params[:cat]).messages
     elsif params[:speaker]

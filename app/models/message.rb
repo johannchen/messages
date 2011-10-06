@@ -12,8 +12,9 @@ class Message < ActiveRecord::Base
   before_save :assign_speaker
   after_save :assign_categories, :assign_verses
 
+  # TODO: refactor search
   def self.search(search)
-    where(['title like ? or speaker like ?', "%#{search}%", "%#{search}%"]).order("mdate desc") if search
+    where(['title like ? or summary like ?', "%#{search}%", "%#{search}%"]) if search
   end 
 
 

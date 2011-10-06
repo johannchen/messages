@@ -49,7 +49,7 @@ describe "UserMessages" do
       page.should have_field("Listened on", :with => "2011-09-03")
       page.should have_field("message_verse_refs", :with => "John 3:16; Matthew 3:2")
       page.should have_field("message_category_names", :with => "peace, kindness")
-      fill_in("Title", :with => "edit message")
+      fill_in "Title", :with => "edit message"
       fill_in "message_speaker_name", :with => "Mondy"
       fill_in "Mdate", :with => "2011-02-03"
       fill_in "Summary", :with => "good message!"
@@ -115,7 +115,19 @@ describe "UserMessages" do
   end
 
   describe "Messages Sidebar" do
-    it "filter messages by category and speaker", :focus => true do
+    it "search title or summary", :focus => true do
+      m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)
+      m2 = Factory(:message, :title => "two", :summary => "one good message", :user => @user)
+      visit messages_path
+      fill_in "search", :with => "one"
+      click_button "Search Messages"
+      page.should have_content("one")
+      page.should have_content("two")
+    end
+  end
+
+  describe "Messages Sidebar" do
+    it "filter messages by category and speaker" do
       # todo: factories mtm
       c1 = Factory(:category, :name => "Kindness", :user => @user)
       c2 = Factory(:category, :name => "Faithfullness", :user => @user)
@@ -137,10 +149,10 @@ describe "UserMessages" do
       page.should have_no_content("one")
       page.should have_content("two")
       # filter with and
-      click_link "Bob"
-      page.should have_no_link("Bob")
-      page.should have_no_content("one")
-      page.should have_no_content("two")
+      #click_link "Bob"
+      #page.should have_no_link("Bob")
+      #page.should have_no_content("one")
+      #page.should have_no_content("two")
     end
   end
 end
