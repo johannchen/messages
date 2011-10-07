@@ -11,8 +11,13 @@ label.error {
 }
 
 /*** SIDE ***/
+.left_side {
+  position: absolute;
+  right: 150px;
+  top: 0;
+}
 
-.side {
+.right_side {
   position: absolute;
   right: 0;
   top: 0;
@@ -67,7 +72,7 @@ label.error {
 /*** MESSAGES ***/
 
 .messages {
-  margin-right: 200px;
+  margin-right: 300px;
 }
 
 .messages h2 .remove {

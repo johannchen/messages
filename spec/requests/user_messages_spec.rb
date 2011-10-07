@@ -148,11 +148,16 @@ describe "UserMessages" do
       # page.should have_link("x")
       page.should have_no_content("one")
       page.should have_content("two")
+
+
       # filter with and
       #click_link "Bob"
       #page.should have_no_link("Bob")
       #page.should have_no_content("one")
       #page.should have_no_content("two")
+
+      page.should have_link("Genesis")
+      page.should have_link("Revelation")
     end
   end
 end
