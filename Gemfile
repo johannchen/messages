@@ -8,6 +8,9 @@ gem 'rails', '3.1.0'
 # postgre
 gem 'pg'
 
+# full text search 
+# gem 'sunspot_rails'
+
 # pagination
 gem 'kaminari'
 

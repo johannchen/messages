@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
   def index
     @speakers = current_user.speakers
     @categories = current_user.categories
+    @verses = current_user.verses
 
     messages = current_user.messages.order("mdate DESC")
     if params[:search]
@@ -14,6 +15,9 @@ class MessagesController < ApplicationController
       messages = @categories.find(params[:cat]).messages
     elsif params[:speaker]
       messages = @speakers.find(params[:speaker]).messages
+    elsif params[:book]
+      verse_ids = @verses.where("ref like ?", "%#{params[:book]}%").map(&:id)
+      messages = Message.joins(:verses).where(:verses => {:id => verse_ids}) 
     end
 
     @messages = messages.page(params[:page]).per(10)

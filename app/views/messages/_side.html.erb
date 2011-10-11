@@ -2,7 +2,11 @@
   <div class="tags">
     <h2>Books</h2>
     <ul>
-      <li>Genesis</li>
+      <% ApplicationHelper::BIBLE.each do |book| %>
+        <li>
+        <%= link_to_unless params[:book] == book, book, messages_path(:book => book) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
@@ -13,7 +17,8 @@
     <ul>
       <% @categories.each do |cat| %>
         <li>
-          <%= link_to_unless params[:cat].to_i == cat.id, cat.name, messages_path(:cat => cat.id) %>
+        <%= link_to_unless params[:cat].to_i == cat.id, cat.name, messages_path(:cat => cat.id) %> 
+        <%= cat.messages.count %>
         </li>
       <% end %>
     </ul>
@@ -23,7 +28,8 @@
     <ul>
       <% @speakers.each do |speaker| %>
         <li>
-          <%= link_to_unless params[:speaker].to_i == speaker.id, speaker.name, messages_path(:speaker => speaker.id) %>
+        <%= link_to_unless params[:speaker].to_i == speaker.id, speaker.name, messages_path(:speaker => speaker.id) %>
+        <%= speaker.messages.count %>
         </li>
       <% end %>
     </ul>
