@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :verses
 
   validates_presence_of :name, :email 
+  validates_uniqueness_of :email
 
   def add_provider(auth)
     unless authentications.find_by_provider_and_uid(auth["provider"], auth["uid"])
@@ -13,12 +14,10 @@ class User < ActiveRecord::Base
     end 
   end
 
-#  def self.create_with_omniauth(auth)
-#    create! do |user|
-#      user.provider = auth["provider"]
-#      user.uid = auth["uid"]
-#      user.name = auth["user_info"]["name"]
-#      user.email = auth["user_info"]["email"]
-#    end
-#  end
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.name = auth["user_info"]["name"]
+      user.email = auth["user_info"]["email"]
+    end
+  end
 end

@@ -41,6 +41,7 @@ gem 'jquery-rails'
 
 group :development do
   gem 'pry'
+  gem 'thin'
 end
 
 
