@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111004181332) do
+ActiveRecord::Schema.define(:version => 20111011232925) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(:version => 20111004181332) do
   create_table "categories_messages", :id => false, :force => true do |t|
     t.integer "category_id"
     t.integer "message_id"
+  end
+
+  create_table "categories_verses", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "verse_id"
   end
 
   create_table "messages", :force => true do |t|

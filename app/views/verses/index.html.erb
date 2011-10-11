@@ -1,0 +1,20 @@
+<h1>Verses</h1>
+
+<%= render 'form' %>
+
+<div id="verses">
+<% if @verses.present? %>
+<ul>
+<% @verses.each do |verse| %>
+  <li>
+  <%= verse.ref %> <%= link_to 'edit', edit_verse_path(verse) %><br />
+  <%= verse.esv_passage %>
+  </li>
+<% end %>
+</ul>
+<% else %>
+<p>no verse found.</p>
+<% end %>
+</div>
+
+

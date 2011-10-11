@@ -5,7 +5,7 @@
       by <%= @message.speaker_name %> 
       <%= @message.mdate.strftime("on %b %d, %Y") %> 
       in <%= @message.category_names %> | 
-      <%= @message.listened_on.strftime("listened on %b %d, %Y") %> 
+      <%= @message.listened_on.strftime("listened on %b %d, %Y") if @message.listened_on.present? %> 
     </div>
     <div class="summary">
       <%= @message.summary %>
@@ -15,7 +15,7 @@
     </div>
     <div class="verses">
   <% @message.verses.each do |verse| %>
-    <%= verse.ref %><br />
+    <%= verse.ref %> | <a href="#" id="favor" data-message="like" data-verse="<%= verse.id %>">like</a><br />
     <%= verse.esv_passage %><br />
   <% end %>
     </div>
