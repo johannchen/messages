@@ -1,0 +1,26 @@
+<div class="left_side">
+  <div class="tags">
+    <h2>Books</h2>
+    <ul>
+      <% ApplicationHelper::BIBLE.each do |book| %>
+        <li>
+        <%= link_to_unless params[:book] == book, book, verses_path(:book => book) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="right_side">
+  <div class="tags">
+    <h2>Categories</h2>
+    <ul>
+      <% @categories.each do |cat| %>
+        <li>
+        <%= link_to_unless params[:cat].to_i == cat.id, cat.name, verses_path(:cat => cat.id) %> 
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

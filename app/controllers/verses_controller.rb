@@ -3,7 +3,14 @@ class VersesController < ApplicationController
 
   def index 
     @verse = Verse.new
-    @verses = current_user.verses
+    @categories = current_user.categories
+
+    if params[:cat]
+    elsif params[:book]
+      @verses = current_user.verses.where("ref like ?", "%#{params[:book]}%")
+    else
+      @verses = current_user.verses
+    end
   end
 
   def show
