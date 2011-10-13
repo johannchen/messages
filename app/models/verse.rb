@@ -7,6 +7,8 @@ class Verse < ActiveRecord::Base
   validates_uniqueness_of :ref, :scope => :user_id
   # TODO: validate ref
 
+  scope :favor, where(:favor => true)
+
   attr_writer :category_names
 
   require 'open-uri'

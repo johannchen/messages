@@ -6,10 +6,13 @@ class VersesController < ApplicationController
     @categories = current_user.categories
 
     if params[:cat]
+      @verses = @categories.find(params[:cat]).verses
     elsif params[:book]
       @verses = current_user.verses.where("ref like ?", "%#{params[:book]}%")
-    else
+    elsif params[:view]
       @verses = current_user.verses
+    else
+      @verses = current_user.verses.favor
     end
   end
 
@@ -32,4 +35,26 @@ class VersesController < ApplicationController
   def update
   end
 
+  def destroy
+    @verse.destroy
+    redirect_to verses_url
+  end
+
+  def dislike 
+    @verse = Verse.find(params[:id])
+    if @verse.update_attribute :favor, false
+      redirect_to :back 
+    else
+      redirect_to :back, :notice => "Cannot remove from favor list"
+    end
+  end
+
+  def like 
+    @verse = Verse.find(params[:id])
+    if @verse.update_attribute :favor, true
+      redirect_to :back
+    else
+      redirect_to :back, :notice => "Cannot add to favor list"
+    end
+  end
 end

@@ -15,7 +15,7 @@
     </div>
     <div class="verses">
   <% @message.verses.each do |verse| %>
-    <%= verse.ref %> | <a href="#" id="favor" data-message="like" data-verse="<%= verse.id %>">like</a><br />
+    <%= verse.ref %> | <%= link_to_unless verse.favor, "like", like_verse_path(verse), :method => :put %><br />
     <%= verse.esv_passage %><br />
   <% end %>
     </div>

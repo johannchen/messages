@@ -8,8 +8,11 @@ Messages::Application.routes.draw do
   end
 
   resources :categories
-  resources :verses
   resources :speakers
+  resources :verses do
+    put 'dislike', :on => :member
+    put 'like', :on => :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

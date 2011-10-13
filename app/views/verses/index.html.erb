@@ -2,12 +2,26 @@
 
 <%= render 'form' %>
 
+<div class="top_links">
+Views: 
+<%= link_to_unless params[:view].present?, "All", verses_path(:view => "all") %> |
+<%= link_to_unless params[:view].blank?, "Favor", verses_path %>
+</div>
+
 <div id="verses">
 <% if @verses.present? %>
 <ul>
 <% @verses.each do |verse| %>
   <li>
-  <%= verse.ref %> <%= link_to 'edit', edit_verse_path(verse) %><br />
+  <%= verse.ref %> 
+  <%= link_to 'edit', edit_verse_path(verse) %> | 
+  <% if verse.favor %>
+    <%= link_to 'dislike', dislike_verse_path(verse), :method => :put %> 
+  <% else %>
+    <%= link_to 'like', like_verse_path(verse), :method => :put %> 
+  <% end %> 
+  | <%= link_to 'remove', verse, :confirm => "Are you sure?", :method => :delete %>
+  <br />
   <%= verse.esv_passage %>
   </li>
 <% end %>
