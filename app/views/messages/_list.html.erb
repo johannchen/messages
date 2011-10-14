@@ -1,0 +1,25 @@
+<div class="messages">
+<% if @messages.present? %>
+  <table class="list">
+    <tr>
+      <th>Title</th>
+      <th>Speaker</th>
+      <th>Date</th>
+      <th>Listened On</th>
+      <th>Action</th>
+    </tr>
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= link_to message.title, message_path(message) %></td>
+    <td><%= message.speaker_name %></td>
+    <td><%= message.mdate %></td>
+    <td><%= message.listened_on %></td>
+    <td><%= link_to 'edit', edit_message_path(message) %></td>
+  </tr>
+<% end %>
+</ul>
+<% else %>
+<p>no message found.</p>
+<% end %>
+</div>
+

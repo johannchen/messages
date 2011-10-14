@@ -1,13 +1,16 @@
   <div class="top_links">
   Views: 
   <%= link_to "Calendar", messages_path(:view => "calendar") %> |
-  <%= link_to "List" %> |
-  <%= link_to "Summary" %> - 
+  <%= link_to "List", messages_path(:view => "list") %> |
+  <%= link_to "Summary", messages_path %> - 
   <%= link_to "New Message", new_message_path %>
   </div>
 <% if params[:view] == "calendar" %>
   <div id="calendar">
   </div>
+<% elsif params[:view] == "list" %>
+  <%= render 'side' %>
+  <%= render 'list' %>
 <% else %>
   <%= render 'side' %>
   <%= render 'summary' %>

@@ -65,9 +65,6 @@ describe "Verses" do
       page.should have_content("John 3:16")
     end
 
-    it "displays favor verses count by book and by category" do
-    end
-
     it "removes verse from favor list" do
       v = Factory(:verse, :favor => true, :user => @user)
       visit verses_path

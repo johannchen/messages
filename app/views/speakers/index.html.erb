@@ -1,16 +1,27 @@
 <h1>Speakers</h1>
-
+<div class="right_side">
 <%= render 'form' %>
-
-<div id="speakers">
+</div>
+<div class="speakers">
 <% if @speakers.present? %>
-<ul>
+  <table class="list">
+    <tr>
+      <th>Name</th>
+      <th>Church</th>
+      <th>Messages</th>
+      <th>Blog</th>
+      <th>Action</th>
+    </tr>
 <% @speakers.each do |speaker| %>
-  <li>
-  <%= speaker.name%> <%= speaker.church %><%= link_to 'edit', edit_speaker_path(speaker) %>
-  </li>
+  <tr> 
+    <td><%= speaker.name%></td>
+    <td><%= speaker.church %></td>
+    <td><%= link_to_unless speaker.messages.count == 0, speaker.messages.count, messages_path(:speaker => speaker.id) %></td>
+    <td><%= link_to 'blog', speaker.link unless speaker.link.blank? %></td>
+    <td><%= link_to 'edit', edit_speaker_path(speaker) %></td>
+  </tr>
 <% end %>
-</ul>
+</table>
 <% else %>
 <p>no speaker found.</p>
 <% end %>

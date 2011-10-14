@@ -6,7 +6,7 @@ describe "UserMessages" do
     @user = User.last
   end
 
-  describe "Single Message Flows" do
+  describe "Message" do
     it "creates, displays and lists message by user" do
       # list
       visit messages_path 
@@ -96,9 +96,28 @@ describe "UserMessages" do
   end
 
   describe "Messages List View" do
-    it "paginates every 30 messages" do
+    it "list in a table", :focus => true do
+      3.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
       visit messages_path
       click_link "List"
+      page.should have_content("Title")
+      page.should have_content("Speaker")
+      page.should have_content("Date")
+      page.should have_content("Listened On")
+      page.should have_link("m0")
+      click_link "m0"
+      current_path.should eq(message_path(Message.first))
+    end
+
+    it "paginates every 30 messages" do
+      32.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
+      visit messages_path
+      click_link "List"
+      page.should have_no_link("Prev")
+      page.should have_link("Next")
+      click_link "Next"
+      page.should have_no_link("Next")
+      page.should have_link("Prev")
     end
   end
 

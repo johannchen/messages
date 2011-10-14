@@ -13,6 +13,7 @@ FactoryGirl.define do
   factory :speaker do
     name "Tim Keller"
     church "Redeemer"
+    link "http://gracedimension.com"
     user
   end
 

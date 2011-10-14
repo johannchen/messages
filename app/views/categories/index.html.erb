@@ -1,13 +1,22 @@
 <h1>Categories</h1>
 <%= render 'form' %>
 
-<div id="categories">
+<div class="categories">
 <% if @categories.present? %>
-<ul>
+  <table class="list">
+    <tr>
+      <th>Name</th>
+      <th>Messages</th>
+      <th>Verses</th>
+      <th>Action</th>
+    </tr>
 <% @categories.each do |category| %>
-  <li>
-    <%= category.name%> <%= link_to 'edit', edit_category_path(category) %>
-  </li>
+  <tr>
+    <td><%= category.name%></td>
+    <td><%= link_to_unless category.messages.count == 0, category.messages.count, messages_path(:cat => category.id) %></td>
+    <td><%= link_to_unless category.verses.count == 0, category.verses.count, verses_path(:cat => category.id) %></td>
+    <td><%= link_to 'edit', edit_category_path(category) %></td>
+  </tr>
 <% end %>
 </ul>
 <% else %>

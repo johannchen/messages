@@ -18,7 +18,6 @@
       <% @categories.each do |cat| %>
         <li>
         <%= link_to_unless params[:cat].to_i == cat.id, cat.name, messages_path(:cat => cat.id) %> 
-        <%= cat.messages.count %>
         </li>
       <% end %>
     </ul>
@@ -29,7 +28,6 @@
       <% @speakers.each do |speaker| %>
         <li>
         <%= link_to_unless params[:speaker].to_i == speaker.id, speaker.name, messages_path(:speaker => speaker.id) %>
-        <%= speaker.messages.count %>
         </li>
       <% end %>
     </ul>

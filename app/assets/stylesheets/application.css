@@ -224,3 +224,81 @@ label.check_box {
   text-decoration: none;
 }
 
+/*** SIDE ***/
+.left_side {
+  position: absolute;
+  right: 150px;
+  top: 0;
+}
+
+.right_side {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/*** TAGS ***/
+.tags {
+  margin-bottom: 20px;
+}
+
+.tags ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #BBB;
+  border-top: none;
+  padding: 5px 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+}
+
+.tags li {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.tags h2 {
+  padding: 4px 20px;
+  margin: 0;
+  font-weight: normal;
+  color: #444;
+  font-size: 14px;
+  text-align: center;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border: solid 1px #BBB;
+  border-bottom-color: #AAA;
+  background-color: #DDD;
+  background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
+  background: -moz-linear-gradient(top,  #EEE, #CCC);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEE', endColorstr='#CCC');
+}
+
+/*** TABLE LIST ***/
+.list {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.list td, .list th {
+  border-bottom: solid 1px #CCC;
+}
+
+.list td {
+  padding: 5px;
+}
+
+.list th {
+  padding: 5px;
+  text-align: left;
+  color: #777;
+}

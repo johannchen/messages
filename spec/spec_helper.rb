@@ -54,7 +54,7 @@ Spork.prefork do
     end
   end
 
-  Capybara.default_host = 'http://example.org'
+  Capybara.default_host = 'http://www.example.com'
 
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(:twitter, {
