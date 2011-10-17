@@ -25,10 +25,10 @@
   <div id="nav_bar">
     <ul class="nav horizontal">
     <% if current_user %>
-      <li><%= link_to 'Messages', messages_path %></li>
-      <!-- <li><%= link_to 'Verses', verses_path %></li> -->
-      <li><%= link_to 'Speakers', speakers_path %></li>
-      <li><%= link_to 'Categories', categories_path %></li>
+      <li><%= link_to_unless current_page?(messages_path), 'Messages', messages_path %></li>
+      <li><%= link_to_unless current_page?(verses_path), 'Verses', verses_path %></li>
+      <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
+      <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
     <% end %>
       <li><%= link_to 'About' %></li>
       <li><%= link_to 'Feedback' %></li>
