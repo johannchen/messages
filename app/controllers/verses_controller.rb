@@ -6,9 +6,9 @@ class VersesController < ApplicationController
     @categories = current_user.categories
 
     if params[:cat]
-      @verses = @categories.find(params[:cat]).verses
+      @verses = @categories.find(params[:cat]).verses.favor
     elsif params[:book]
-      @verses = current_user.verses.where("ref like ?", "%#{params[:book]}%")
+      @verses = current_user.verses.favor.where("ref like ?", "%#{params[:book]}%")
     elsif params[:view]
       @verses = current_user.verses
     else
@@ -33,6 +33,11 @@ class VersesController < ApplicationController
   end
 
   def update
+    if @verse.update_attributes(params[:verse])
+      redirect_to verses_path, notice: 'Successfully updated verse.'
+    else
+      render action: "edit"
+    end
   end
 
   def destroy

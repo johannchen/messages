@@ -20,14 +20,6 @@ describe "Verses" do
       page.should have_content("John 3:16")
     end
 
-    it "creates favor verse" do
-      visit verses_path
-      fill_in "verse_ref", :with => "John 3:16"
-      fill_in "verse_category_names", :with => "Love"
-      click_button "Create"
-      page.should have_content("John 3:16")
-      page.should have_content("God so love")
-    end
 
     it "paginates every 10 favor verses" do
     end
@@ -106,8 +98,26 @@ describe "Verses" do
     end
   end
 
+  describe "Verse" do
+    it "creates and updates verse", :focus => true do
+      visit verses_path
+      click_link "New Verse"
+      # page.should have_checked_field("favor")
+      fill_in "verse_ref", :with => "John 3:16"
+      fill_in "verse_category_names", :with => "Love"
+      check "verse_favor"
+      click_button "Create"
+      current_path.should eq(verses_path)
+      page.should have_content("John 3:16")
+      page.should have_content("God so loved")
+      page.should have_link("Love")
+      click_link "edit"
+      page.should have_field("verse_ref", :with => "John 3:16")
+      fill_in "verse_ref", :with => "Genesis 1:1"
+      click_button "Update"
+      page.should have_content("Genesis 1:1")
+    end
 
-  describe "DESTROY Verse" do
     it "deletes verse and its associations" do
       v = Factory(:verse, :favor => true, :user => @user)
       c = Factory(:category, :user => @user)

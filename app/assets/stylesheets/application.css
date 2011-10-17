@@ -81,6 +81,12 @@ ul.horizontal li {
   color: #FFF;
 }
 
+.notice {
+  padding: 0 .7em;
+  margin-right: 350px;
+  margin-bottom: 10px;
+}
+
 .field {
   margin: 10px 0;
 }

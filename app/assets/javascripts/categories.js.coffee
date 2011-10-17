@@ -5,7 +5,7 @@
 jQuery ->
   split = (val) -> val.split /,\s*/
   extractLast = (term) -> split(term).pop()
-  $("#message_category_names")
+  $("#message_category_names,#verse_category_names")
     .bind "keydown", (event) ->
       if event.keyCode == $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active
         event.preventDefault

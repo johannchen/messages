@@ -10,6 +10,7 @@ class Verse < ActiveRecord::Base
   scope :favor, where(:favor => true)
 
   attr_writer :category_names
+  after_save :assign_categories
 
   require 'open-uri'
   

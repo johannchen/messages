@@ -45,13 +45,15 @@
 
   <div id="main"> 
     <div class="content">
-    <% flash.each do |name, msg| %>
+    <div class="notice">
+      <% flash.each do |name, msg| %>
       <div class="ui-widget">
-        <div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">
+        <div class="ui-state-highlight ui-corner-all">
           <%= msg %><br />
         </div>
       </div>
     <% end %>
+    </div>
 <%= yield %>
     </div>
   </div>

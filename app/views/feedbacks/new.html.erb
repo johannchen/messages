@@ -1,0 +1,10 @@
+<h2>Feedback</h2>
+<%= form_tag('/feedbacks') do %>
+  <div class="field">
+    <%= label_tag :feedback %>
+    <%= text_area_tag :feedback %>
+  </div>
+  <div class="actions">
+    <%= submit_tag :submit %>
+  </div>
+<% end %>

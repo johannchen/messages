@@ -1,3 +1,17 @@
 // Place all the styles related to the verses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.verses {
+  margin-right: 350px;
+}
+
+.verse {
+  margin-bottom: 10px;
+}
+
+.verse .ref {
+  font-weight: bold;
+  padding-right: 15px;
+  float: left;
+}
