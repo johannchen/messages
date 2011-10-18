@@ -6,7 +6,10 @@ Views:
 </div>
 
 <div class="verses">
-<% if @verses.present? %>
+  <% if @verses.present? %>
+    <div class="stat">
+      <%= "Total: " + @verses.count.to_s + " verses" %>
+    </div>
   <% @verses.each do |verse| %>
     <div class="verse">
       <div class="ref">

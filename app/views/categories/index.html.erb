@@ -1,7 +1,9 @@
-
 <div class="categories">
   <%= render 'form' %>
 <% if @categories.present? %>
+<div class="stat">
+  <%= "Total: " + @categories.count.to_s + " categories" %>
+</div>
   <table class="list">
     <tr>
       <th>Category</th>
@@ -14,10 +16,11 @@
     <td><%= category.name%></td>
     <td><%= link_to_unless category.messages.count == 0, category.messages.count, messages_path(:cat => category.id) %></td>
     <td><%= link_to_unless category.verses.count == 0, category.verses.count, verses_path(:cat => category.id) %></td>
-    <td><%= link_to 'edit', edit_category_path(category) %></td>
+    <td><%= link_to 'edit', edit_category_path(category) %> |
+      <%= link_to 'remove', category, :confirm => "Are you sure?", :method => :delete %> </td>
   </tr>
 <% end %>
-</ul>
+</table>
 <% else %>
 <p>no category found.</p>
 <% end %>

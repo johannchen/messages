@@ -3,6 +3,9 @@
 </div>
 <div class="speakers">
 <% if @speakers.present? %>
+<div class="stat">
+  <%= "Total: " + @speakers.count.to_s + " speakers" %>
+</div>
   <table class="list">
     <tr>
       <th>Speaker</th>

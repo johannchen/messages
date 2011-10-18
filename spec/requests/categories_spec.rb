@@ -25,29 +25,40 @@ describe "Categories" do
       page.should have_content("hate")
     end
 
-    it "displays number of messages and verses", :focus => true do
-      c1 = Factory(:category, :user => @user)
-      c2 = Factory(:category, :name => "Hate", :user => @user)
-      m = Factory(:message, :user => @user)
-      v1 = Factory(:verse, :user => @user)
-      v2 = Factory(:verse, :ref => "Genesis 1:1", :user => @user)
+  end
+
+  describe "Category List" do
+    before :each do
+      @c1 = Factory(:category, :user => @user)
+      @m = Factory(:message, :user => @user)
+      @v1 = Factory(:verse, :user => @user)
+      @v2 = Factory(:verse, :ref => "Genesis 1:1", :user => @user)
       
-      c1.messages << m
-      c1.verses << [v1, v2]
+      @c1.messages << @m
+      @c1.verses << [@v1, @v2]
 
       visit categories_path
+    end 
+
+    it "displays number of messages and verses" do
       page.should have_link("1")
       page.should have_link("2")
-      page.should have_content("0")
-      page.should have_no_link("0")
       click_link "1"
-      current_url.should eq(messages_url(:cat => c1.id))
+      current_url.should eq(messages_url(:cat => @c1.id))
       click_link "Categories"
       click_link "2"
-      current_url.should eq(verses_url(:cat => c1.id))
+      current_url.should eq(verses_url(:cat => @c1.id))
     end
 
-    it "removes category" do
+    it "removes category"  do
+      page.should have_link("remove")
+      click_link "remove"
+      page.should have_no_content("Love")
+      page.should have_no_link("1")
+      click_link "Messages"
+      page.should have_no_content("Love")
+      click_link "Verses"
+      page.should have_no_link("Love")
     end
   end
 end

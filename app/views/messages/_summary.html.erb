@@ -1,3 +1,6 @@
+<div class="stat">
+  <%= "Total: " + @messages.count.to_s + " messages" %>
+</div>
 <div class="messages">
   <div class="full">
 <% if @messages.present? %>
@@ -8,12 +11,12 @@
         <div class="info">
           <%= "By " + message.speaker_name %> 
           <%= message.mdate.strftime("on %b %d, %Y") %> 
-          <%= "in category:" +  message.category_names unless message.category_names.blank? %>
+          <%= "in Category: " +  message.category_names unless message.category_names.blank? %>
         </div>
         <div class="summary">
           <%= message.summary %>
         </div>
-        <div class="ref">
+        <div class="info">
           <%= message.verse_refs %>
         </div>
         <div class="clear"></div>

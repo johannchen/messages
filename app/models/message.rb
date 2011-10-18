@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :speaker
   belongs_to :user
 
-  validates_presence_of :title, :mdate, :user
+  validates_presence_of :title, :user
 
   scope :order_by_listened_date, order("listened_on DESC")
 

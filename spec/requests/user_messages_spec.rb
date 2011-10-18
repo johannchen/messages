@@ -95,8 +95,14 @@ describe "UserMessages" do
     end
   end
 
-  describe "Messages List View" do
-    it "list in a table", :focus => true do
+  describe "Messages" do
+    it "display count", :focus => true do
+      Factory(:message, :user => @user)
+      visit messages_path
+      page.should have_content("Total: 1 messages")
+    end
+
+    it "list in a table with list view" do
       3.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
       visit messages_path
       click_link "List"
@@ -121,7 +127,6 @@ describe "UserMessages" do
     end
   end
 
-  describe "Messages Calendar View" do
     it "displays messages in a calendar by listened date" do
       #Factory(:message)
       m1 = Factory(:message, :title => "one", :listened_on => "2011-10-08", :user => @user)
@@ -133,7 +138,6 @@ describe "UserMessages" do
     end
   end
 
-  describe "Messages Sidebar" do
     it "search title or summary", :focus => true do
       m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)
       m2 = Factory(:message, :title => "two", :summary => "one good message", :user => @user)

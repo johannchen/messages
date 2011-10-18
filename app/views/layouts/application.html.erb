@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Messages</title>
+  <title>Sermon Messages</title>
   <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" %>
   <%= javascript_include_tag "application" %>
@@ -10,7 +10,7 @@
 <body>
 
   <div id="top">
-    <div class="title">Messages</div>
+    <div class="title">Sermon Messages</div>
     <div class="user_nav">
       <% if current_user %>
         Welcome <%= current_user.name %>! 
@@ -29,9 +29,9 @@
       <li><%= link_to_unless current_page?(verses_path), 'Verses', verses_path %></li>
       <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
       <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
+      <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
     <% end %>
       <li><%= link_to_unless current_page?(root_path), 'About', root_path %></li>
-      <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
     </ul>
     <div>
 <% if current_user %>
@@ -58,5 +58,10 @@
     </div>
   </div>
 
+  <div id="footer">
+    <div class="inner">
+      &copy;2011 Sermon Messages
+    </div>
+  </div>
 </body>
 </html>

@@ -211,6 +211,14 @@ label.check_box {
   margin-right: 400px;
 }
 
+.top_links {
+  margin-bottom: 10px;
+}
+
+.stat {
+  margin-bottom: 10px;
+}
+
 .actions {
   margin: 8px 0;
 }
