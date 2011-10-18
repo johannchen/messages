@@ -1,7 +1,7 @@
 <div class="top_links">
 Views: 
 <%= link_to_unless params[:view].present?, "All", verses_path(:view => "all") %> |
-<%= link_to_unless params[:view].blank?, "Favor", verses_path %> -
+<%= link_to_unless params[:view].blank?, "Favorites", verses_path %> -
 <%= link_to 'New Verse', new_verse_path %>
 </div>
 

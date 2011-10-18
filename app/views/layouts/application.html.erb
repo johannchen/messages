@@ -30,8 +30,8 @@
       <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
       <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
     <% end %>
-      <li><%= link_to 'About' %></li>
-      <li><%= link_to 'Feedback' %></li>
+      <li><%= link_to_unless current_page?(root_path), 'About', root_path %></li>
+      <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
     </ul>
     <div>
 <% if current_user %>

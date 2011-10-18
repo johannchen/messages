@@ -4,7 +4,7 @@
     <%= f.text_field :title, :class => "required" %>
   </div>
   <div class="field">
-    <%= f.label :mdate %>
+    <%= f.label :date %>
     <%= f.text_field :mdate, :class => "required" %>
   </div>
   <div class="field">
@@ -13,10 +13,10 @@
   </div>
   <div class="field">
     <%= f.label :summary %>
-    <%= f.text_area :summary %>
+    <%= f.text_area :summary, :cols => 100, :rows => 20 %>
   </div>
   <div class="field">
-    <%= f.label :url %>
+    <%= f.label :link %>
     <%= f.text_field :url %>
   </div>
   <div class="field">

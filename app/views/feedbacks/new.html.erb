@@ -1,10 +1,8 @@
-<h2>Feedback</h2>
 <%= form_tag('/feedbacks') do %>
   <div class="field">
-    <%= label_tag :feedback %>
-    <%= text_area_tag :feedback %>
+    <%= text_area_tag :feedback, nil, :cols => 100, :rows => 20 %>
   </div>
   <div class="actions">
-    <%= submit_tag :submit %>
+    <%= submit_tag "Send Feedback" %>
   </div>
 <% end %>

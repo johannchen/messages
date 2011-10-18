@@ -6,9 +6,9 @@
       <div class="main">
         <h2><%= link_to message.title, message_path(message) %></h2>
         <div class="info">
-          By <%= message.speaker_name %> 
+          <%= "By " + message.speaker_name %> 
           <%= message.mdate.strftime("on %b %d, %Y") %> 
-          in <%= message.category_names %>
+          <%= "in category:" +  message.category_names unless message.category_names.blank? %>
         </div>
         <div class="summary">
           <%= message.summary %>

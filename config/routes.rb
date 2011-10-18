@@ -1,7 +1,6 @@
 Messages::Application.routes.draw do
 
-  get "feedbacks/new"
-
+  match "/feedback" => "feedbacks#new", :as => :feedback
   match "auth/:provider/callback" => "sessions#create"
   match "auth/failure" => "sessions#failure"
   match "/signout" => "sessions#destroy", :as => :signout
@@ -9,6 +8,7 @@ Messages::Application.routes.draw do
     get 'calendar', :on => :collection
   end
 
+  resources :feedbacks, :only => :create
   resources :categories
   resources :speakers
   resources :verses do
