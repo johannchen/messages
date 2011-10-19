@@ -2,26 +2,20 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-#jQuery ->
-#  $("#message_category_tokens").tokenInput "/categories.json",
-#    crossDomain: false
-#    prePopulate: $("#message_category_tokens").data("pre")
-#    theme: "facebook"
-#
 
 jQuery ->
   $("#calendar").fullCalendar
-    editable: false
     header:
       left: 'prev,next today'
       center: 'title'
       right: 'month,basicWeek'
     defaultView: 'month'
-    height: 500
+    editable: false
     events: "/messages/calendar"
     eventClick: (event) ->
       window.location = '/messages/' + event.id
       false
+    #height: 500
 #    loading: (bool) -> 
 #      if bool then $("#loading").show() else $("#loading").hide()
 
