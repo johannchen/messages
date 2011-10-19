@@ -10,6 +10,9 @@ gem 'rack', '1.3.3'
 # postgre
 gem 'pg'
 
+# server
+gem 'thin'
+
 # full text search 
 # gem 'sunspot_rails'
 
@@ -43,7 +46,6 @@ gem 'jquery-rails'
 
 group :development do
   gem 'pry'
-  gem 'thin'
 end
 
 
