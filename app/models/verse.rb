@@ -7,7 +7,8 @@ class Verse < ActiveRecord::Base
   validates_uniqueness_of :ref, :scope => :user_id
   # TODO: validate ref
 
-  scope :favor, where(:favor => true)
+  scope :favorite, where(:favor => true)
+  scope :book, lambda { |book| where("ref like ?", "%#{book}%") }
 
   attr_writer :category_names
   after_save :assign_categories

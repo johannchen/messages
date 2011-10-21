@@ -5,11 +5,12 @@ Views:
 <%= link_to 'New Verse', new_verse_path %>
 </div>
 
-<div class="verses">
-  <% if @verses.present? %>
     <div class="stat">
       <%= "Total: " + @verses.count.to_s + " verses" %>
     </div>
+
+<div class="verses">
+  <% if @verses.present? %>
   <% @verses.each do |verse| %>
     <div class="verse">
       <div class="ref">
@@ -28,9 +29,8 @@ Views:
   </div>
 <% end %>
 </ul>
-<% else %>
-<p>no verse found.</p>
-<% end %>
+<%= paginate @verses %>
+ <% end %>
 </div>
 
 <%= render 'side' %>

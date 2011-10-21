@@ -1,9 +1,9 @@
 <div class="categories">
   <%= render 'form' %>
-<% if @categories.present? %>
 <div class="stat">
   <%= "Total: " + @categories.count.to_s + " categories" %>
 </div>
+<% if @categories.present? %>
   <table class="list">
     <tr>
       <th>Category</th>
@@ -21,8 +21,7 @@
   </tr>
 <% end %>
 </table>
-<% else %>
-<p>no category found.</p>
+<%= paginate @categories%>
 <% end %>
 </div>
 

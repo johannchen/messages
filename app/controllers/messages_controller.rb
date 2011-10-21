@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @categories = current_user.categories
     @verses = current_user.verses
 
-    messages = current_user.messages.order("mdate DESC")
+    messages = current_user.messages
     if params[:search]
       messages = current_user.messages.search(params[:search])
     elsif params[:cat] && params[:speaker]
@@ -20,7 +20,14 @@ class MessagesController < ApplicationController
       messages = Message.joins(:verses).where(:verses => {:id => verse_ids}) 
     end
 
-    @messages = messages.page(params[:page]).per(10)
+    #pagination
+    if params[:view] == "list"
+      @messages = messages.page(params[:page]).per(30)
+    elsif params[:view] == "calendar"
+      @messages = messages
+    else
+      @messages = messages.page(params[:page]).per(10)
+    end
   end
 
   def show

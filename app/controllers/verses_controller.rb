@@ -4,16 +4,22 @@ class VersesController < ApplicationController
   def index 
     @verse = Verse.new
     @categories = current_user.categories
-
-    if params[:cat]
-      @verses = @categories.find(params[:cat]).verses.favor
-    elsif params[:book]
-      @verses = current_user.verses.favor.where("ref like ?", "%#{params[:book]}%")
-    elsif params[:view]
-      @verses = current_user.verses
+    
+    if params[:view]
+      vs = current_user.verses
     else
-      @verses = current_user.verses.favor
+      vs = current_user.verses.favorite
     end
+
+    if params[:cat] && params[:book]
+      vs = vs.book(params[:book]).joins(:categories).where(:categories => {:id => params[:cat]})
+    elsif params[:cat]
+      vs = vs.joins(:categories).where(:categories => {:id => params[:cat]})
+    elsif params[:book]
+      vs = vs.book(params[:book])
+    end
+
+    @verses = vs.page(params[:page]).per(10)
   end
 
   def show

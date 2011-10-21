@@ -4,7 +4,7 @@
     <ul>
       <% ApplicationHelper::BIBLE.each do |book| %>
         <li>
-        <%= link_to_unless params[:book] == book, book, verses_path(:book => book) %>
+        <%= link_to_unless params[:book] == book, book, params.merge({:book => book}) %>
         </li>
       <% end %>
     </ul>
@@ -17,7 +17,7 @@
     <ul>
       <% @categories.each do |cat| %>
         <li>
-        <%= link_to_unless params[:cat].to_i == cat.id, cat.name, verses_path(:cat => cat.id) %> 
+        <%= link_to_unless params[:cat].to_i == cat.id, cat.name, params.merge({:cat => cat.id}) %> 
         </li>
       <% end %>
     </ul>

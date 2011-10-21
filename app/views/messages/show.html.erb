@@ -9,14 +9,20 @@
     </div>
     <div class="summary">
       <%= @message.summary %>
-    </div>
-    <div class="url">
-      <%= @message.url %>
+      <%= link_to "...", @message.url if @message.url.present? %>
     </div>
     <div class="verses">
-  <% @message.verses.each do |verse| %>
-    <%= verse.ref %> | <%= link_to_unless verse.favor, "like", like_verse_path(verse), :method => :put %><br />
-    <%= verse.esv_passage %><br />
+      <% @message.verses.each do |verse| %>
+    <div class="verse">
+      <div class="ref"><%= verse.ref %></div> 
+      <div class="ref_link"> 
+        <%= link_to "like", like_verse_path(verse), :method => :put unless verse.favor %>
+        <br />
+      </div>
+    <div class="passage">
+      <%= verse.esv_passage %>
+    </div>
+  </div>
   <% end %>
     </div>
   </div>
