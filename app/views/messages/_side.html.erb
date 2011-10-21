@@ -2,7 +2,7 @@
   <div class="tags">
     <h2>Books</h2>
     <ul>
-      <% ApplicationHelper::BIBLE.each do |book| %>
+      <% BIBLE.each do |book| %>
         <li>
         <%= link_to_unless params[:book] == book, book, messages_path(:book => book) %>
         </li>
