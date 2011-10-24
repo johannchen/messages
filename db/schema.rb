@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012214202) do
+ActiveRecord::Schema.define(:version => 20111024215938) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -75,9 +75,12 @@ ActiveRecord::Schema.define(:version => 20111012214202) do
   end
 
   create_table "verses", :force => true do |t|
-    t.string  "ref"
-    t.integer "user_id"
-    t.boolean "favor"
+    t.string   "ref"
+    t.integer  "user_id"
+    t.boolean  "favorite"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "memorized_at"
   end
 
 end

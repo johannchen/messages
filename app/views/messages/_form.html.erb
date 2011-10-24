@@ -1,15 +1,17 @@
-<%= form_for @message, :html => {:id => "message_form"} do |f| %>
+<%= form_for @message do |f| %>
+  <%= render "shared/error_messages", :target => @message %>
+
   <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title, :class => "required" %>
+    <%= f.label :title %><%= mark_required(@message, :title) %>
+    <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :date %>
-    <%= f.text_field :mdate, :class => "required" %>
+    <%= f.label :date %><%= mark_required(@message, :mdate) %>
+    <%= f.text_field :mdate %>
   </div>
   <div class="field">
     <%= f.label :speaker %>
-    <%= f.text_field :speaker_name, :class => "required" %>
+    <%= f.text_field :speaker_name %>
   </div>
   <div class="field">
     <%= f.label :summary %>

@@ -8,7 +8,7 @@ class VersesController < ApplicationController
     if params[:view]
       vs = current_user.verses
     else
-      vs = current_user.verses.favorite
+      vs = current_user.verses.favorites
     end
 
     if params[:cat] && params[:book]
@@ -19,7 +19,7 @@ class VersesController < ApplicationController
       vs = vs.book(params[:book])
     end
 
-    @verses = vs.page(params[:page]).per(10)
+    @verses = vs.order("updated_at DESC").page(params[:page]).per(10)
   end
 
   def show
@@ -35,6 +35,8 @@ class VersesController < ApplicationController
     @verse = current_user.verses.build(params[:verse])
     if @verse.save
       redirect_to verses_path, notice: 'Successfully added verse.'
+    else 
+      render 'new'
     end
   end
 
@@ -53,19 +55,19 @@ class VersesController < ApplicationController
 
   def dislike 
     @verse = Verse.find(params[:id])
-    if @verse.update_attribute :favor, false
+    if @verse.update_attribute :favorite, false
       redirect_to :back 
     else
-      redirect_to :back, :notice => "Cannot remove from favor list"
+      redirect_to :back, :notice => "Cannot remove from favorite list"
     end
   end
 
   def like 
     @verse = Verse.find(params[:id])
-    if @verse.update_attribute :favor, true
+    if @verse.update_attribute :favorite, true
       redirect_to :back
     else
-      redirect_to :back, :notice => "Cannot add to favor list"
+      redirect_to :back, :notice => "Cannot add to favorite list"
     end
   end
 end

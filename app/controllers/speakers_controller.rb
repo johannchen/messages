@@ -21,6 +21,8 @@ class SpeakersController < ApplicationController
     @speaker = current_user.speakers.build(params[:speaker])
     if @speaker.save
       redirect_to speakers_path, notice: 'Successfully added speaker.'
+    else
+      redirect_to speakers_path, notice: 'Speaker name is required.' 
     end
   end
 

@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @categories = current_user.categories
     @verses = current_user.verses
 
-    messages = current_user.messages
+    messages = current_user.messages.order("updated_at DESC")
     if params[:search]
       messages = current_user.messages.search(params[:search])
     elsif params[:cat] && params[:speaker]

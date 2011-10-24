@@ -22,6 +22,8 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(params[:category])
     if @category.save
       redirect_to categories_path, notice: 'Successfully added category.'
+    else
+      redirect_to categories_path, notice: 'Category name is required.'
     end
   end
 

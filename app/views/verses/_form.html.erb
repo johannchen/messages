@@ -1,18 +1,7 @@
 <%= form_for(@verse) do |f| %>
-  <% if @verse.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@verse.errors.count, "error") %> prohibited this verse from being saved:</h2>
-
-      <ul>
-      <% @verse.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render "shared/error_messages", :target => @verse %>
   <div class="field">
-    <%= f.label :verse %>
+    <%= f.label :verse %><%= mark_required(@verse, :ref) %>
     <%= f.text_field :ref %>
   </div>
   <div class="field">
@@ -20,7 +9,7 @@
     <%= f.text_field :category_names %>
   </div>
   <div class="field">
-    <%= f.check_box :favor %> Favorite
+    <%= f.check_box :favorite %> Favorite
   </div>
   <div class="actions">
     <%= f.submit %>
