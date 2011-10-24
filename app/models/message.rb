@@ -12,11 +12,27 @@ class Message < ActiveRecord::Base
   before_save :assign_speaker
   after_save :assign_categories, :assign_verses
 
+  require 'csv'
+
   # TODO: refactor search
   def self.search(search)
     where(['title like ? or summary like ?', "%#{search}%", "%#{search}%"]) if search
   end 
 
+  def to_csv
+    csv_data = CSV.generate do |csv|
+      csv << ["Title", "Date", "Summary"]
+      self.each do |msg|
+        csv << [
+          msg.title,
+          msg.mdate,
+          msg.summary
+        ]
+      end
+    end
+
+    csv_data
+  end
 
   def speaker_name
     @speaker_name || speaker.name if speaker

@@ -28,6 +28,11 @@ class MessagesController < ApplicationController
     else
       @messages = messages.page(params[:page]).per(10)
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { render :text => current_user.messages.to_csv }
+    end
   end
 
   def show
