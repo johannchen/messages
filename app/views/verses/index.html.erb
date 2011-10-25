@@ -6,7 +6,7 @@ Views:
 </div>
 
 <div class="stat">
-  <%= "Total: " + @verses.count.to_s + " verses" %>
+  <%= "Total: " + pluralize(@verses.count, "verse") %>
 </div>
 
 <div class="verses">

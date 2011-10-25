@@ -19,10 +19,11 @@ class Message < ActiveRecord::Base
     where(['title like ? or summary like ?', "%#{search}%", "%#{search}%"]) if search
   end 
 
-  def to_csv
+  def self.download_csv
+    messages = self.order("updated_at DESC")
     csv_data = CSV.generate do |csv|
       csv << ["Title", "Date", "Summary"]
-      self.each do |msg|
+      messages.map do |msg|
         csv << [
           msg.title,
           msg.mdate,

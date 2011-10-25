@@ -2,7 +2,7 @@
   <%= render "shared/error_messages", :target => @speaker %>
 
   <div class="field">
-    <%= f.label :name %><%= mark_required(@speaker, :name) %>
+    <%= "Name " + mark_required(@speaker, :name) %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">

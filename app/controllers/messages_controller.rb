@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render :text => current_user.messages.to_csv }
+      format.csv { render :text => current_user.messages.download_csv }
     end
   end
 

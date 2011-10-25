@@ -1,7 +1,7 @@
 <%= form_for(@verse) do |f| %>
   <%= render "shared/error_messages", :target => @verse %>
   <div class="field">
-    <%= f.label :verse %><%= mark_required(@verse, :ref) %>
+    <%= "Verse reference " + mark_required(@verse, :ref) %><br />
     <%= f.text_field :ref %>
   </div>
   <div class="field">

@@ -2,7 +2,7 @@
 <%= render 'form' %>
 </div>
 <div class="stat">
-  <%= "Total: " + @speakers.count.to_s + " speakers" %>
+  <%= "Total: " + pluralize(@speakers.count, "speaker") %>
 </div>
 <div class="speakers">
 <% if @speakers.present? %>

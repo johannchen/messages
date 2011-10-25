@@ -1,5 +1,5 @@
 <div class="stat">
-  <%= "Total: " + @messages.count.to_s + " messages" %>
+  <%= "Total: " + pluralize(@messages.count, "message") %>
 </div>
 <div class="messages">
 <% if @messages.present? %>
