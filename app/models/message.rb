@@ -22,12 +22,16 @@ class Message < ActiveRecord::Base
   def self.download_csv
     messages = self.order("updated_at DESC")
     csv_data = CSV.generate do |csv|
-      csv << ["Title", "Date", "Summary"]
+      csv << ["Title", "Date", "Speaker", "Summary", "Verses", "Categories", "Listened on"]
       messages.map do |msg|
         csv << [
           msg.title,
           msg.mdate,
-          msg.summary
+          msg.speaker_name,
+          msg.summary,
+          msg.verse_refs,
+          msg.category_names,
+          msg.listened_on
         ]
       end
     end

@@ -1,12 +1,29 @@
+<%= render 'side' %>
+
 <div class="top_links">
 Views: 
-<%= link_to "All", verses_path(:view => "all") %> |
-<%= link_to "Favorites", verses_path %> -
+<%= link_to_unless params[:view] == "all",  "All", verses_path(:view => "all") %> |
+<%= link_to_if params[:view].present?, "Favorites", verses_path %> -
 <%= link_to 'New Verse', new_verse_path %>
 </div>
 
+
 <div class="stat">
   <%= "Total: " + pluralize(@verses.count, "verse") %>
+  <% if params[:book].present? %>
+    <% temp_params1 = params.dup %>
+    <span class="filter">
+      <%= params[:book] %>
+      <%= link_to "x", temp_params1.delete_if {|key, value| key == "book"} %>
+    </span>
+  <% end %>
+  <% if params[:cat].present? %>
+    <% temp_params2 = params.dup %>
+    <span class="filter">
+      <%= Category.find(params[:cat]).name %>
+      <%= link_to "x", temp_params2.delete_if {|key, value| key == "cat"} %>
+    </span>
+  <% end %>
 </div>
 
 <div class="verses">
@@ -33,4 +50,3 @@ Views:
  <% end %>
 </div>
 
-<%= render 'side' %>

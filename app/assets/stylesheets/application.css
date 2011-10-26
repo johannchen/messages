@@ -219,6 +219,15 @@ label.check_box {
   margin-bottom: 10px;
 }
 
+.stat .filter {
+  border: solid 1px #999;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  background-color: #DDD;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
 .actions {
   margin: 8px 0;
 }
