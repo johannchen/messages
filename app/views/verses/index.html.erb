@@ -11,17 +11,15 @@ Views:
 <div class="stat">
   <%= "Total: " + pluralize(@verses.count, "verse") %>
   <% if params[:book].present? %>
-    <% temp_params1 = params.dup %>
-    <span class="filter">
+    <span class="list_filter">
       <%= params[:book] %>
-      <%= link_to "x", temp_params1.delete_if {|key, value| key == "book"} %>
+      <%= link_to "x", remove_filter("book") %>
     </span>
   <% end %>
   <% if params[:cat].present? %>
-    <% temp_params2 = params.dup %>
-    <span class="filter">
+    <span class="list_filter">
       <%= Category.find(params[:cat]).name %>
-      <%= link_to "x", temp_params2.delete_if {|key, value| key == "cat"} %>
+      <%= link_to "x", remove_filter("cat") %>
     </span>
   <% end %>
 </div>

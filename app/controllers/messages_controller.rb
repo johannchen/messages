@@ -6,27 +6,36 @@ class MessagesController < ApplicationController
     @categories = current_user.categories
     @verses = current_user.verses
 
-    messages = current_user.messages.order("updated_at DESC")
-    if params[:search]
-      messages = current_user.messages.search(params[:search])
+    ms = current_user.messages
+    ms = ms.search(params[:search]) if params[:search]
+    
+    if params[:cat] && params[:speaker] && params[:book]
+      ms = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker]).book(params[:book])
     elsif params[:cat] && params[:speaker]
-      messages = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker])
+      ms = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker])
+    elsif params[:cat] && params[:book]
+      ms = @categories.find(params[:cat]).messages.book(params[:book])
+    elsif params[:speaker] && params[:book]
+      ms = @speaker.find(params[:speaker]).messages.book(params[:book]) 
     elsif params[:cat]
-      messages = @categories.find(params[:cat]).messages
+      ms = @categories.find(params[:cat]).messages
     elsif params[:speaker]
-      messages = @speakers.find(params[:speaker]).messages
+      ms = @speakers.find(params[:speaker]).messages
     elsif params[:book]
-      verse_ids = @verses.where("ref like ?", "%#{params[:book]}%").map(&:id)
-      messages = Message.joins(:verses).where(:verses => {:id => verse_ids}) 
+      #verse_ids = @verses.where("ref like ?", "%#{params[:book]}%").map(&:id)
+      #ms = Message.joins(:verses).where(:verses => {:id => verse_ids}) 
+      ms = ms.book(params[:book])
     end
+
+    ms = ms.order("updated_at DESC")
 
     #pagination
     if params[:view] == "list"
-      @messages = messages.page(params[:page]).per(30)
+      @messages = ms.page(params[:page]).per(30)
     elsif params[:view] == "calendar"
-      @messages = messages
+      @messages = ms
     else
-      @messages = messages.page(params[:page]).per(10)
+      @messages = ms.page(params[:page]).per(10)
     end
 
     respond_to do |format|

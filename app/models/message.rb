@@ -7,6 +7,7 @@ class Message < ActiveRecord::Base
   validates_presence_of :title, :user
 
   scope :order_by_listened_date, order("listened_on DESC")
+  scope :book, lambda { |book| joins(:verses).where("verses.ref like ?", "%#{book}%")}
 
   attr_writer :speaker_name, :category_names, :verse_refs
   before_save :assign_speaker
@@ -14,7 +15,6 @@ class Message < ActiveRecord::Base
 
   require 'csv'
 
-  # TODO: refactor search
   def self.search(search)
     where(['title like ? or summary like ?', "%#{search}%", "%#{search}%"]) if search
   end 
