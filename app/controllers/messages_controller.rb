@@ -22,8 +22,6 @@ class MessagesController < ApplicationController
     elsif params[:speaker]
       ms = @speakers.find(params[:speaker]).messages
     elsif params[:book]
-      #verse_ids = @verses.where("ref like ?", "%#{params[:book]}%").map(&:id)
-      #ms = Message.joins(:verses).where(:verses => {:id => verse_ids}) 
       ms = ms.book(params[:book])
     end
 
@@ -81,6 +79,10 @@ class MessagesController < ApplicationController
     end
   end
 
+  def note
+    @message = Message.find(params[:id])
+  end
+
   def calendar
     @messages = current_user.messages
     messages = []
@@ -89,4 +91,5 @@ class MessagesController < ApplicationController
     end
     render :text => messages.to_json
   end
+
 end

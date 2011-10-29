@@ -6,6 +6,7 @@ Messages::Application.routes.draw do
   match "/signout" => "sessions#destroy", :as => :signout
   resources :messages do
     get 'calendar', :on => :collection
+    get 'note', :on => :member
   end
 
   resources :feedbacks, :only => :create

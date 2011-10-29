@@ -9,7 +9,10 @@
     </div>
     <div class="summary">
       <%= @message.summary %>
-      <%= link_to "...", @message.url if @message.url.present? %>
+      <%= link_to "link", @message.url if @message.url.present? %>
+    </div>
+    <div class="note">
+      <%= @message.note %>
     </div>
     <div class="verses">
       <% @message.verses.each do |verse| %>
@@ -26,6 +29,7 @@
   <% end %>
     </div>
   </div>
-<%= link_to 'Edit', edit_message_path(@message) %>
+  <%= link_to 'Edit', edit_message_path(@message) %> |
+  <%= link_to 'Take Note', note_message_path(@message) %>
 </div>
 

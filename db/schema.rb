@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024215938) do
+ActiveRecord::Schema.define(:version => 20111029224157) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20111024215938) do
     t.integer  "speaker_id"
     t.date     "listened_on"
     t.integer  "user_id"
+    t.text     "note"
   end
 
   create_table "messages_verses", :id => false, :force => true do |t|

@@ -77,6 +77,16 @@ describe "Messages" do
       page.should have_content("joy, leadership")
       page.should have_content("good message!")
     end
+
+    it "adds note", :focus => true do
+      m = Factory(:message, :user => @user)
+      visit message_path(m)
+      page.should have_link("Take Note")
+      click_link "Take Note"
+      fill_in "Note", :with => "my note"
+      click_button "Save Note"
+      page.should have_content("my note")
+    end
   end
   
   describe "Messages Summary View" do
@@ -96,10 +106,10 @@ describe "Messages" do
   end
 
   describe "Messages List View" do
-    it "display count", :focus => true do
+    it "display count" do
       Factory(:message, :user => @user)
       visit messages_path
-      page.should have_content("Total: 1 messages")
+      page.should have_content("Total: 1 message")
     end
 
     it "list in a table with list view" do
@@ -125,7 +135,6 @@ describe "Messages" do
       page.should have_no_link("Next")
       page.should have_link("Prev")
     end
-  end
 
     it "displays messages in a calendar by listened date" do
       #Factory(:message)
@@ -136,9 +145,8 @@ describe "Messages" do
       page.should have_content("one")
       page.should have_content("two")
     end
-  end
 
-    it "search title or summary", :focus => true do
+    it "search title or summary" do
       m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)
       m2 = Factory(:message, :title => "two", :summary => "one good message", :user => @user)
       visit messages_path
