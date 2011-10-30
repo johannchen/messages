@@ -7,27 +7,33 @@
       in <%= @message.category_names %> | 
       <%= @message.listened_on.strftime("listened on %b %d, %Y") if @message.listened_on.present? %> 
     </div>
+  <% if @message.summary.present? %>
     <div class="summary">
       <strong>Summary: </strong><%= @message.summary %>
       <%= link_to "link", @message.url if @message.url.present? %>
     </div>
+  <% end %>
+  <% if @message.note.present? %>
     <div class="note">
       <strong>Note: </strong><br /><%= @message.note.html_safe %>
     </div>
+  <% end %>
+  <% if @message.verses.present? %>
     <div class="verses">
-      <% @message.verses.each do |verse| %>
+    <% @message.verses.each do |verse| %>
     <div class="verse">
       <div class="ref"><%= verse.ref %></div> 
       <div class="ref_link"> 
         <%= link_to "like", like_verse_path(verse), :method => :put unless verse.favorite %>
         <br />
       </div>
-    <div class="passage">
+      <div class="passage">
       <%= verse.esv_passage %>
+      </div>
     </div>
-  </div>
+    <% end %>
+    </div>
   <% end %>
-    </div>
   </div>
   <%= link_to 'Edit', edit_message_path(@message) %> |
   <%= link_to 'Take Note', note_message_path(@message) %>
