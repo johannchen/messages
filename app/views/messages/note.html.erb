@@ -1,8 +1,9 @@
+<h1><%= @message.title %></h1>
+
 <%= form_for @message, :method => :put do |f| %>
   <%= render "shared/error_messages", :target => @message %>
 
   <div class="field">
-    <%= f.label :note %>
     <%= f.text_area :note, :cols => 100, :rows => 20 %>
   </div>
   <div class="actions">

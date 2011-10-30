@@ -8,11 +8,11 @@
       <%= @message.listened_on.strftime("listened on %b %d, %Y") if @message.listened_on.present? %> 
     </div>
     <div class="summary">
-      <%= @message.summary %>
+      <strong>Summary: </strong><%= @message.summary %>
       <%= link_to "link", @message.url if @message.url.present? %>
     </div>
     <div class="note">
-      <%= @message.note %>
+      <strong>Note: </strong><br /><%= @message.note.html_safe %>
     </div>
     <div class="verses">
       <% @message.verses.each do |verse| %>

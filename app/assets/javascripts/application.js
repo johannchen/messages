@@ -9,4 +9,5 @@
 //= require jquery-ui
 //= require jquery.validate
 //= require fullcalendar
+//= require cleditor
 //= require_tree .

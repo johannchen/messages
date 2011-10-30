@@ -4,7 +4,7 @@
 Views: 
 <%= link_to_unless params[:view] == "all",  "All", verses_path(:view => "all") %> |
 <%= link_to_if params[:view].present?, "Favorites", verses_path %> -
-<%= link_to 'New Verse', new_verse_path %>
+<%= link_to 'Add Verse', new_verse_path %>
 </div>
 
 
