@@ -2,8 +2,8 @@ class MessagesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @speakers = current_user.speakers
-    @categories = current_user.categories
+    @speakers = current_user.speakers.order(:name)
+    @categories = current_user.categories.order(:name)
     @verses = current_user.verses
 
     ms = current_user.messages

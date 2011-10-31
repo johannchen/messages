@@ -6,7 +6,7 @@ class SpeakersController < ApplicationController
     if params[:term]
       @speakers = current_user.speakers.where(['name like ?', "%#{params[:term]}%"]) if current_user.speakers
     else
-      @speakers = current_user.speakers
+      @speakers = current_user.speakers.order(:name)
     end
     respond_to do |format|
       format.html

@@ -3,7 +3,7 @@ class VersesController < ApplicationController
 
   def index 
     @verse = Verse.new
-    @categories = current_user.categories
+    @categories = current_user.categories.order(:name)
     
     if params[:view]
       vs = current_user.verses

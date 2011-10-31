@@ -16,8 +16,7 @@
         Welcome <%= current_user.name %>! 
         <%= link_to "Sign Out", signout_path %>
       <% else %>
-        Sign in with <%= link_to "Twitter", "/auth/twitter" %> |
-        <%= link_to "Google", "/auth/google" %>
+        Sign in with <%= link_to "Google", "/auth/google" %>
       <% end %>
     </div>
   </div>

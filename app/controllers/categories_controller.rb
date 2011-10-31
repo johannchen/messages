@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
       # jquery autocomplete
       @categories = current_user.categories.where("name like ?", "%#{params[:term]}%") if current_user.categories
     else
-      @categories = current_user.categories.page(params[:page]).per(30) 
+      @categories = current_user.categories.order(:name).page(params[:page]).per(30) 
     end
     respond_to do |format|
       format.html
