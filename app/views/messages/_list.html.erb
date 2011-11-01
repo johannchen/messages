@@ -6,17 +6,17 @@
     <tr>
       <th>Title</th>
       <th>Speaker</th>
-      <th>Date</th>
-      <th>Listened On</th>
+      <th>Listen On</th>
       <th>Action</th>
     </tr>
 <% @messages.each do |message| %>
   <tr>
     <td><%= link_to message.title, message_path(message) %></td>
     <td><%= message.speaker_name %></td>
-    <td><%= message.mdate %></td>
     <td><%= message.listened_on %></td>
-    <td><%= link_to 'edit', edit_message_path(message) %></td>
+    <td><%= link_to 'edit', edit_message_path(message) %> | 
+      <%= link_to 'remove', message, :confirm => "Are you sure?", :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

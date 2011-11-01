@@ -2,10 +2,10 @@
   <div class="info">
     <h1><%= @message.title %></h1>
     <div class="details">
-      by <%= @message.speaker_name %> 
-      <%= @message.mdate.strftime("on %b %d, %Y") %> 
-      in <%= @message.category_names %> | 
-      <%= @message.listened_on.strftime("listened on %b %d, %Y") if @message.listened_on.present? %> 
+      <%= "By" +  @message.speaker_name unless @message.speaker_name.blank? %> 
+      <%= @message.mdate.strftime("on %b %d, %Y") unless @message.mdate.blank? %> 
+      <%= "in Category: " + @message.category_names unless @message.category_names.blank? %>  
+      <%= " | " + @message.listened_on.strftime("listened on %b %d, %Y") if @message.listened_on.present? %> 
     </div>
   <% if @message.summary.present? %>
     <div class="summary">
