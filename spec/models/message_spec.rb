@@ -8,10 +8,10 @@ describe Message do
     message.should_not be_valid
   end
 
-  it "should not be valid with blank mdate" do
-    message.mdate = "" 
-    message.should_not be_valid
-  end
+#  it "should not be valid with blank mdate" do
+#    message.mdate = "" 
+#    message.should_not be_valid
+#  end
 
 #  it "should not be valid with blank speaker" do
 #    message.speaker = nil 
