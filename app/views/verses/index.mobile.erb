@@ -1,0 +1,14 @@
+<div data-role="header">
+  <h1>Favorites Verses</h1>
+</div>
+
+<div data-role="content">
+  <ul data-role="listview">
+    <% @verses.each do |verse| %>
+    <li>
+      <%= verse.ref %> 
+    </li>
+    <% end %> 
+  </ul>
+</div>
+
