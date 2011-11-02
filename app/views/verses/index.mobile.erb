@@ -1,5 +1,6 @@
 <div data-role="header">
   <h1>Favorites Verses</h1>
+  <%= link_to 'Full', root_url(:mobile => 0), "data-icon" => "gear", :class => "ui-btn-right" %> 
 </div>
 
 <div data-role="content">
@@ -12,3 +13,6 @@
   </ul>
 </div>
 
+<div data-role="footer">
+  <%= link_to 'Back', verses_path, "data-icon" => "back", :class => "ui-btn-left" %> 
+</div>

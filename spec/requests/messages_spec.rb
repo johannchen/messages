@@ -12,16 +12,16 @@ describe "Messages" do
       visit messages_path 
       # page.should have_content "no messages found"
       # view links
-      page.should have_link "New Message"
+      page.should have_link "Add Message"
       page.should have_link "Calendar"
       page.should have_link "List"
       page.should have_link "Summary"
-      click_link "New Message"
+      click_link "Add Message"
       current_path.should eq(new_message_path)
       # new
-      fill_in "Title", :with => "my message"
+      fill_in "message_title", :with => "my message"
       fill_in "message_speaker_name", :with => "Eric"
-      fill_in "Mdate", :with => "2011-01-03"
+      fill_in "message_mdate", :with => "2011-01-03"
       fill_in "Summary", :with => "What a message!"
       fill_in "Listened on", :with => "2011-09-03"
       fill_in "message_verse_refs", :with => "John 3:16; Matthew 3:2"
@@ -33,8 +33,8 @@ describe "Messages" do
       # display
       page.should have_content("my message")
       page.should have_content("Eric")
-      page.should have_content("2011-01-03")
-      page.should have_content("2011-09-03")
+      page.should have_content("Jan 03, 2011")
+      page.should have_content("Sep 03, 2011")
       page.should have_content("What a message!")
       page.should have_content("John 3:16")
       page.should have_content("God so loved the world")
@@ -44,14 +44,14 @@ describe "Messages" do
       click_link "Edit"
       current_path.should eq(edit_message_path(Message.last))
       # edit
-      page.should have_field("Title", :with => "my message")
+      page.should have_field("message_title", :with => "my message")
       page.should have_field("message_speaker_name", :with => "Eric")
       page.should have_field("Listened on", :with => "2011-09-03")
       page.should have_field("message_verse_refs", :with => "John 3:16; Matthew 3:2")
       page.should have_field("message_category_names", :with => "peace, kindness")
-      fill_in "Title", :with => "edit message"
+      fill_in "message_title", :with => "edit message"
       fill_in "message_speaker_name", :with => "Mondy"
-      fill_in "Mdate", :with => "2011-02-03"
+      fill_in "message_mdate", :with => "2011-02-03"
       fill_in "Summary", :with => "good message!"
       fill_in "Listened on", :with => "2011-10-03"
       fill_in "message_verse_refs", :with => "John 1:4; Matthew 6:2"
@@ -62,8 +62,8 @@ describe "Messages" do
       # display edited message
       page.should have_content("edit message")
       page.should have_content("Mondy")
-      page.should have_content("2011-02-03")
-      page.should have_content("2011-10-03")
+      page.should have_content("Feb 03, 2011")
+      page.should have_content("Oct 03, 2011")
       page.should have_content("good message!")
       page.should have_content("John 1:4")
       page.should have_content("joy, leadership")
@@ -78,12 +78,12 @@ describe "Messages" do
       page.should have_content("good message!")
     end
 
-    it "adds note", :focus => true do
+    it "adds note" do
       m = Factory(:message, :user => @user)
       visit message_path(m)
       page.should have_link("Take Note")
       click_link "Take Note"
-      fill_in "Note", :with => "my note"
+      fill_in "message_note", :with => "my note"
       click_button "Save Note"
       page.should have_content("my note")
     end
@@ -118,8 +118,7 @@ describe "Messages" do
       click_link "List"
       page.should have_content("Title")
       page.should have_content("Speaker")
-      page.should have_content("Date")
-      page.should have_content("Listened On")
+      page.should have_content("Listen On")
       page.should have_link("m0")
       click_link "m0"
       current_path.should eq(message_path(Message.first))
@@ -136,15 +135,12 @@ describe "Messages" do
       page.should have_link("Prev")
     end
 
-    it "displays messages in a calendar by listened date" do
-      #Factory(:message)
-      m1 = Factory(:message, :title => "one", :listened_on => "2011-10-08", :user => @user)
-      m2 = Factory(:message, :title => "two", :listened_on => "2011-10-10", :user => @user)
-      visit messages_path
-      click_link "Calendar"
-      page.should have_content("one")
-      page.should have_content("two")
-    end
+#    it "displays messages in a calendar by listened date" do
+#      Factory(:message, :title => "one", :listened_on => "2011-11-02", :user => @user)
+#      visit messages_path
+#      click_link "Calendar"
+#      page.should have_link("one")
+#    end
 
     it "search title or summary" do
       m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)

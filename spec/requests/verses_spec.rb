@@ -6,8 +6,8 @@ describe "Verses" do
     @user = User.last
   end
 
-  describe "Favor Verses" do
-    it "tags favor verse through message", :focus => true do 
+  describe "Favorite Verses" do
+    it "tags favorite verse through message", :focus => true do 
       m = Factory(:message, :user => @user)
       v = Factory(:verse, :user => @user)
       m.verses << v
@@ -21,12 +21,12 @@ describe "Verses" do
     end
 
 
-    it "paginates every 10 favor verses" do
+    it "paginates every 10 favorite verses" do
     end
 
-    it "filters favor verses by book" do
-      v1 = Factory(:verse, :ref => "Genesis 1:1", :favor => true, :user => @user)
-      v2 = Factory(:verse, :favor => true, :user => @user)
+    it "filters favorite verses by book" do
+      v1 = Factory(:verse, :ref => "Genesis 1:1", :favorite => true, :user => @user)
+      v2 = Factory(:verse, :favorite => true, :user => @user)
       visit verses_path
       page.should have_link("Genesis")
       page.should have_link("Revelation")
@@ -38,9 +38,9 @@ describe "Verses" do
       page.should have_no_link("Genesis")
     end
 
-    it "filters favor verses by category" do
-      v1 = Factory(:verse, :ref => "Genesis 1:1", :favor => true, :user => @user)
-      v2 = Factory(:verse, :favor => true, :user => @user)
+    it "filters favorite verses by category" do
+      v1 = Factory(:verse, :ref => "Genesis 1:1", :favorite => true, :user => @user)
+      v2 = Factory(:verse, :favorite => true, :user => @user)
       c1 = Factory(:category, :name => "Kindness", :user => @user)
       c2 = Factory(:category, :name => "Faithfullness", :user => @user)
       v1.categories << c1
@@ -57,8 +57,8 @@ describe "Verses" do
       page.should have_content("John 3:16")
     end
 
-    it "removes verse from favor list" do
-      v = Factory(:verse, :favor => true, :user => @user)
+    it "removes verse from favorite list" do
+      v = Factory(:verse, :favorite => true, :user => @user)
       visit verses_path
       page.should have_content("John 3:16")
       page.should have_link("dislike")
@@ -73,7 +73,7 @@ describe "Verses" do
 
     it "displays all verses" do
       v1 = Factory(:verse, :ref => "Genesis 1:1", :user => @user)
-      v2 = Factory(:verse, :favor => true, :user => @user)
+      v2 = Factory(:verse, :favorite => true, :user => @user)
 
       visit verses_path
       page.should have_link("All")
@@ -86,7 +86,7 @@ describe "Verses" do
       page.should have_content("John 3:16")
     end
 
-    it "adds to favor list" do
+    it "adds to favorite list" do
       v1 = Factory(:verse, :ref => "Genesis 1:1", :user => @user)
       visit verses_path
       click_link "All"
@@ -99,13 +99,13 @@ describe "Verses" do
   end
 
   describe "Verse" do
-    it "creates and updates verse", :focus => true do
+    it "creates and updates verse" do
       visit verses_path
-      click_link "New Verse"
+      click_link "Add Verse"
       # page.should have_checked_field("favor")
       fill_in "verse_ref", :with => "John 3:16"
       fill_in "verse_category_names", :with => "Love"
-      check "verse_favor"
+      check "verse_favorite"
       click_button "Create"
       current_path.should eq(verses_path)
       page.should have_content("John 3:16")
@@ -119,7 +119,7 @@ describe "Verses" do
     end
 
     it "deletes verse and its associations" do
-      v = Factory(:verse, :favor => true, :user => @user)
+      v = Factory(:verse, :favorite => true, :user => @user)
       c = Factory(:category, :user => @user)
       m = Factory(:message, :user => @user)
       v.categories << c

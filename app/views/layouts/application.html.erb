@@ -16,7 +16,12 @@
         Welcome <%= current_user.name %>! 
         <%= link_to "Sign Out", signout_path %>
       <% else %>
-        Sign in with <%= link_to "Google", "/auth/google" %>
+        <%= link_to "Sign in with Google", "/auth/google" %>
+      <% end %> | 
+      <% if mobile_device? %>
+        <%= link_to "Full Site", :mobile => 0 %>
+      <% else %>
+        <%= link_to "Mobile Site", verses_path(:mobile => 1) %>
       <% end %>
     </div>
   </div>
@@ -59,7 +64,7 @@
 
   <div id="footer">
     <div class="inner">
-      &copy;2011 Sermon Messages
+      &copy;2011 Gracedimension 
     </div>
   </div>
 </body>
