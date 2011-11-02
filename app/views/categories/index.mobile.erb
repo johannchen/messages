@@ -1,21 +1,21 @@
 <div data-role="header">
   <%= link_to 'Back', "#", "data-icon" => "back" %> 
-  <h1>Favorites Verses</h1>
+  <h1>Categories</h1>
   <%= link_to 'Next', "#", "data-icon" => "forward" %> 
 </div>
 
 <div data-role="content">
   <ul data-role="listview">
-    <% @verses.each do |verse| %>
+    <% @categories.each do |category| %>
     <li>
-      <%= verse.ref %> 
+      <%= link_to category.name, category_path(category) %> 
     </li>
     <% end %> 
   </ul>
 </div>
 
 <div data-role="footer">
-  <%= link_to 'Categories', "#", "data-icon" => "arrow-u" %> 
+  <%= link_to 'Home', "#", "data-icon" => "home" %> 
   <%= link_to 'Remove', "#", "data-icon" => "delete" %> 
   <%= link_to 'Add', "#", "data-icon" => "plus" %> 
 </div>

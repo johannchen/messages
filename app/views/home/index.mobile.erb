@@ -1,1 +1,16 @@
-<p>Display the last verse</p>
+<div data-role="header">
+  <%= link_to 'Back', "#", "data-icon" => "back" %> 
+  <h1>Favorites Verses</h1>
+  <%= link_to 'Next', "#", "data-icon" => "forward" %> 
+</div>
+
+<div data-role="content">
+  <h3><%= @verse.ref %></h3>
+  <p><%= @verse.esv_passage %></p> 
+</div>
+
+<div data-role="footer">
+  <%= link_to 'Categories', categories_path, "data-icon" => "arrow-u" %> 
+  <%= link_to 'Remove', "#", "data-icon" => "delete" %> 
+  <%= link_to 'Add', "#", "data-icon" => "plus" %> 
+</div>

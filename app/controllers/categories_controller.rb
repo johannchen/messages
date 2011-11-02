@@ -6,6 +6,8 @@ class CategoriesController < ApplicationController
     if params[:term]
       # jquery autocomplete
       @categories = current_user.categories.where("name like ?", "%#{params[:term]}%") if current_user.categories
+    elsif mobile_device?
+      @categories = current_user.categories.order(:name)
     else
       @categories = current_user.categories.order(:name).page(params[:page]).per(30) 
     end
@@ -13,6 +15,10 @@ class CategoriesController < ApplicationController
       format.html
       format.json { render :json => @categories.order(:name).map(&:name) }
     end
+  end
+
+  def show
+    @verses = @category.verses.favorite.order("updated_at DESC")
   end
 
   def edit
