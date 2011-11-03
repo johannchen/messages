@@ -1,21 +1,15 @@
 <div data-role="header">
-  <%= link_to 'Back', "#", "data-icon" => "back" %> 
+  <a data-rel="back" data-icon="back">Back</a> 
   <h1><%= @category.name %></h1>
-  <%= link_to 'Next', "#", "data-icon" => "forward" %> 
+  <%= link_to 'Add', "#", "data-icon" => "plus" %> 
 </div>
 
 <div data-role="content">
   <ul data-role="listview">
     <% @verses.each do |verse| %>
     <li>
-      <%= verse.ref %> 
+      <%= link_to verse.ref, verse_path(verse) %> 
     </li>
     <% end %> 
   </ul>
-</div>
-
-<div data-role="footer">
-  <%= link_to 'Home', "#", "data-icon" => "home" %> 
-  <%= link_to 'Remove', "#", "data-icon" => "delete" %> 
-  <%= link_to 'Add', "#", "data-icon" => "plus" %> 
 </div>

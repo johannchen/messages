@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @verses = @category.verses.favorite.order("updated_at DESC")
+    @verses = @category.verses.favorites.order("updated_at DESC")
   end
 
   def edit
