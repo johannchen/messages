@@ -38,12 +38,13 @@ Views:
   <% else %>
     <%= link_to 'like', like_verse_path(verse), :method => :put %> 
   <% end %> 
-  | <%= link_to 'remove', verse, :confirm => "Are you sure?", :method => :delete %>
+  | <%= link_to 'remove', verse, :confirm => "Are you sure?", :method => :delete %> 
 </div>
-  <%= verse.esv_passage %>
+<p>
+<%= verse.esv_passage %>
+</p>
   </div>
 <% end %>
-</ul>
 <%= paginate @verses %>
  <% end %>
 </div>

@@ -1,14 +1,16 @@
 <div data-role="header">
   <%= link_to 'Home', root_url, "data-icon" => "home" %> 
   <h1>Categories</h1>
-  <%= link_to 'Add', "#", "data-icon" => "plus" %> 
+  <%= link_to 'Add', new_category_path, "data-icon" => "plus" %> 
 </div>
 
 <div data-role="content">
   <ul data-role="listview">
     <% @categories.each do |category| %>
     <li>
-      <%= link_to category.name, category_path(category) %> 
+    <%= link_to category do %>
+      <%= category.name %><span class="ui-li-count"><%= category.verses.count %></span>
+    <% end %>
     </li>
     <% end %> 
   </ul>

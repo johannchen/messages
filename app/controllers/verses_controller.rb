@@ -32,9 +32,13 @@ class VersesController < ApplicationController
   end
 
   def create
+    params[:verse][:favorite] = 1 unless params[:verse][:favorite]
     @verse = current_user.verses.build(params[:verse])
     if @verse.save
-      redirect_to verses_path, notice: 'Successfully added verse.'
+      respond_to do |format|
+        format.mobile { redirect_to @verse }
+        format.html { redirect_to verses_path, notice: 'Successfully added verse.' }
+      end
     else 
       render 'new'
     end

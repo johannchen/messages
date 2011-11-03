@@ -1,0 +1,23 @@
+<div data-role="header">
+  <a data-rel="back" data-icon="back">Back</a>
+  <h1>New Category</h1>
+</div>
+
+<div data-role="content">
+  <div class="notice">
+      <% flash.each do |name, msg| %>
+      <div class="ui-widget">
+        <div class="ui-state-highlight ui-corner-all">
+          <%= msg %><br />
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= form_for(@category) do |f| %>
+  <div data-role="fieldcontain">
+  <%= f.label :name, :class => "ui-hidden-accessible" %>
+  <%= f.text_field :name, "placeholder" => "Category Name" %>
+  <%= f.submit "Save Category" %>
+    </div>
+  <% end %>
+</div>

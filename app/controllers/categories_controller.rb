@@ -21,6 +21,9 @@ class CategoriesController < ApplicationController
     @verses = @category.verses.favorites.order("updated_at DESC")
   end
 
+  def new
+  end
+
   def edit
   end
 
@@ -29,7 +32,10 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: 'Successfully added category.'
     else
-      redirect_to categories_path, notice: 'Category name is required.'
+      respond_to do |format|
+        format.mobile { render 'new', notice: 'Category name cannot be blank or duplicated' }
+        format.html { redirect_to categories_path, notice: 'Category name is required.' }
+      end
     end
   end
 

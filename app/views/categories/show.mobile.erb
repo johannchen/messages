@@ -1,7 +1,7 @@
 <div data-role="header">
   <a data-rel="back" data-icon="back">Back</a> 
   <h1><%= @category.name %></h1>
-  <%= link_to 'Add', "#", "data-icon" => "plus" %> 
+  <%= link_to 'Add Verse', new_verse_path(:cat => @category.id), "data-icon" => "plus" %> 
 </div>
 
 <div data-role="content">
