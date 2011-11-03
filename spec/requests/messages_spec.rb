@@ -134,7 +134,7 @@ describe "Messages" do
       page.should have_no_link("Next")
       page.should have_link("Prev")
     end
-
+  end
 #    it "displays messages in a calendar by listened date" do
 #      Factory(:message, :title => "one", :listened_on => "2011-11-02", :user => @user)
 #      visit messages_path
@@ -142,9 +142,10 @@ describe "Messages" do
 #      page.should have_link("one")
 #    end
 
-    it "search title or summary" do
+  describe "Message Search" do
+    it "search title or summary with case insensitive", :focus => true do
       m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)
-      m2 = Factory(:message, :title => "two", :summary => "one good message", :user => @user)
+      m2 = Factory(:message, :title => "two", :summary => "One good message", :user => @user)
       visit messages_path
       fill_in "search", :with => "one"
       click_button "Search Messages"

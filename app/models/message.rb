@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   require 'csv'
 
   def self.search(search)
-    where(['title like ? or summary like ?', "%#{search}%", "%#{search}%"]) if search
+    where(['lower(title) like ? or lower(summary) like ?', "%#{search.downcase}%", "%#{search.downcase}%"]) if search
   end 
 
   def self.download_csv
