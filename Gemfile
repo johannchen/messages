@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '~> 3.1.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'rack', '1.3.3'
+# gem 'rack', '1.3.3'
 
 # postgre
 gem 'pg'
@@ -20,10 +20,12 @@ gem 'thin'
 gem 'kaminari'
 
 # authentication
-gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :branch => "0-3-stable"
+# gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :branch => "0-3-stable"
+gem 'omniauth'
+gem 'omniauth-openid'
 
 # authorization
-gem 'cancan', '1.6.5'
+gem 'cancan' 
 
 # Gems used only for assets and not required
 # in production environments by default.
