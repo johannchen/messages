@@ -1,10 +1,15 @@
 <div data-role="header">
-  <%= link_to 'Full', root_url(:mobile => 0), "data-icon" => "back" %> 
+  <%= link_to 'Full Site', root_url(:mobile => 0), :rel => "external", "data-icon" => "back" %> 
   <h1>My Favorite Verse Today</h1>
-  <%= link_to 'Categories', categories_path, "data-icon" => "arrow-d" %> 
+  <%= link_to 'Categories', categories_path, "data-icon" => "arrow-d" if current_user %> 
 </div>
 
 <div data-role="content">
+<% if current_user %>
   <h3><%= @verse.ref %></h3>
   <p><%= @verse.esv_passage %></p> 
+<% else %>
+  <p>Please go to Full Site to sign in with your Google account</p>
+<% end %>
 </div>
+  
