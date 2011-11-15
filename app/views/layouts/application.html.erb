@@ -21,7 +21,8 @@
           <%= link_to "Mobile Site", root_path(:mobile => 1) %>
         <% end %>
       <% else %>
-        <%= link_to "Sign in with Google", "/auth/google" %>
+        Sign in with <%= link_to "Google", "/auth/google" %> | 
+        <%= link_to "Facebook", "/auth/facebook" %>
       <% end %> 
     </div>
   </div>

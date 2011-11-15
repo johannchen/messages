@@ -20,9 +20,11 @@ gem 'thin'
 gem 'kaminari'
 
 # authentication
-# gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :branch => "0-3-stable"
 gem 'omniauth'
+# google 
 gem 'omniauth-openid'
+# facebook
+gem 'omniauth-facebook', '~> 1.0.0.rc1'
 
 # authorization
 gem 'cancan' 

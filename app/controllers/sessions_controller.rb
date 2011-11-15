@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
-    
+
     if session[:user_id]
       User.find(session[:user_id]).add_provider(auth)
       render :text => "You can now login using #{auth["provider"].capitalize} too!"

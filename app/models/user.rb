@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   def self.create_with_omniauth(auth)
     create! do |user|
       user.name = auth["user_info"]["name"]
-      user.email = auth["user_info"]["email"]
+      user.email = auth[:provider] == "facebook"? auth["info"]["email"] : auth["user_info"]["email"]
     end
   end
 end
