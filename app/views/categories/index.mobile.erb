@@ -9,7 +9,7 @@
     <% @categories.each do |category| %>
     <li>
     <%= link_to category do %>
-      <%= category.name %><span class="ui-li-count"><%= category.verses.count %></span>
+      <%= category.name %><span class="ui-li-count"><%= category.verses.favorites.count %></span>
     <% end %>
     </li>
     <% end %> 
