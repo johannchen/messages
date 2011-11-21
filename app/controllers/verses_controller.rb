@@ -33,6 +33,8 @@ class VersesController < ApplicationController
 
   def create
     params[:verse][:favorite] = 1 unless params[:verse][:favorite]
+    # handle mobile select 
+    params[:verse][:ref] = params[:verse_book] + " " + params[:verse_num] if params[:verse_book]
     @verse = current_user.verses.build(params[:verse])
     if @verse.save
       respond_to do |format|
