@@ -4,3 +4,5 @@ log/*.log
 tmp/
 .sass-cache/
 config/database.yml
+config/setup_mailer.rb
+config/omniauth.rb
