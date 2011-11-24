@@ -1,5 +1,5 @@
 class FeedbackMailer < ActionMailer::Base
-  default to: "gracedimension@gmail.com"
+  default to: "johannchen@gmail.com"
 
   def feedback_mail(user, msg)
     @msg = msg

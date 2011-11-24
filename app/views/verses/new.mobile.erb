@@ -6,10 +6,18 @@
 <div data-role="content">
   <%= form_for(@verse) do |f| %>
   <div data-role="fieldcontain">
-  <%= f.label :ref, "Verse Reference", :class => "ui-hidden-accessible" %>
-  <%= f.text_field :ref, "placeholder" => "John 3:16" %>
-  <input type="hidden" id="verse_category_names" name="verse[category_names]", value="<%= Category.find(params[:cat]).name %>" />
-  <%= f.submit "Save Verse" %>
-    </div>
+    <%= f.label :ref, "Verse Reference (e.g. John 3:16)" %>
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <select name="verse_book" id="verse_book">
+	 <option>Book</option>
+	 <% BIBLE.each do |book| %>
+	 <option value="<%= book %>"><%= book %></option>
+	 <% end %>
+      </select>
+      <input type="text" name="verse_num" id="verse_num" value="" /> 
+    </fieldset>   
+    <input type="hidden" id="verse_category_names" name="verse[category_names]", value="<%= Category.find(params[:cat]).name %>" />
+    <%= f.submit "Save Verse" %>
+  </div>
   <% end %>
 </div>
