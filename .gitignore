@@ -4,4 +4,3 @@ log/*.log
 tmp/
 .sass-cache/
 config/database.yml
-config/initializers/setup_mailer.rb
