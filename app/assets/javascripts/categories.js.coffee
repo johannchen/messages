@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  $('.best_in_place').best_in_place()
+
   split = (val) -> val.split /,\s*/
   extractLast = (term) -> split(term).pop()
   $("#message_category_names,#verse_category_names")

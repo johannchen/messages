@@ -1,8 +1,6 @@
-<div class="right_side">
-<%= render 'form' %>
-</div>
 <div class="stat">
-  <%= "Total: " + pluralize(@speakers.count, "speaker") %>
+  <%= "Total: " + pluralize(@speakers.count, "speaker") %> - 
+  <%= link_to 'Add Speaker', new_speaker_path %>
 </div>
 <div class="speakers">
 <% if @speakers.present? %>
@@ -12,15 +10,15 @@
       <th>Church</th>
       <th>Messages</th>
       <th>Blog</th>
-      <th>Action</th>
+      <th>Link</th>
     </tr>
 <% @speakers.each do |speaker| %>
   <tr> 
-    <td><%= speaker.name%></td>
-    <td><%= speaker.church %></td>
+    <td><%= best_in_place speaker, :name %></td>
+    <td><%= best_in_place speaker, :church %></td>
     <td><%= link_to_unless speaker.messages.count == 0, speaker.messages.count, messages_path(:speaker => speaker.id) %></td>
-    <td><%= link_to 'blog', speaker.link unless speaker.link.blank? %></td>
-    <td><%= link_to 'edit', edit_speaker_path(speaker) %></td>
+    <td><%= best_in_place speaker, :link %></td>
+    <td><%= link_to "link", speaker.link, :target => "_blank" if speaker.link.present? %></td>
   </tr>
 <% end %>
 </table>

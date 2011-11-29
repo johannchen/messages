@@ -13,10 +13,10 @@
     </tr>
 <% @categories.each do |category| %>
   <tr>
-    <td><%= category.name%></td>
+    <td><%= best_in_place category, :name %></td>
     <td><%= link_to_unless category.messages.count == 0, category.messages.count, messages_path(:cat => category.id) %></td>
     <td><%= link_to_unless category.verses.count == 0, category.verses.count, verses_path(:cat => category.id) %></td>
-    <td><%= link_to 'edit', edit_category_path(category) %> |
+    <td>
       <%= link_to 'remove', category, :confirm => "Are you sure?", :method => :delete %> </td>
   </tr>
 <% end %>
