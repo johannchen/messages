@@ -10,7 +10,7 @@
   <% if @message.summary.present? %>
     <div class="summary">
       <strong>Summary: </strong><%= @message.summary %>
-      <%= link_to "link", @message.url if @message.url.present? %>
+      <%= link_to "link", @message.url, :target => "_blank" if @message.url.present? %>
     </div>
   <% end %>
   <% if @message.note.present? %>
