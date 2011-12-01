@@ -13,6 +13,9 @@
     <div class="title">Sermon Messages</div>
     <div class="user_nav">
       <% if current_user %>
+        <% if current_user.admin? %>
+          [<%= User.count %>]
+        <% end %>
         Welcome <%= current_user.name %>! 
         <%= link_to "Sign Out", signout_path %> |
         <% if mobile_device? %>
