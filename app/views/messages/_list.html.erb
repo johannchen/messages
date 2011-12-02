@@ -14,8 +14,8 @@
     <td><%= link_to message.title, message_path(message) %></td>
     <td><%= message.speaker_name %></td>
     <td><%= message.listened_on %></td>
-    <td><%= link_to 'edit', edit_message_path(message) %> | 
-      <%= link_to 'remove', message, :confirm => "Are you sure?", :method => :delete %>
+    <td><%= link_to 'edit', edit_message_path(message), :class => "ui-icon ui-icon-pencil", :title => "edit" %>  
+      <%= link_to 'remove', message, :class => "ui-icon ui-icon-trash", :title => "remove", :confirm => "Are you sure?", :method => :delete %>
     </td>
   </tr>
 <% end %>

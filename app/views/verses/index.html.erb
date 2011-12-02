@@ -1,15 +1,25 @@
 <%= render 'side' %>
 
 <div class="top_links">
-Views: 
-<%= link_to_unless params[:view] == "all",  "All", verses_path(:view => "all") %> |
-<%= link_to_if params[:view].present?, "Favorites", verses_path %> -
-<%= link_to 'Add Verse', new_verse_path %>
+  <ul class="ui-widget ui-helper-clearfix">
+  <li class="ui-state-default ui-corner-all">
+    <span class="ui-icon ui-icon-calculator"></span> 
+    <%= link_to "View All", verses_path(:view => "all") %>
+  </li>
+  <li class="ui-state-default ui-corner-all">
+    <span class="ui-icon ui-icon-heart"></span> 
+    <%= link_to "View Favorites", verses_path %> 
+  </li>
+  <li class="ui-state-default ui-corner-all">
+    <span class="ui-icon ui-icon-plus"></span> 
+    <%= link_to 'Add Verse', new_verse_path %>
+  </li>
+  </ul>
 </div>
 
-
 <div class="stat">
-  <%= "Total: " + pluralize(@verses.count, "verse") %>
+  <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
+  <%= pluralize(@verses.count, "verse") %>
   <% if params[:book].present? %>
     <span class="list_filter">
       <%= params[:book] %>
@@ -32,15 +42,15 @@ Views:
         <%= verse.ref %>
       </div>
       <div class="ref_link"> 
-  <%= link_to 'edit', edit_verse_path(verse) %> | 
+        <%= link_to 'edit', edit_verse_path(verse), :class => "ui-icon ui-icon-pencil", :title => "edit" %>  
   <% if verse.favorite %>
-    <%= link_to 'dislike', dislike_verse_path(verse), :method => :put %> 
+    <%= link_to 'dislike', dislike_verse_path(verse), :method => :put, :class =>"ui-icon ui-icon-pin-s", :title => "dislike" %> 
   <% else %>
-    <%= link_to 'like', like_verse_path(verse), :method => :put %> 
+    <%= link_to 'like', like_verse_path(verse), :method => :put, :class => "ui-icon ui-icon-heart", :title => "like" %> 
   <% end %> 
-  | <%= link_to 'remove', verse, :confirm => "Are you sure?", :method => :delete %> 
-</div>
-<p>
+  <%= link_to 'remove', verse, :class => "ui-icon ui-icon-trash", :title => "remove", :confirm => "Are you sure?", :method => :delete %> 
+  </div>
+<p class="clear">
 <%= verse.esv_passage %>
 </p>
   </div>

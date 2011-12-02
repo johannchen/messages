@@ -17,7 +17,7 @@
     <td><%= link_to_unless category.messages.count == 0, category.messages.count, messages_path(:cat => category.id) %></td>
     <td><%= link_to_unless category.verses.count == 0, category.verses.count, verses_path(:cat => category.id) %></td>
     <td>
-      <%= link_to 'remove', category, :confirm => "Are you sure?", :method => :delete %> </td>
+      <%= link_to 'remove', category, :class => "ui-icon ui-icon-trash", :title => "remove", :confirm => "Are you sure?", :method => :delete %> </td>
   </tr>
 <% end %>
 </table>

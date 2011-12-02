@@ -95,6 +95,11 @@ ul.horizontal li {
   display: none;
 }
 
+.ui-icon {
+  float: left;
+  margin-right: 10px;
+}
+
 label {
   display: block;
   padding: 5px 5px;
@@ -216,6 +221,25 @@ label.check_box {
 
 .top_links {
   margin-bottom: 10px;
+}
+
+.top_links ul {
+  padding-left: 0;
+}
+
+.top_links ul li {
+  list-style: none;
+  display: inline;
+  float: left;
+  margin: 0 4px;
+}
+
+.top_links ul span.ui-icon {
+  float: left;
+  margin-right: 4px;
+}
+.top_links ul li a {
+  padding-right: 6px;
 }
 
 .stat {
