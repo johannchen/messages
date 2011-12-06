@@ -1,7 +1,9 @@
 <%= form_for(@verse) do |f| %>
   <%= render "shared/error_messages", :target => @verse %>
   <div class="field">
-    <%= "Verse reference " + mark_required(@verse, :ref) %><br />
+    <label for="verse_ref">
+      <%= mark_required(@verse, :ref) %> Verse reference
+    </label>
     <%= f.text_field :ref %>
   </div>
   <div class="field">
@@ -9,7 +11,8 @@
     <%= f.text_field :category_names %>
   </div>
   <div class="field">
-    <%= f.check_box :favorite %> Favorite
+    <%= f.label :favorite %>
+    <%= f.check_box :favorite %> 
   </div>
   <div class="actions">
     <%= f.submit %>

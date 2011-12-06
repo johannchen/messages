@@ -91,6 +91,21 @@ ul.horizontal li {
   margin: 10px 0;
 }
 
+.field label {
+  float: left;
+  line-height: 18px;
+  text-align: right;
+  width: 120px;
+}
+
+.field input textarea {
+  margin-left: 10px;
+}
+
+.actions {
+  margin-left: 130px;
+}
+
 .special_email_field {
   display: none;
 }
@@ -254,25 +269,6 @@ label.check_box {
   padding: 2px 8px;
   font-size: 12px;
   margin-right: 3px;
-}
-
-.actions {
-  margin: 8px 0;
-}
-
-.actions a {
-  padding: 3px 8px 2px 8px;
-  font-size: 12px;
-  color: #000;
-  border: 1px solid #999;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  background: #DDD;
-  background: -webkit-gradient(linear, left top, left bottom, from(#F5F5F5), to(#DDD));
-  background: -moz-linear-gradient(top,  #F5F5F5, #DDD);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F5F5F5', endColorstr='#DDD');
-  text-decoration: none;
 }
 
 /*** SIDE ***/
