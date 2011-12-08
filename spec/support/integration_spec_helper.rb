@@ -1,5 +1,5 @@
 module IntegrationSpecHelper
-  def login_with_oauth(service = :twitter)
+  def login_with_oauth(service = :facebook)
     visit "/auth/#{service}"
     User.last
   end

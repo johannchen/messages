@@ -94,6 +94,8 @@ describe "Messages" do
       22.times {|n| Factory(:message, :title => "m#{n}", :user => @user)}
       visit messages_path
       click_link "Summary"
+      page.should have_content("22 messages")
+
       page.should have_no_link("Prev")
       page.should have_link("Next")
       click_link "Next"
@@ -143,7 +145,7 @@ describe "Messages" do
 #    end
 
   describe "Message Search" do
-    it "search title or summary with case insensitive", :focus => true do
+    it "search title or summary with case insensitive" do
       m1 = Factory(:message, :title => "one", :summary => "no good", :user => @user)
       m2 = Factory(:message, :title => "two", :summary => "One good message", :user => @user)
       visit messages_path

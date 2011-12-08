@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
     @verses = current_user.verses
 
     ms = current_user.messages
+    @count = ms.count
     ms = ms.search(params[:search]) if params[:search]
     
     if params[:cat] && params[:speaker] && params[:book]

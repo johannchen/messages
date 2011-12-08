@@ -1,5 +1,5 @@
 <div class="stat">
-  <%= "Total: " + pluralize(@messages.count, "message") %>
+  <%= "Total: " + pluralize(@count, "message") %>
   <% if params[:search].present? %>
     <span class="list_filter">
       <%= params[:search] %>

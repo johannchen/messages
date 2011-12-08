@@ -7,7 +7,7 @@ describe "Verses" do
   end
 
   describe "Favorite Verses" do
-    it "tags favorite verse through message", :focus => true do 
+    it "tags favorite verse through message" do 
       m = Factory(:message, :user => @user)
       v = Factory(:verse, :user => @user)
       m.verses << v
@@ -18,10 +18,6 @@ describe "Verses" do
       page.should have_no_link("like")
       visit verses_path
       page.should have_content("John 3:16")
-    end
-
-
-    it "paginates every 10 favorite verses" do
     end
 
     it "filters favorite verses by book" do
@@ -77,11 +73,9 @@ describe "Verses" do
 
       visit verses_path
       page.should have_link("All")
-      page.should have_no_link("Favor")
       page.should have_no_content("Genesis 1:1")
       page.should have_content("John 3:16")
       click_link ("All")
-      page.should have_no_link("All")
       page.should have_content("Genesis 1:1")
       page.should have_content("John 3:16")
     end
@@ -92,8 +86,6 @@ describe "Verses" do
       click_link "All"
       page.should have_link("like")
       click_link "like"
-      click_link "Favor"
-      page.should have_no_link("Favor")
       page.should have_content("Genesis 1:1") 
     end
   end
