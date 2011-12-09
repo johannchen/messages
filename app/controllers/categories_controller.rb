@@ -9,7 +9,9 @@ class CategoriesController < ApplicationController
     elsif mobile_device?
       @categories = current_user.categories.order(:name)
     else
-      @categories = current_user.categories.order(:name).page(params[:page]).per(30) 
+      cats = current_user.categories
+      @count = cats.count
+      @categories = cats.order(:name).page(params[:page]).per(30) 
     end
     respond_to do |format|
       format.html

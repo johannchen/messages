@@ -19,7 +19,7 @@
 
 <div class="stat">
   <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
-  <%= pluralize(@verses.count, "verse") %>
+  <%= pluralize(@count, "verse") %>
   <% if params[:book].present? %>
     <span class="list_filter">
       <%= params[:book] %>

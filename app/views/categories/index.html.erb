@@ -1,7 +1,7 @@
 <div class="categories">
   <%= render 'form' %>
 <div class="stat">
-  <%= "Total: " + pluralize(@categories.count, "category") %>
+  <%= "Total: " + pluralize(@count, "category") %>
 </div>
 <% if @categories.present? %>
   <table class="list">

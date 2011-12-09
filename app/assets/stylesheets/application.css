@@ -103,7 +103,7 @@ label.check_box {
   float: left;
   line-height: 18px;
   text-align: right;
-  width: 120px;
+  width: 130px;
 }
 
 .field input textarea {
@@ -111,7 +111,7 @@ label.check_box {
 }
 
 .actions {
-  margin-left: 130px;
+  margin-left: 140px;
 }
 
 .special_email_field {

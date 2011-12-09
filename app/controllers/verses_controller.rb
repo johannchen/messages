@@ -11,6 +11,8 @@ class VersesController < ApplicationController
       vs = current_user.verses.favorites
     end
 
+    @count = vs.count
+
     if params[:cat] && params[:book]
       vs = vs.book(params[:book]).joins(:categories).where(:categories => {:id => params[:cat]})
     elsif params[:cat]
