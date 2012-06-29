@@ -36,6 +36,7 @@ group :assets do
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier'
   gem 'cleditor_rails', "~> 0.0.3"
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 gem 'jquery-rails'

@@ -1,76 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Sermon Messages</title>
-  <link href='http://fonts.googleapis.com/css?family=Devonshire' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    "application" %>
-  <%= stylesheet_link_tag    "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Sermon Messages" %></title>
+    <%= csrf_meta_tags %>
 
-  <div id="top">
-    <div class="title">Sermon Messages</div>
-    <div class="user_nav">
-      <% if current_user %>
-        <% if current_user.admin? %>
-          [<%= User.count %>]
-        <% end %>
-        Welcome <%= current_user.name %>! 
-        <%= link_to "Sign Out", signout_path %> |
-        <% if mobile_device? %>
-          <%= link_to "Full Site", :mobile => 0 %>
-        <% else %>
-          <%= link_to "Mobile Verses", root_path(:mobile => 1) %>
-        <% end %>
-      <% else %>
-        Sign in with <%= link_to "Google", "/auth/google" %> | 
-        <%= link_to "Facebook", "/auth/facebook" %>
-      <% end %> 
-    </div>
-  </div>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
 
-  <div id="nav_bar">
-    <ul class="nav horizontal">
-    <% if current_user %>
-      <li><%= link_to_unless current_page?(messages_path), 'Messages', messages_path %></li>
-      <li><%= link_to_unless current_page?(verses_path), 'Verses', verses_path %></li>
-      <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
-      <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
-      <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
-    <% end %>
-      <li><%= link_to_unless current_page?(root_path), 'About', root_path %></li>
-    </ul>
-    <div>
-<% if current_user %>
-  <%= form_tag messages_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Messages", :name => nil %>
-  <% end %>
-<% end %>
-    </div> 
-  </div>
+    <%= stylesheet_link_tag "application", :media => "all" %>
 
-  <div id="main"> 
-    <div class="content">
-    <div class="notice">
-      <% flash.each do |name, msg| %>
-      <div class="ui-widget">
-        <div class="ui-state-highlight ui-corner-all">
-          <%= msg %><br />
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Sermon Messages</a>
+          <div class="container nav-collapse">
+            <ul class="nav">
+            <% if current_user %>
+              <li><%= link_to_unless current_page?(messages_path), 'Messages', messages_path %></li>
+              <li><%= link_to_unless current_page?(verses_path), 'Verses', verses_path %></li>
+              <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
+              <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
+              <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
+            <% end %>
+              <li><%= link_to 'About', root_path %></li>
+            </ul>
+            <% if current_user %>
+              <%= form_tag messages_path, method:'get', class: 'navbar-search pull-right' do %>
+                <%= text_field_tag :search, params[:search], class: 'span2' %>
+              <% end %>
+            <% end %>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
-    <% end %>
     </div>
-<%= yield %>
-    </div>
-  </div>
 
-  <div id="footer">
-    <div class="inner">
-      &copy;2011 Gracedimension 
-    </div>
-  </div>
-</body>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+           <div class="span9">
+              <%= yield %>
+            </div>
+            <div class="span3">
+              <div class="well sidebar-nav">
+                <h3>Sidebar</h3>
+                <ul class="nav nav-list">
+                  <li class="nav-header">Sidebar</li>
+                  <li><%= link_to "Link1", "/path1"  %></li>
+                  <li><%= link_to "Link2", "/path2"  %></li>
+                  <li><%= link_to "Link3", "/path3"  %></li>
+                </ul>
+              </div><!--/.well -->
+            </div><!--/span-->
+        </div><!--/row-->
+      </div><!--/content-->
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+  </body>
 </html>
