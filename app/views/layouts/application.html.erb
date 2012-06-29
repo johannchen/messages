@@ -37,8 +37,15 @@
               <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
               <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
               <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
-            <% end %>
               <li><%= link_to 'About', root_path %></li>
+              <li><%= link_to 'Sign Out', signout_path %></li>
+              <% if current_user.admin? %>
+                [<%= User.count %>]
+              <% end %>
+            <% else %>
+              <li><%= link_to 'Sign in with Google', '/auth/google' %></li>
+              <li><%= link_to 'Sign in with Facebook', '/auth/facebook' %></li>
+            <% end %>
             </ul>
             <% if current_user %>
               <%= form_tag messages_path, method:'get', class: 'navbar-search pull-right' do %>
