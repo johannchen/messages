@@ -31,21 +31,26 @@
           <a class="brand" href="#">Sermon Messages</a>
           <div class="container nav-collapse">
             <ul class="nav">
-            <% if current_user %>
-              <li><%= link_to_unless current_page?(messages_path), 'Messages', messages_path %></li>
-              <li><%= link_to_unless current_page?(verses_path), 'Verses', verses_path %></li>
-              <li><%= link_to_unless current_page?(speakers_path), 'Speakers', speakers_path %></li>
-              <li><%= link_to_unless current_page?(categories_path), 'Categories', categories_path %></li>
-              <li><%= link_to_unless current_page?(feedback_path), 'Feedback', feedback_path %></li>
-              <li><%= link_to 'About', root_path %></li>
-              <li><%= link_to 'Sign Out', signout_path %></li>
-              <% if current_user.admin? %>
-                [<%= User.count %>]
+              <% if current_user %>
+                <%= active_link_to 'Messages', messages_path, wrap_tag: :li %>
+                <%= active_link_to 'Verses', verses_path, wrap_tag: :li %>
+                <%= active_link_to 'Speakers', speakers_path, wrap_tag: :li %>
+                <%= active_link_to 'Categories', categories_path, wrap_tag: :li %>
+                <%= active_link_to 'Feedback', feedback_path, wrap_tag: :li %>
+                <%= active_link_to 'About', root_path, wrap_tag: :li %>
+                <% if mobile_device? %>
+                  <li><%= link_to 'Full Site', mobile: 0 %></li>
+                <% else %>
+                  <li><%= link_to 'Mobile', root_path(mobile: 1) %></li>
+                <% end %>
+                <li><%= link_to 'Sign Out', signout_path %></li>
+                <% if current_user.admin? %>
+                  [<%= User.count %>]
+                <% end %>
+              <% else %>
+                <li><%= link_to 'Sign in with Google', '/auth/google' %></li>
+                <li><%= link_to 'Sign in with Facebook', '/auth/facebook' %></li>
               <% end %>
-            <% else %>
-              <li><%= link_to 'Sign in with Google', '/auth/google' %></li>
-              <li><%= link_to 'Sign in with Facebook', '/auth/facebook' %></li>
-            <% end %>
             </ul>
             <% if current_user %>
               <%= form_tag messages_path, method:'get', class: 'navbar-search pull-right' do %>
@@ -60,20 +65,7 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
-              <%= yield %>
-            </div>
-            <div class="span3">
-              <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                  <li><%= link_to "Link1", "/path1"  %></li>
-                  <li><%= link_to "Link2", "/path2"  %></li>
-                  <li><%= link_to "Link3", "/path3"  %></li>
-                </ul>
-              </div><!--/.well -->
-            </div><!--/span-->
+          <%= yield %>
         </div><!--/row-->
       </div><!--/content-->
 

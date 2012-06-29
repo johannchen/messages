@@ -25,9 +25,9 @@
 <% if params[:view] == "calendar" %>
   <%= render 'calendar' %>
 <% elsif params[:view] == "list" %>
-  <%= render 'side' %>
   <%= render 'list' %>
-<% else %>
   <%= render 'side' %>
+<% else %>
   <%= render 'summary' %>
+  <%= render 'side' %>
 <% end %>
