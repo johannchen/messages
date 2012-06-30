@@ -1,7 +1,7 @@
-<div class="left_side">
-  <div class="tags">
-    <h2>Books</h2>
-    <ul>
+<div class="span2">
+  <div class="well sidebar-nav">
+    <h3>Books</h3>
+    <ul class="nav nav-list">
       <% BIBLE.each do |book| %>
         <li>
         <%= link_to_unless params[:book] == book, book, params.merge({:book => book}) %>
@@ -11,10 +11,10 @@
   </div>
 </div>
 
-<div class="right_side">
-  <div class="tags">
-    <h2>Categories</h2>
-    <ul>
+<div class="span2">
+  <div class="well sidebar-nav">
+    <h3>Categories</h3>
+    <ul class="nav nav-list">
       <% @categories.each do |cat| %>
         <li>
         <%= link_to_unless params[:cat].to_i == cat.id, cat.name, params.merge({:cat => cat.id}) %> 
