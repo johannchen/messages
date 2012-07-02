@@ -7,7 +7,6 @@ class MessagesController < ApplicationController
     @verses = current_user.verses
 
     ms = current_user.messages
-    @count = ms.count
     ms = ms.search(params[:search]) if params[:search]
     
     if params[:cat] && params[:speaker] && params[:book]
@@ -25,6 +24,8 @@ class MessagesController < ApplicationController
     elsif params[:book]
       ms = ms.book(params[:book])
     end
+    
+    @count = ms.count
 
     ms = ms.order("updated_at DESC")
 
