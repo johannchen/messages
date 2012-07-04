@@ -45,6 +45,8 @@ class Verse < ActiveRecord::Base
                "include-passage-references=0",
                "include-headings=0",
                "include-footnotes=0",
+               "include-verse-numbers=0",
+               "include-first-verse-numbers=0",
                "include-heading-horizontal-lines=0"].join("&")
     base_url = "http://www.esvapi.org/v2/rest/passageQuery?key=IP"
 
