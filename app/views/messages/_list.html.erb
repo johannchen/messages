@@ -1,14 +1,18 @@
+<div class="span8">
 <%= render 'stat_filter' %>
 
 <div class="messages">
 <% if @messages.present? %>
-  <table class="list">
+  <table class="table">
+    <thead>
     <tr>
       <th>Title</th>
       <th>Speaker</th>
       <th>Listen On</th>
       <th>Action</th>
     </tr>
+    </thead>
+    <tbody>
 <% @messages.each do |message| %>
   <tr>
     <td><%= link_to message.title, message_path(message) %></td>
@@ -19,8 +23,9 @@
     </td>
   </tr>
 <% end %>
+  </tbody>
 </table>
 <%= paginate @messages %>
 <% end %>
 </div>
-
+</div>

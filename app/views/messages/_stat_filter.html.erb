@@ -1,25 +1,25 @@
 <div class="stat">
   <%= "Total: " + pluralize(@count, "message") %>
   <% if params[:search].present? %>
-    <span class="list_filter">
+    <span class="label">
       <%= params[:search] %>
       <%= link_to "x", remove_filter("search") %>
     </span>
   <% end %>
   <% if params[:book].present? %>
-    <span class="list_filter">
+    <span class="label">
       <%= params[:book] %>
       <%= link_to "x", remove_filter("book") %>
     </span>
   <% end %>
   <% if params[:cat].present? %>
-    <span class="list_filter">
+    <span class="label">
       <%= Category.find(params[:cat]).name %>
       <%= link_to "x", remove_filter("cat") %>
     </span>
   <% end %>
   <% if params[:speaker].present? %>
-    <span class="list_filter">
+    <span class="label">
       <%= Speaker.find(params[:speaker]).name %>
       <%= link_to "x", remove_filter("speaker") %>
     </span>
