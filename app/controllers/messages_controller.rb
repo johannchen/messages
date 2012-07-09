@@ -48,6 +48,7 @@ class MessagesController < ApplicationController
   end
 
   def new
+    3.times { @message.verses.build(user: current_user) }
   end
 
   def edit

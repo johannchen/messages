@@ -23,4 +23,7 @@ jQuery ->
   $("#message_listened_on").datepicker dateFormat: 'yy-mm-dd'
   $("#message_speaker_name").autocomplete source: "/speakers"
   $("#message_note").cleditor()
+
+  $('#add-verse-link').click ->
+    $('#verse_fields').append("<li><input type='text' name='message[verse_refs][]' /></li>")
         

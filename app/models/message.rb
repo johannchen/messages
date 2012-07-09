@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
   belongs_to :speaker
   belongs_to :user
 
+  accepts_nested_attributes_for :verses, reject_if: lambda { |v| v[:ref].blank? }
+
   validates_presence_of :title, :user
 
   scope :order_by_listened_date, order("listened_on DESC")
@@ -11,7 +13,7 @@ class Message < ActiveRecord::Base
 
   attr_writer :speaker_name, :category_names, :verse_refs
   before_save :assign_speaker
-  after_save :assign_categories, :assign_verses
+  after_save :assign_categories
 
   require 'csv'
 
@@ -49,7 +51,7 @@ class Message < ActiveRecord::Base
   end
 
   def verse_refs
-    @verse_refs || verses.map(&:ref).join('; ')
+    @verse_refs || verses.map(&:ref)
   end
 
   private
@@ -68,11 +70,11 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def assign_verses
-    if @verse_refs
-      self.verses = @verse_refs.split(/;\s+/).map do |ref|
-        Verse.find_or_create_by_ref_and_user_id(ref, self.user_id)
-      end
-    end
-  end
+#  def assign_verses
+#    if @verse_refs
+#      self.verses = @verse_refs.map do |ref|
+#        Verse.find_or_create_by_ref_and_user_id(ref, self.user_id)
+#      end
+#    end
+#  end
 end

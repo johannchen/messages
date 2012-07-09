@@ -25,7 +25,12 @@
   </div>
   <div class="field">
     <%= f.label :verses %>
-    <%= f.text_field :verse_refs, :class => "ui-widget" %>
+    <ul id="verse_fields">
+    <%= f.fields_for :verses do |builder| %>
+      <li><%= builder.text_field :ref %></li>
+    <% end %>
+    </ul>
+    <div id="add-verse-link"><a href="#">add more verse</a></div>
   </div>
   <div class="field">
     <%= f.label :category_names %>
