@@ -43,6 +43,3 @@ jQuery ->
   
   $("#verse_ref").autocomplete source: books
 
-  $('#add-verse-link').click ->
-    $('#verse_fields').append("<li><input type='text' id='verse_ref' name='message[verse_refs][]' /></li>")
-        

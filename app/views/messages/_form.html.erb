@@ -23,15 +23,6 @@
     <%= f.label :listened_on %>
     <%= f.text_field :listened_on %>
   </div>
-  <% if @message.verse_refs.blank? %>
-  <div class="field">
-    <%= f.label :verses %>
-    <ul id="verse_fields">
-      <li><input type='text' id='verse_ref' name='message[verse_refs][]' /></li>
-    </ul>
-    <div id="add-verse-link"><a href="#">add more verse</a></div>
-  </div>
-  <% end %>
   <div class="field">
     <%= f.label :category_names %>
     <%= f.text_field :category_names, :class => "ui-widget" %>

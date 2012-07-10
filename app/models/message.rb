@@ -11,9 +11,10 @@ class Message < ActiveRecord::Base
   scope :order_by_listened_date, order("listened_on DESC")
   scope :book, lambda { |book| joins(:verses).where("verses.ref like ?", "%#{book}%")}
 
-  attr_writer :speaker_name, :category_names, :verse_refs
+  attr_reader :verse_refs
+  attr_writer :speaker_name, :category_names 
   before_save :assign_speaker
-  after_save :assign_categories, :assign_verses
+  after_save :assign_categories 
 
   require 'csv'
 
@@ -51,7 +52,7 @@ class Message < ActiveRecord::Base
   end
 
   def verse_refs
-    @verse_refs || verses.map(&:ref)
+    @verse_refs || verses.map(&:ref).join('; ')
   end
 
   private
@@ -70,11 +71,4 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def assign_verses
-    if @verse_refs.reject!(&:empty?)
-      self.verses = @verse_refs.map do |ref|
-        Verse.find_or_create_by_ref_and_user_id(ref, self.user_id)
-      end
-    end
-  end
 end
