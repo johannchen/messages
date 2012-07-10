@@ -21,7 +21,7 @@ class VersesController < ApplicationController
       vs = vs.book(params[:book])
     end
 
-    @verses = vs.order("updated_at DESC").page(params[:page]).per(10)
+    @verses = vs.order("updated_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def show

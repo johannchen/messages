@@ -31,11 +31,11 @@ class MessagesController < ApplicationController
 
     #pagination
     if params[:view] == "list"
-      @messages = ms.page(params[:page]).per(30)
+      @messages = ms.paginate(page: params[:page], per_page: 30)
     elsif params[:view] == "calendar"
       @messages = ms
     else
-      @messages = ms.page(params[:page]).per(10)
+      @messages = ms.paginate(page: params[:page], per_page: 10)
     end
 
     respond_to do |format|

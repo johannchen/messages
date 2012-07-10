@@ -14,7 +14,8 @@ gem 'pg'
 # gem 'sunspot_rails'
 
 # pagination
-gem 'kaminari'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # authentication
 gem 'omniauth'
