@@ -13,5 +13,5 @@
 //= require cleditor
 //= require jquery.purr
 //= require best_in_place
-//= require jquery_nested_form
 //= require_tree .
+

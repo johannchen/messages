@@ -53,7 +53,6 @@ label.error {
 /*** SHOW MESSAGE ***/
 #message {
   margin: 0 auto;
-  width: 962px;
 }
 
 #message .info h1 {
@@ -70,7 +69,6 @@ label.error {
 
 #message .info .summary {
   margin-top: 6px;
-  margin-right: 140px;
   margin-bottom: 10px;
 }
 
@@ -83,3 +81,13 @@ label.error {
   margin-bottom: 10px;
 }
 
+/*** New Message ***/
+.field ul {
+  list-style-type: none;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+#add-verse-link {
+  margin-bottom: 10px;
+}
