@@ -7,6 +7,9 @@ Messages::Application.routes.draw do
   resources :messages do
     get 'calendar', :on => :collection
     get 'note', :on => :member
+    # remove verse association
+    put 'remove_verse', :on => :member 
+    put 'add_verse', :on => :member 
   end
 
   resources :feedbacks, :only => :create

@@ -4,7 +4,7 @@ class Verse < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :ref, :user
-  validates_uniqueness_of :ref, :scope => :user_id
+  validates_uniqueness_of :ref, scope: :user_id 
   # TODO: validate ref
 
   scope :favorites, where(:favorite => true)

@@ -24,14 +24,19 @@
     <div class="verse">
       <div class="ref"><%= verse.ref %></div> 
       <div class="ref_link"> 
-        <%= link_to "like", like_verse_path(verse), :method => :put, :class => "ui-icon ui-icon-heart", :title => "like" unless verse.favorite %>
+        <%= link_to "like", like_verse_path(verse), method: :put, title: "like" unless verse.favorite %>
+        <%= link_to "remove", remove_verse_message_path(verse: verse), method: :put, title: "like" %>
         <br />
       </div>
       <div class="passage">
       <%= verse.esv_passage %>
       </div>
     </div>
-    <% end %>
+  <% end %>
+  <%= form_tag add_verse_message_path(@message), method: :put do %>
+    <%= text_field_tag :ref, params[:ref], required: 'required' %>
+    <%= submit_tag 'Add Verse' %>
+  <% end %>
     </div>
   <% end %>
   </div>

@@ -48,7 +48,6 @@ class MessagesController < ApplicationController
   end
 
   def new
-    3.times { @message.verses.build(user: current_user) }
   end
 
   def edit
@@ -95,4 +94,20 @@ class MessagesController < ApplicationController
     render :text => messages.to_json
   end
 
+  def remove_verse
+    @message = Message.find(params[:id])
+    verse = Verse.find(params[:verse])
+    if @message.verses.delete(verse)
+      redirect_to :back
+    else
+      redirect_to :back, notice: "Cannot remove verse."
+    end
+  end
+
+  def add_verse
+    @message = Message.find(params[:id])
+    verse = Verse.find_or_create_by_ref_and_user_id(params[:ref], current_user)
+    @message.verses <<  verse
+    redirect_to @message 
+  end
 end

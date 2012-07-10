@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :speaker
   belongs_to :user
 
-  accepts_nested_attributes_for :verses, reject_if: lambda { |v| v[:ref].blank? }
+  #accepts_nested_attributes_for :verses, reject_if: lambda { |v| v[:ref].blank? }
 
   validates_presence_of :title, :user
 
@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
 
   attr_writer :speaker_name, :category_names, :verse_refs
   before_save :assign_speaker
-  after_save :assign_categories
+  after_save :assign_categories, :assign_verses
 
   require 'csv'
 
@@ -70,11 +70,11 @@ class Message < ActiveRecord::Base
     end
   end
 
-#  def assign_verses
-#    if @verse_refs
-#      self.verses = @verse_refs.map do |ref|
-#        Verse.find_or_create_by_ref_and_user_id(ref, self.user_id)
-#      end
-#    end
-#  end
+  def assign_verses
+    if @verse_refs.reject!(&:empty?)
+      self.verses = @verse_refs.map do |ref|
+        Verse.find_or_create_by_ref_and_user_id(ref, self.user_id)
+      end
+    end
+  end
 end
