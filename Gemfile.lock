@@ -40,6 +40,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
+    angularjs-rails (1.0.1.1)
     arel (3.0.2)
     best_in_place (1.1.2)
       jquery-rails
@@ -65,9 +66,11 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     commonjs (0.2.6)
+    daemons (1.1.8)
     database_cleaner (0.8.0)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (3.5.0)
@@ -210,6 +213,10 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.15.4)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -230,6 +237,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
+  angularjs-rails
   best_in_place
   cancan
   capybara
@@ -253,6 +261,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.5)
   spork
+  thin
   twitter-bootstrap-rails!
   uglifier
   will_paginate

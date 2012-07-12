@@ -7,6 +7,9 @@ gem 'rails', '~> 3.2.6'
 
 # gem 'rack', '1.3.3'
 
+# server
+gem 'thin'
+
 # postgre
 gem 'pg'
 
@@ -32,6 +35,9 @@ gem 'best_in_place'
 
 # active link
 gem 'active_link_to'
+
+# angular js
+gem 'angularjs-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

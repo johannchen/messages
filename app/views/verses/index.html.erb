@@ -1,4 +1,14 @@
 <div class="span8">
+  <div ng-controller="VerseCtrl">
+    <form ng-submit="addVerse()">
+      <input type="text" ng-model="newVerse" placeholder="Add new verse">
+      <%= submit_tag "Add Verse", class: "btn-primary" %>
+    </form>
+    <ul class="unstyled">
+      <li ng-repeat="verse in verses">{{verse.ref}}</li>
+    </ul>
+  </div>
+
 <div class="stat">
   <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
   <%= pluralize(@count, "verse") %>
