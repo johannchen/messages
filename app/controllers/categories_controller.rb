@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     else
       cats = current_user.categories
       @count = cats.count
-      @categories = cats.order(:name).page(params[:page]).per(30) 
+      @categories = cats.order(:name).paginate(page: params[:page], per_page: 30) 
     end
     respond_to do |format|
       format.html
