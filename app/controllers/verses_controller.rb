@@ -22,6 +22,11 @@ class VersesController < ApplicationController
     end
 
     @verses = vs.order("updated_at DESC").paginate(page: params[:page], per_page: 10)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @verses.to_json(only: [:ref], methods: [:category_names, :esv_passage]) }
+    end
   end
 
   def show

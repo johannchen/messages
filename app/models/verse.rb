@@ -10,7 +10,7 @@ class Verse < ActiveRecord::Base
   scope :favorites, where(:favorite => true)
   scope :book, lambda { |book| where("ref like ?", "%#{book}%") }
 
-  attr_writer :category_names
+  attr_accessor :category_names
   after_save :assign_categories
 
   require 'open-uri'
