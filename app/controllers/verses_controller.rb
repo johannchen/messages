@@ -22,10 +22,10 @@ class VersesController < ApplicationController
     end
 
     @verses = vs.order("updated_at DESC").paginate(page: params[:page], per_page: 10)
-
+    
     respond_to do |format|
       format.html
-      format.json { render json: @verses.to_json(only: [:ref], methods: [:category_names, :esv_passage]) }
+      format.json { render json: @verses.to_json(only: [:ref], methods: [:esv_passage]) }
     end
   end
 
@@ -81,6 +81,14 @@ class VersesController < ApplicationController
       redirect_to :back
     else
       redirect_to :back, :notice => "Cannot add to favorite list"
+    end
+  end
+
+  def api
+    @verse = Verse.esv_api(params[:passage])
+    respond_to do |format|
+      format.html
+      format.json { render json: @verse }
     end
   end
 end
