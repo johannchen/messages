@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111029224157) do
+ActiveRecord::Schema.define(:version => 20120817184109) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -81,7 +81,9 @@ ActiveRecord::Schema.define(:version => 20111029224157) do
     t.boolean  "favorite"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "memorized_at"
+    t.datetime "last_memorized_at"
+    t.text     "content"
+    t.integer  "memorized",         :default => 0
   end
 
 end
