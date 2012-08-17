@@ -1,13 +1,8 @@
 <div class="span8">
   <div ng-controller="VersesCtrl">
-    <form ng-submit="addVerse()">
-      <input type="text" ng-model="newVerse" placeholder="Add new verse">
-      <%= submit_tag "Add Verse", class: "btn-primary" %>
-    </form>
     <ul class="unstyled">
       <li ng-repeat="verse in verses">
-        {{verse.ref}} {{verse.category_names}}<br />
-        {{verse.esv_passage}}
+      {{verse.ref}} {{verse.category_names}}<br />
       </li>
     </ul>
   </div>
