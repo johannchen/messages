@@ -1,53 +1,149 @@
-<div class="span8">
-  <div ng-controller="VersesCtrl">
-    <ul class="unstyled">
-      <li ng-repeat="verse in verses">
-      {{verse.ref}} {{verse.category_names}}<br />
+<div id="headrow" class="row">
+  <div class="span5">
+    <form class="form-inline">
+      <button class="btn">New Verse</button>
+      <input type="text" class="span1" placeholder="search">
+      <select class="span1">
+        <option value="">filter</option>
+        <option value="unmemorized">Unmemorized</option>
+        <option value="memorized">Memorized</option>
+      </select>
+      <select class="span1">
+        <option value="">tag</option>
+      </select>
+      <select class="span1">
+        <option value="">sort</option>
+        <option value="-last_memorized_at">Lastest Memorized</option>
+        <option value="last_memorized_at">Oldest Memorized</option>
+        <option value="-memorized">Most Memorized</option>
+        <option value="memorized">Least Memorized</option>
+        <option value="-created_at">Lastest Added</option>
+        <option value="created_at">Oldest Added</option>
+        <option value="title">Verse Reference</option>
+      </select>
+    </form>
+  </div>
+  <div class="span5">
+    <div class="pull-right">
+      <span class="badge badge-success" title="Memorized Total">1</span> / 
+      <span class="badge badge-inverse" title="Verse Total">100</span>
+    </div> 
+    <div class="progress progress-success">
+      <div class="bar" style="width: 60%;"></div>
+    </div>
+  </div>
+  <div class="span2">
+  </div>
+</div>
+<div class="row">
+  <div class="span10">
+    <div class="row">
+      <div id="verses">
+        <ul class="thumbnails">
+          <li class="span5">
+          <form name="newVerseForm" class="span5 thumbnail">
+            <div class="form-inline">
+              <input type="text" class="span2">
+              <button class="btn">Load ESV</button>
+            </div>
+            <button class="btn btn-large close pull-right">&times;</button>  
+            <hr />
+            <textarea rows="5" class="span4 input-xlarge" placeholder="verse content"></textarea><br />
+            <button class="btn btn-primary">Add Verse</button>
+            <button class="btn btn-success">Add Another</button>
+            <button class="btn">Cancel</button>
+          </form>
+          </li>
+          <% @verses.each do |verse| %>
+
+            <li class="span5">
+          <article class="span5 thumbnail">
+            <header>
+              <%= verse.ref %>
+              <i class="icon-arrow-right" title="to memorize"></i> 
+              <i class="icon-arrow-left" title="to review"></i> 
+              <i class="icon-info-sign" title="created on"></i>
+              <i class="icon-ok" title="last memorized on"></i>
+              <span title="times memorized">1</span>
+
+              <button class="btn btn-large close pull-right">&times;</button>  
+            </header>
+            <hr /> 
+            <div class="verse_content">
+              <%= verse.esv_passage %>
+            </div>
+            <form>
+              <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" autofocus="autofocus"></textarea><br />
+              <input type="submit" class="btn-primary" value="Submit">
+            </form>
+          </div>
+        </article>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="span2">
+    <h4>Draggable Tags</h4>
+    <hr />
+    <ul class="taglist unstyled">
+      <li>
+      <span class="label label-info move"></span>
+      <span>&times;</span>  
       </li>
     </ul>
-  </div>
-
-<div class="stat">
-  <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
-  <%= pluralize(@count, "verse") %>
-  <% if params[:book].present? %>
-    <span class="label">
-      <%= params[:book] %>
-      <%= link_to "x", remove_filter("book") %>
-    </span>
-  <% end %>
-  <% if params[:cat].present? %>
-    <span class="label">
-      <%= Category.find(params[:cat]).name %>
-      <%= link_to "x", remove_filter("cat") %>
-    </span>
-  <% end %>
-</div>
-
-<div class="verses">
-  <% if @verses.present? %>
-  <% @verses.each do |verse| %>
-    <div class="verse">
-      <div class="ref">
-        <%= verse.ref %>
+    <form>
+      <div class="input-append">
+        <input type="text" class="input-small" placeholder="add new tag">
+        <input class="btn-primary" type="submit" value="add">
       </div>
-      <div class="ref_link"> 
-        <%= link_to 'edit', edit_verse_path(verse), title: "edit" %>  
-  <% if verse.favorite %>
-    <%= link_to 'dislike', dislike_verse_path(verse), method: :put, title: "dislike" %> 
-  <% else %>
-    <%= link_to 'like', like_verse_path(verse), method: :put, title: "like" %> 
-  <% end %> 
-  <%= link_to 'remove', verse, title: "remove", confirm: "Are you sure?", method: :delete %> 
+    </form>
   </div>
-<p class="clear">
-<%= verse.esv_passage %>
-</p>
-  </div>
-<% end %>
-<%= will_paginate @verses %>
- <% end %>
 </div>
-</div>
-<%= render 'side' %>
 
+<div class="row">
+  <div class="span8">
+
+    <div class="stat">
+      <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
+      <%= pluralize(@count, "verse") %>
+      <% if params[:book].present? %>
+        <span class="label">
+        <%= params[:book] %>
+        <%= link_to "x", remove_filter("book") %>
+      </span>
+    <% end %>
+      <% if params[:cat].present? %>
+        <span class="label">
+        <%= Category.find(params[:cat]).name %>
+        <%= link_to "x", remove_filter("cat") %>
+      </span>
+    <% end %>
+    </div>
+
+    <div class="verses">
+      <% if @verses.present? %>
+        <% @verses.each do |verse| %>
+        <div class="verse">
+        <div class="ref">
+          <%= verse.ref %>
+        </div>
+        <div class="ref_link"> 
+          <%= link_to 'edit', edit_verse_path(verse), title: "edit" %>  
+          <% if verse.favorite %>
+            <%= link_to 'dislike', dislike_verse_path(verse), method: :put, title: "dislike" %> 
+        <% else %>
+            <%= link_to 'like', like_verse_path(verse), method: :put, title: "like" %> 
+        <% end %> 
+          <%= link_to 'remove', verse, title: "remove", confirm: "Are you sure?", method: :delete %> 
+        </div>
+        <p class="clear">
+        <%= verse.esv_passage %>
+        </p>
+      </div>
+    <% end %>
+      <%= will_paginate @verses %>
+    <% end %>
+    </div>
+  </div>
+</div>
