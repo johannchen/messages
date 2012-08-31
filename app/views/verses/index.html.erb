@@ -57,8 +57,8 @@
           <% @verses.each do |verse| %>
 
             <li class="span5">
-          <article class="span5 thumbnail">
-            <header>
+          <div class="span5 thumbnail">
+            <div class="verse-header">
               <%= verse.ref %>
               <i class="icon-arrow-right" title="to memorize"></i> 
               <i class="icon-arrow-left" title="to review"></i> 
@@ -67,7 +67,7 @@
               <span title="times memorized">1</span>
 
               <button class="btn btn-large close pull-right">&times;</button>  
-            </header>
+            </div>
             <hr /> 
             <div class="verse_content">
               <%= verse.esv_passage %>
@@ -77,7 +77,7 @@
               <input type="submit" class="btn-primary" value="Submit">
             </form>
           </div>
-        </article>
+        </div>
         </li>
       <% end %>
       </ul>
@@ -100,7 +100,7 @@
     </form>
   </div>
 </div>
-
+<!---
 <div class="row">
   <div class="span8">
 
@@ -108,13 +108,13 @@
       <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
       <%= pluralize(@count, "verse") %>
       <% if params[:book].present? %>
-        <span class="label">
+ <span class="label">
         <%= params[:book] %>
         <%= link_to "x", remove_filter("book") %>
       </span>
     <% end %>
       <% if params[:cat].present? %>
-        <span class="label">
+ <span class="label">
         <%= Category.find(params[:cat]).name %>
         <%= link_to "x", remove_filter("cat") %>
       </span>
@@ -123,17 +123,17 @@
 
     <div class="verses">
       <% if @verses.present? %>
-        <% @verses.each do |verse| %>
-        <div class="verse">
+ <% @verses.each do |verse| %>
+ <div class="verse">
         <div class="ref">
           <%= verse.ref %>
         </div>
         <div class="ref_link"> 
           <%= link_to 'edit', edit_verse_path(verse), title: "edit" %>  
           <% if verse.favorite %>
-            <%= link_to 'dislike', dislike_verse_path(verse), method: :put, title: "dislike" %> 
+ <%= link_to 'dislike', dislike_verse_path(verse), method: :put, title: "dislike" %> 
         <% else %>
-            <%= link_to 'like', like_verse_path(verse), method: :put, title: "like" %> 
+ <%= link_to 'like', like_verse_path(verse), method: :put, title: "like" %> 
         <% end %> 
           <%= link_to 'remove', verse, title: "remove", confirm: "Are you sure?", method: :delete %> 
         </div>
@@ -147,3 +147,4 @@
     </div>
   </div>
 </div>
+-->

@@ -37,7 +37,7 @@ gem 'best_in_place'
 gem 'active_link_to'
 
 # angular js
-gem 'angularjs-rails'
+#gem 'angularjs-rails'
 
 # json builder
 gem 'jbuilder'
@@ -49,7 +49,6 @@ group :assets do
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier'
   gem 'cleditor_rails', "~> 0.0.3"
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
   gem 'jquery-ui-rails'
 end
 
