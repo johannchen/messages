@@ -4,7 +4,7 @@ describe "Verses" do
   let(:user) { login_with_oauth }
 
   describe "Favorite Verses" do
-    it "creates and updates verse" do
+    it "creates and updates verse", focus: true do
       visit verses_path
       click_button "New Verse"
       fill_in "verse_ref", with: "John 15:5"
