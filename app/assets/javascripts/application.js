@@ -12,7 +12,5 @@
 //= require cleditor
 //= require jquery.purr
 //= require best_in_place
-//= require angular
-//= require angular-resource
 //= require_tree .
 

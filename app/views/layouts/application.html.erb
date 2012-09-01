@@ -60,7 +60,7 @@
                 <% else %>
                   <li><%= link_to 'Mobile', root_path(mobile: 1) %></li>
                 <% end %>
-                <li><%= link_to 'Sign Out', signout_path %></li>
+                <li><%= link_to "Sign Out #{current_user.name}", signout_path %></li>
                 <% if current_user.admin? %>
                   [<%= User.count %>]
                 <% end %>

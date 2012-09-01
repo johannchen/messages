@@ -19,11 +19,10 @@ describe "login" do
     end
   end
 
-  describe "login with Google account", focus: true do
+  describe "login with Google account" do
     it "displays username after login" do
       login_with_oauth
-      page.should have_content("Welcome jchen!")
-      page.should have_link("Sign Out")
+      page.should have_link("Sign Out jchen")
       page.should have_link("Messages")
       page.should have_link("Verses")
       page.should have_field("search")

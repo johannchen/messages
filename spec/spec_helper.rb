@@ -58,7 +58,7 @@ Spork.prefork do
   Capybara.default_host = 'http://example.com'
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:open_id, {
+  OmniAuth.config.add_mock(:google, {
     :uid => '12345',
     :info => {:name => 'jchen', :email => 'jchen@example.com'}
   })
