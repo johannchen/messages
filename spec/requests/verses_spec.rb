@@ -1,12 +1,29 @@
 require 'spec_helper'
 
 describe "Verses" do
-  before :each do
-    login_with_oauth
-    @user = User.last
-  end
+  let(:user) { login_with_oauth }
 
   describe "Favorite Verses" do
+    it "creates and updates verse" do
+      visit verses_path
+      click_button "New Verse"
+      fill_in "verse_ref", with: "John 15:5"
+      fill_in "verse_content", with: "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing." 
+      fill_in "verse_category_names", with: "Abide"
+      click_button "Add Verse"
+      current_path.should eq(verses_path)
+      page.should have_content("John 15:5")
+      page.should have_content("I am the vine")
+      page.should have_link("Abide")
+      click_link "edit"
+      page.should have_field("verse_ref", :with => "John 15:5")
+      fill_in "verse_ref", with: "John 12:25"
+      fill_in "verse_content", with: "Whoever loves his life loses it, and whoever hates his life in this world will keep it for eternal life." 
+      click_button "Update"
+      page.should have_content("John 12:25")
+      page.should have_content("loves his life loses it")
+    end
+
     it "tags favorite verse through message" do 
       m = Factory(:message, :user => @user)
       v = Factory(:verse, :user => @user)
@@ -91,25 +108,7 @@ describe "Verses" do
   end
 
   describe "Verse" do
-    it "creates and updates verse" do
-      visit verses_path
-      click_link "Add Verse"
-      # page.should have_checked_field("favor")
-      fill_in "verse_ref", :with => "John 3:16"
-      fill_in "verse_category_names", :with => "Love"
-      check "verse_favorite"
-      click_button "Create"
-      current_path.should eq(verses_path)
-      page.should have_content("John 3:16")
-      page.should have_content("God so loved")
-      page.should have_link("Love")
-      click_link "edit"
-      page.should have_field("verse_ref", :with => "John 3:16")
-      fill_in "verse_ref", :with => "Genesis 1:1"
-      click_button "Update"
-      page.should have_content("Genesis 1:1")
-    end
-
+   
     it "deletes verse and its associations" do
       v = Factory(:verse, :favorite => true, :user => @user)
       c = Factory(:category, :user => @user)

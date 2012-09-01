@@ -23,8 +23,16 @@ FactoryGirl.define do
   end
 
   factory :verse do
-    ref "John 3:16"
+    ref "John 1:4"
+    content "In him was life, and the life was the light of men."
     user
+    factory :favorite_verse do
+      favorite true
+    end
+    factory :memorized_verse do
+      last_memorized_at Time.now
+      memorized 1
+    end
   end
 
   factory :message do
