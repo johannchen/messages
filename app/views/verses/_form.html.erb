@@ -1,20 +1,16 @@
 <%= form_for(@verse) do |f| %>
   <%= render "shared/error_messages", :target => @verse %>
+  <div class="form-inline">
+    <%= f.text_field :ref, class: "span2", placeholder: "verse reference" %>
+    <button class="btn">Load ESV</button>
+  </div>
+  <button class="btn btn-large close pull-right">&times;</button>  
+  <hr />
+  <%= f.text_area :content, class: "span4 input-xlarge", rows: 5, placeholder: "verse content" %><br />
   <div class="field">
-    <label for="verse_ref">
-      <%= mark_required(@verse, :ref) %> Verse reference
-    </label>
-    <%= f.text_field :ref %>
+    <%= f.text_field :category_names, placeholder: "category" %>
   </div>
-  <div class="field">
-    <%= f.label :category %>
-    <%= f.text_field :category_names %>
-  </div>
-  <div class="field">
-    <%= f.label :favorite %>
-    <%= f.check_box :favorite %> 
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <button class="btn btn-primary">Add Verse</button>
+  <button class="btn btn-success">Add Another</button>
+  <button class="btn">Cancel</button>
 <% end %>
