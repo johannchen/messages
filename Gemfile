@@ -37,7 +37,7 @@ gem 'best_in_place'
 gem 'active_link_to'
 
 # angular js
-#gem 'angularjs-rails'
+gem 'angularjs-rails'
 
 # json builder
 gem 'jbuilder'

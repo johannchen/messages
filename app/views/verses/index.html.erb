@@ -1,3 +1,4 @@
+<div ng-app="versesApp" ng-controller="VersesCtrl">
 <div id="headrow" class="row">
   <div class="span5">
     <form class="form-inline">
@@ -41,16 +42,23 @@
       <div id="verses">
         <ul class="thumbnails">
           <li class="span5">
-          <div class="span5 thumbnail">
-            <%= render 'form' %>
-          </div> 
+            <form name="newVerseForm" class="span5 thumbnail">
+              <div class="form-inline">
+                <input type="text" class="span2" placeholder="verse reference" autofocus="autofocus">
+                <button class="btn" ng-click="getESV()">Load ESV</button>
+              </div>
+              <button class="btn btn-large close pull-right"  ng-click="cancelNewVerse()">&times;</button>  
+              <hr />
+              <textarea rows="5" class="span4 input-xlarge"  ng-model="verseContent" placeholder="verse content"></textarea><br />
+              <button ng-click="addVerseClose()" class="btn btn-primary">Add Verse</button>
+              <button ng-click="addVerseOpen()" class="btn btn-success">Add Another</button>
+              <button ng-click="cancelNewVerse()" class="btn">Cancel</button>
+            </form>
           </li>
-          <% @verses.each do |verse| %>
 
-            <li class="span5">
+          <li class="span5">
           <div class="span5 thumbnail">
             <div class="verse-header">
-              <%= verse.ref %>
               <i class="icon-arrow-right" title="to memorize"></i> 
               <i class="icon-arrow-left" title="to review"></i> 
               <i class="icon-info-sign" title="created on"></i>
@@ -61,7 +69,6 @@
             </div>
             <hr /> 
             <div class="verse_content">
-              <%= verse.esv_passage %>
             </div>
             <form>
               <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" autofocus="autofocus"></textarea><br />
@@ -70,7 +77,6 @@
           </div>
         </div>
         </li>
-      <% end %>
       </ul>
     </div>
   </div>
@@ -78,64 +84,20 @@
     <h4>Draggable Tags</h4>
     <hr />
     <ul class="taglist unstyled">
-      <li>
-      <span class="label label-info move"></span>
+      <li ng-repeat="tag in tags">
+      <span class="label label-info move">
+        {{tag.name}}
+      </span>
       <span>&times;</span>  
       </li>
     </ul>
     <form>
       <div class="input-append">
-        <input type="text" class="input-small" placeholder="add new tag">
-        <input class="btn-primary" type="submit" value="add">
+        <input type="text" class="input-small" placeholder="add new tag" ng-model="tagName">
+        <button class="btn-primary" ng-click="addTag()">Add</button>
       </div>
     </form>
   </div>
 </div>
-<!---
-<div class="row">
-  <div class="span8">
-
-    <div class="stat">
-      <strong><%= params[:view] == "all" ? "All: " : "Favorites: " %></strong>
-      <%= pluralize(@count, "verse") %>
-      <% if params[:book].present? %>
- <span class="label">
-        <%= params[:book] %>
-        <%= link_to "x", remove_filter("book") %>
-      </span>
-    <% end %>
-      <% if params[:cat].present? %>
- <span class="label">
-        <%= Category.find(params[:cat]).name %>
-        <%= link_to "x", remove_filter("cat") %>
-      </span>
-    <% end %>
-    </div>
-
-    <div class="verses">
-      <% if @verses.present? %>
- <% @verses.each do |verse| %>
- <div class="verse">
-        <div class="ref">
-          <%= verse.ref %>
-        </div>
-        <div class="ref_link"> 
-          <%= link_to 'edit', edit_verse_path(verse), title: "edit" %>  
-          <% if verse.favorite %>
- <%= link_to 'dislike', dislike_verse_path(verse), method: :put, title: "dislike" %> 
-        <% else %>
- <%= link_to 'like', like_verse_path(verse), method: :put, title: "like" %> 
-        <% end %> 
-          <%= link_to 'remove', verse, title: "remove", confirm: "Are you sure?", method: :delete %> 
-        </div>
-        <p class="clear">
-        <%= verse.esv_passage %>
-        </p>
-      </div>
-    <% end %>
-      <%= will_paginate @verses %>
-    <% end %>
-    </div>
-  </div>
+Version: <span app-version></span>
 </div>
--->

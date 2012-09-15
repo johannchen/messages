@@ -12,5 +12,7 @@
 //= require cleditor
 //= require jquery.purr
 //= require best_in_place
+//= require jquery.indexeddb 
+//= require angular
 //= require_tree .
 
