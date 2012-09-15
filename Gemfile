@@ -50,6 +50,7 @@ group :assets do
   gem 'uglifier'
   gem 'cleditor_rails', "~> 0.0.3"
   gem 'jquery-ui-rails'
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'
