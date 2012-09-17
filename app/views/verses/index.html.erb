@@ -85,7 +85,8 @@
     <hr />
     <ul class="taglist unstyled">
       <li ng-repeat="tag in tags">
-      <span class="label label-info move" jc-editable-text model="tag.name"></span>
+      {{tag.name}}
+      <span class="label label-info move"></span>
       <span><a ng-click="removeTag(tag)">&times;</a></span>  
       </li>
     </ul>

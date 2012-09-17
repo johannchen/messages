@@ -1,11 +1,10 @@
-angular.module 'versesApp', ['versesApp.services', 'versesApp.directives']
-
+versesApp = angular.module 'versesApp', ['versesApp.services', 'versesApp.directives']
+# allow CSRF
+versesApp.config [ "$httpProvider", (provider) ->
+  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+]
 #window.module = angular.module('Verses', ['ngResource'])
 #
-## allow CSRF
-#window.module.config [ "$httpProvider", (provider) ->
-#  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-#]
 #
 #window.VersesCtrl = ($scope, $resource) ->
 #  Verse = $resource('verses.json')

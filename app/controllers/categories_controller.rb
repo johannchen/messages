@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.json { render :json => @categories.order(:name).map(&:name) }
+      format.json { render json: @categories.order(:name), only: [:id, :name] }
     end
   end
 

@@ -1,5 +1,8 @@
-versesServices = angular.module 'versesApp.services', []
+versesServices = angular.module 'versesApp.services', ['ngResource']
 versesServices.value 'version', '0.1'
+versesServices.factory 'Category', ($resource) ->
+  $resource('categories.json')
+
 versesServices.factory 'idb', () ->
   dbName = "Messages"
   $.indexedDB(dbName,

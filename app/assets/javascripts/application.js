@@ -15,5 +15,6 @@
 //= require best_in_place
 //= require jquery.indexeddb 
 //= require angular
+//= require angular-resource
 //= require_tree .
 
