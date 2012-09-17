@@ -9,7 +9,8 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Category) ->
   #
   $scope.tags = Category.query() 
   $scope.addTag = () ->
-    $scope.tags.push({name: $scope.tagName})
+    #$scope.tags.push({name: $scope.tagName})
+    $scope.tags.push(Category.save({user_id: 1, name: $scope.tagName}))
     #idb.add('tags', {name:$scope.tagName})
     $scope.tagName = ''
   $scope.removeTag = (tag) ->
