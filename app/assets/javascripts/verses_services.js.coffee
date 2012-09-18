@@ -3,7 +3,8 @@ versesServices.value 'version', '0.1'
 versesServices.factory 'Categories', ($resource) ->
   $resource 'categories.json'
 versesServices.factory 'Category', ($resource) ->
-  $resource '/categories/:category_id.json', {category_id:'@id'}
+  $resource '/categories/:category_id.json', {category_id:'@id'},
+    update: { method: 'PUT' }
 
 versesServices.factory 'idb', () ->
   dbName = "Messages"

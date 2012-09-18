@@ -51,9 +51,15 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update_attributes(params[:category])
-      redirect_to categories_path, notice: 'Successfully updated category.'
+      #redirect_to categories_path, notice: 'Successfully updated category.'
+      respond_to do |format|
+        format.json { head :no_content }
+      end
     else
-      render action: "edit"
+      #render action: "edit"
+      respond_to do |format|
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 

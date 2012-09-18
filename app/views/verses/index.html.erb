@@ -85,8 +85,8 @@
     <hr />
     <ul class="taglist unstyled">
       <li ng-repeat="tag in tags">
-      {{tag.name}}
-      <span class="label label-info move"></span>
+      <span class="label label-info move" ng-hide="editMode" ng-dblclick="editMode=true">{{tag.name}}</span>
+      <input type="text" class="span2" ng-model="tag.name" ng-show="editMode" ng-dblclick="editMode=false; updateTag(tag)" />
       <span><a ng-click="removeTag(tag)">&times;</a></span>  
       </li>
     </ul>
