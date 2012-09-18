@@ -1,4 +1,5 @@
-angular.module('versesApp').controller 'VersesCtrl', ($scope, Category) ->
+angular.module('versesApp').controller 'VersesCtrl', ($scope, Categories, Category) ->
+  $scope.newTag = {}
   ### 
   # idb code
   $scope.tags = idb.all('tags')
@@ -7,15 +8,19 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Category) ->
   ), 1000
   ###
   #
-  $scope.tags = Category.query() 
+  $scope.tags = Categories.query() 
   $scope.addTag = () ->
-    #$scope.tags.push({name: $scope.tagName})
-    $scope.tags.push(Category.save({user_id: 1, name: $scope.tagName}))
+    t = new Categories($scope.newTag)
+    t.$save (tag) -> 
+      console.log(tag)
+      $scope.tags.push(tag)
+    #$scope.tags.push(Category.save({name: $scope.tagName}))
     #idb.add('tags', {name:$scope.tagName})
-    $scope.tagName = ''
+    $scope.newTag= {} 
   $scope.removeTag = (tag) ->
     index = $scope.tags.indexOf(tag)
     $scope.tags.splice(index, 1)
+    Category.remove {category_id: tag.id}
     #idb.delete('tags', tag.id)
 
   # update tag when value change (id stay the same)

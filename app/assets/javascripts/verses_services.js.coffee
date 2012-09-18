@@ -1,7 +1,9 @@
 versesServices = angular.module 'versesApp.services', ['ngResource']
 versesServices.value 'version', '0.1'
+versesServices.factory 'Categories', ($resource) ->
+  $resource 'categories.json'
 versesServices.factory 'Category', ($resource) ->
-  $resource 'categories'
+  $resource '/categories/:category_id.json', {category_id:'@id'}
 
 versesServices.factory 'idb', () ->
   dbName = "Messages"
