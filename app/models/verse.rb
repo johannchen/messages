@@ -2,6 +2,8 @@ class Verse < ActiveRecord::Base
   has_and_belongs_to_many :messages
   has_and_belongs_to_many :categories
   belongs_to :user
+  
+  attr_accessible :ref, :content
 
   validates_presence_of :ref, :user
   validates_uniqueness_of :ref, scope: :user_id 

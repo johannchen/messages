@@ -30,6 +30,10 @@ class VersesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @verse }
+    end
   end
 
   def new
@@ -59,15 +63,24 @@ class VersesController < ApplicationController
 
   def update
     if @verse.update_attributes(params[:verse])
-      redirect_to verses_path, notice: 'Successfully updated verse.'
+      # redirect_to verses_path, notice: 'Successfully updated verse.'
+      respond_to do |format|
+        format.json { head :no_content }
+      end
     else
-      render action: "edit"
+      #render action: "edit"
+      respond_to do |format|
+        format.json { render json: @verse.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @verse.destroy
-    redirect_to verses_url
+    # redirect_to verses_url
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 
   def dislike 

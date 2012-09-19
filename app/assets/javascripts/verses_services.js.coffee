@@ -1,9 +1,16 @@
 versesServices = angular.module 'versesApp.services', ['ngResource']
 versesServices.value 'version', '0.1'
+
 versesServices.factory 'Verses', ($resource) ->
   $resource 'verses.json'
+
+versesServices.factory 'Verse', ($resource) ->
+  $resource '/verses/:verse_id.json', {verse_id:'@id'},
+    update: { method: 'PUT' }
+
 versesServices.factory 'Categories', ($resource) ->
   $resource 'categories.json'
+
 versesServices.factory 'Category', ($resource) ->
   $resource '/categories/:category_id.json', {category_id:'@id'},
     update: { method: 'PUT' }

@@ -59,21 +59,28 @@
           <li class="span5" ng-repeat="verse in verses">
           <div class="span5 thumbnail">
             <div class="verse-header">
-              {{verse.ref}}
+              <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.ref}}</span>
+              <input type="text" class="span2" ng-model="verse.ref" ng-show="editMode" ng-dblclick="editMode=false; updateVerse(verse)" />
               <i class="icon-arrow-right" title="to memorize"></i> 
               <i class="icon-arrow-left" title="to review"></i> 
               <i class="icon-info-sign" title="created on"></i>
               <i class="icon-ok" title="last memorized on"></i>
               <span title="times memorized">1</span>
-
-              <button class="btn btn-large close pull-right">&times;</button>  
+              <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
             </div>
             <hr /> 
             <div class="verse_content">
-              {{verse.content}}
+              <div ng-hide="isMemorizing">
+                <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.content}}</span>
+                <textarea rows="10" class="span4 input-xlarge" ng-model="verse.content" ng-show="editMode" ng-dblclick="editMode=false; updateVerse(verse)"></textarea>
+              </div>
+              <div ng-show="doneMemorizing">
+                <hr />
+                <div ng-bind-html-unsafe="diffResult"></div>
+              </div>
             </div>
-            <form>
-              <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" autofocus="autofocus"></textarea><br />
+            <form ng-submit="memorizeVerse()" ng-show="isMemorizing">
+              <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" ng-model="typedContent"></textarea><br />
               <input type="submit" class="btn-primary" value="Submit">
             </form>
           </div>

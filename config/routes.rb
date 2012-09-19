@@ -5,7 +5,7 @@ Messages::Application.routes.draw do
   match "auth/failure" => "sessions#failure"
   match "/signout" => "sessions#destroy", :as => :signout
 
-  match "/verses/:passage" => "verses#api"
+  #match "/verses/:passage" => "verses#api"
 
   resources :messages do
     get 'calendar', :on => :collection
