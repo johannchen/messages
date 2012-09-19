@@ -1,5 +1,7 @@
 versesServices = angular.module 'versesApp.services', ['ngResource']
 versesServices.value 'version', '0.1'
+versesServices.factory 'Verses', ($resource) ->
+  $resource 'verses.json'
 versesServices.factory 'Categories', ($resource) ->
   $resource 'categories.json'
 versesServices.factory 'Category', ($resource) ->

@@ -1,5 +1,11 @@
-angular.module('versesApp').controller 'VersesCtrl', ($scope, Categories, Category) ->
-  $scope.newTag = {}
+angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Categories, Category) ->
+  $scope.newVerse = {} 
+  $scope.verses = []
+  $scope.addVerseClose = () ->
+    v = new Verses($scope.newVerse)
+    v.$save (verse) ->
+      $scope.verses.push(verse)
+    $scope.newVerse = {}
   ### 
   # idb code
   $scope.tags = idb.all('tags')
@@ -8,6 +14,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Categories, Catego
   ), 1000
   ###
   #
+  $scope.newTag = {}
   $scope.tags = Categories.query() 
   $scope.addTag = () ->
     t = new Categories($scope.newTag)
@@ -24,7 +31,6 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Categories, Catego
     t = Category.get {category_id: tag.id}, () ->
       t.name = tag.name
       t.$update()
-    #t.$update {category_id: tag.id}
 
   # update tag when value change (id stay the same)
   ###

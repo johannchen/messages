@@ -25,7 +25,7 @@ class VersesController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @verses.to_json(only: [:ref], methods: [:esv_passage]) }
+      format.json { render json: @verses }
     end
   end
 
@@ -41,15 +41,19 @@ class VersesController < ApplicationController
   def create
     params[:verse][:favorite] = 1 unless params[:verse][:favorite]
     # handle mobile select 
-    params[:verse][:ref] = params[:verse_book] + " " + params[:verse_num] if params[:verse_book]
+    # params[:verse][:ref] = params[:verse_book] + " " + params[:verse_num] if params[:verse_book]
     @verse = current_user.verses.build(params[:verse])
     if @verse.save
       respond_to do |format|
+        format.json { render json: @verse, status: :created }
         format.mobile { redirect_to @verse }
         format.html { redirect_to verses_path, notice: 'Successfully added verse.' }
       end
     else 
-      render 'new'
+      respond_to do |format|
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.html { render 'new' }
+      end
     end
   end
 

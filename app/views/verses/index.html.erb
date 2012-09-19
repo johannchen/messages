@@ -44,21 +44,22 @@
           <li class="span5">
             <form name="newVerseForm" class="span5 thumbnail">
               <div class="form-inline">
-                <input type="text" class="span2" placeholder="verse reference" autofocus="autofocus">
+                <input type="text" class="span2" placeholder="verse reference" autofocus="autofocus" ng-model="newVerse.ref">
                 <button class="btn" ng-click="getESV()">Load ESV</button>
               </div>
               <button class="btn btn-large close pull-right"  ng-click="cancelNewVerse()">&times;</button>  
               <hr />
-              <textarea rows="5" class="span4 input-xlarge"  ng-model="verseContent" placeholder="verse content"></textarea><br />
+              <textarea rows="5" class="span4 input-xlarge"  ng-model="newVerse.content" placeholder="verse content"></textarea><br />
               <button ng-click="addVerseClose()" class="btn btn-primary">Add Verse</button>
               <button ng-click="addVerseOpen()" class="btn btn-success">Add Another</button>
               <button ng-click="cancelNewVerse()" class="btn">Cancel</button>
             </form>
           </li>
 
-          <li class="span5">
+          <li class="span5" ng-repeat="verse in verses">
           <div class="span5 thumbnail">
             <div class="verse-header">
+              {{verse.ref}}
               <i class="icon-arrow-right" title="to memorize"></i> 
               <i class="icon-arrow-left" title="to review"></i> 
               <i class="icon-info-sign" title="created on"></i>
@@ -69,6 +70,7 @@
             </div>
             <hr /> 
             <div class="verse_content">
+              {{verse.content}}
             </div>
             <form>
               <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" autofocus="autofocus"></textarea><br />
