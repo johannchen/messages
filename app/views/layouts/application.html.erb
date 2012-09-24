@@ -34,8 +34,6 @@
                 
                 <%= active_link_to 'Messages', messages_path, wrap_tag: :li %>
                 <%= active_link_to 'Verses', verses_path, wrap_tag: :li %>
-                <%= active_link_to 'Categories', categories_path, wrap_tag: :li %>
-                <%= active_link_to 'Feedback', feedback_path, wrap_tag: :li %>
                 <%= active_link_to 'About', root_path, wrap_tag: :li %>
                 <% if mobile_device? %>
                   <li><%= link_to 'Full Site', mobile: 0 %></li>

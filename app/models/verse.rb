@@ -3,7 +3,7 @@ class Verse < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :user
   
-  attr_accessible :ref, :content
+  attr_accessible :ref, :content, :favorite, :memorized, :last_memorized_at
 
   validates_presence_of :ref, :user
   validates_uniqueness_of :ref, scope: :user_id 

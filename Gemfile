@@ -51,6 +51,7 @@ group :assets do
   gem 'cleditor_rails', "~> 0.0.3"
   gem 'jquery-ui-rails'
   gem 'twitter-bootstrap-rails'
+  #gem 'chosen-rails'
 end
 
 gem 'jquery-rails'

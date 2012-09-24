@@ -2,7 +2,7 @@
 <div id="headrow" class="row">
   <div class="span5">
     <form class="form-inline">
-      <button class="btn">New Verse</button>
+      <button class="btn" ng-click="newVerse()">New Verse</button>
       <input type="text" class="span1" placeholder="search">
       <select class="span1">
         <option value="">filter</option>
@@ -41,7 +41,7 @@
     <div class="row">
       <div id="verses">
         <ul class="thumbnails">
-          <li class="span5">
+          <li class="span5" ng-show="isAddingVerse">
             <form name="newVerseForm" class="span5 thumbnail">
               <div class="form-inline">
                 <input type="text" class="span2" placeholder="verse reference" autofocus="autofocus" ng-model="newVerse.ref">
@@ -61,48 +61,52 @@
             <div class="verse-header">
               <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.ref}}</span>
               <input type="text" class="span2" ng-model="verse.ref" ng-show="editMode" ng-dblclick="editMode=false; updateVerse(verse)" />
-              <i class="icon-arrow-right" title="to memorize"></i> 
-              <i class="icon-arrow-left" title="to review"></i> 
+              <i class="icon-arrow-right" title="to memorize" ng-click="showMemorizeForm()" ng-model="isMemorizing" ng-hide="isMemorizing"></i> 
+              <i class="icon-arrow-left" title="to review" ng-click="hideMemorizeForm()" ng-show="isMemorizing"></i> 
               <i class="icon-info-sign" title="created on"></i>
-              <i class="icon-ok" title="last memorized on"></i>
-              <span title="times memorized">1</span>
-              <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
-            </div>
-            <hr /> 
-            <div class="verse_content">
-              <div ng-hide="isMemorizing">
-                <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.content}}</span>
-                <textarea rows="10" class="span4 input-xlarge" ng-model="verse.content" ng-show="editMode" ng-dblclick="editMode=false; updateVerse(verse)"></textarea>
-              </div>
-              <div ng-show="doneMemorizing">
-                <hr />
-                <div ng-bind-html-unsafe="diffResult"></div>
-              </div>
-            </div>
-            <form ng-submit="memorizeVerse()" ng-show="isMemorizing">
-              <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" ng-model="typedContent"></textarea><br />
-              <input type="submit" class="btn-primary" value="Submit">
-            </form>
+              <span ng-show="verse.memorized">
+                <i class="icon-ok" title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}"></i>
+                <span title="times memorized">{{verse.memorized}}</span>
+              </span>
+              <select data-placehoder="Choose a Category" multiple class="chzn-select span4" jc-chosen ng-model="categories" ng-options="category.name for category in categories"></select>
+              
+            <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
           </div>
+          <hr /> 
+          <div class="verse_content">
+            <div ng-hide="isMemorizing">
+              <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.content}}</span>
+              <textarea rows="10" class="span4 input-xlarge" ng-model="verse.content" ng-show="editMode" ng-dblclick="editMode=false; updateVerse(verse)"></textarea>
+            </div>
+            <div ng-show="doneMemorizing">
+              <hr />
+              <div ng-bind-html-unsafe="diffResult"></div>
+            </div>
+          </div>
+          <form ng-submit="memorizeVerse()" ng-show="isMemorizing">
+            <textarea rows="5" class="span4 input-xlarge" placeholder="type verse to memorize" ng-model="typedContent"></textarea><br />
+            <input type="submit" class="btn-primary" value="Submit">
+          </form>
         </div>
-        </li>
-      </ul>
-    </div>
+      </div>
+      </li>
+    </ul>
   </div>
-  <div class="span2">
-    <h4>Draggable Tags</h4>
-    <hr />
-    <ul class="taglist unstyled">
-      <li ng-repeat="tag in tags">
-      <span class="label label-info move" ng-hide="editMode" ng-dblclick="editMode=true">{{tag.name}}</span>
-      <input type="text" class="span2" ng-model="tag.name" ng-show="editMode" ng-dblclick="editMode=false; updateTag(tag)" />
-      <span><a ng-click="removeTag(tag)">&times;</a></span>  
+</div>
+<div class="span2">
+  <h4>Categories</h4>
+  <hr />
+  <ul class="unstyled">
+    <li ng-repeat="category in categories">
+    <span class="label label-info move" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</span>
+      <input type="text" class="span2" ng-model="tag.name" ng-show="editMode" ng-dblclick="editMode=false; updateCategory(category)" />
+      <span><a ng-click="removeCategory(category)">&times;</a></span>  
       </li>
     </ul>
     <form>
       <div class="input-append">
-        <input type="text" class="input-small" placeholder="add new tag" ng-model="newTag.name">
-        <button class="btn-primary" ng-click="addTag()">Add</button>
+        <input type="text" class="input-small" placeholder="add new category" ng-model="newCategory.name">
+        <button class="btn-primary" ng-click="addCategory()">Add</button>
       </div>
     </form>
   </div>

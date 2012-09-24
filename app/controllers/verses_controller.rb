@@ -5,11 +5,7 @@ class VersesController < ApplicationController
     @verse = Verse.new
     @categories = current_user.categories.order(:name)
     
-    if params[:view]
-      vs = current_user.verses
-    else
-      vs = current_user.verses.favorites
-    end
+    vs = current_user.verses
 
     @count = vs.count
 

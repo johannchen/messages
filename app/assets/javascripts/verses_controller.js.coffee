@@ -1,30 +1,57 @@
 angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Categories, Category) ->
   $scope.newVerse = {} 
+  $scope.memorized = false
   $scope.verses = Verses.query() 
-  $scope.addVerseClose = () ->
+
+  $scope.newVerse = ->
+    $scope.isAddingVerse = true
+
+  $scope.cancelNewVerse = ->
+    $scope.isAddingVerse = false 
+    $scope.newVerse = {}
+
+  $scope.addVerse = ->
     v = new Verses($scope.newVerse)
     v.$save (verse) ->
-      $scope.verses.push(verse)
+      $scope.verses.unshift(verse)
     $scope.newVerse = {}
+
+  $scope.addVerseClose = ->
+    $scope.addVerse()
+    $scope.isAddingVerse = false 
+
+  $scope.addVerseOpen = ->
+    $scope.addVerse()
+    $scope.isAddingVerse = true 
+  
   $scope.removeVerse = (verse) ->
     index = $scope.verses.indexOf(verse)
     $scope.verses.splice(index, 1)
     Verse.remove {verse_id: verse.id}
-    #v = Verse.get {verse_id: verse.id}, () ->
-    #  v.$remove()
+  
   $scope.updateVerse = (verse) ->
-    v = Verse.get {verse_id: verse.id}, () ->
+    v = Verse.get {verse_id: verse.id}, ->
       v.ref = verse.ref
       v.content = verse.content
+      v.memorized = verse.memorized if verse.memorized
+      v.last_memorized_at = verse.last_memorized_at if verse.last_memorized_at
       v.$update()
 
+  $scope.showMemorizeForm = ->
+    @isMemorizing = true
+    @doneMemorizing = false
+  
+  $scope.hideMemorizeForm = ->
+    @isMemorizing = false
+  
   $scope.memorizeVerse = ->
     @diffResult = ""
     verse = @verse
     if verse.content is @typedContent
       (if verse.memorized then ++verse.memorized else verse.memorized = 1)
       verse.last_memorized_at = new Date()
-      # TODO update verse on server
+      # update verse on server
+      $scope.updateVerse(verse)
     else
       dmp = new diff_match_patch()
       d = dmp.diff_main(@typedContent, verse.content)
@@ -34,43 +61,42 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
     @isMemorizing = false
     @typedContent = ""
 
- 
   ### 
   # idb code
-  $scope.tags = idb.all('tags')
+  $scope.categorys = idb.all('categorys')
   setTimeout (->
     $rootScope.$apply()
   ), 1000
   ###
   #
-  $scope.newTag = {}
-  $scope.tags = Categories.query() 
-  $scope.addTag = () ->
-    t = new Categories($scope.newTag)
-    t.$save (tag) -> 
-      $scope.tags.push(tag)
-    $scope.newTag= {} 
-    #idb.add('tags', {name:$scope.tagName})
-  $scope.removeTag = (tag) ->
-    index = $scope.tags.indexOf(tag)
-    $scope.tags.splice(index, 1)
-    Category.remove {category_id: tag.id}
-    #idb.delete('tags', tag.id)
-  $scope.updateTag = (tag) ->
-    t = Category.get {category_id: tag.id}, () ->
-      t.name = tag.name
+  $scope.newCategory = {}
+  $scope.categories = Categories.query() 
+  $scope.addCategory = ->
+    t = new Categories($scope.newCategory)
+    t.$save (category) -> 
+      $scope.categories.push(category)
+    $scope.newCategory= {} 
+    #idb.add('categorys', {name:$scope.categoryName})
+  $scope.removeCategory = (category) ->
+    index = $scope.categories.indexOf(category)
+    $scope.categorys.splice(index, 1)
+    Category.remove {category_id: category.id}
+    #idb.delete('categorys', category.id)
+  $scope.updateCategory = (category) ->
+    t = Category.get {category_id: category.id}, ->
+      t.name = category.name
       t.$update()
 
-  # update tag when value change (id stay the same)
+  # update category when value change (id stay the same)
   ###
-  $scope.$watch 'tags', ((newValue, oldValue) ->
+  $scope.$watch 'categorys', ((newValue, oldValue) ->
     if newValue.length == oldValue.length
       oldNames = {}
       oldValue.forEach (obj) ->
         oldNames[obj.name] = obj
-      newTags = newValue.filter (obj) ->
+      newCategorys = newValue.filter (obj) ->
         obj.name not of oldNames
-      console.log(newTags)
-        #idb.put('tags', newValue, tag.id)
+      console.log(newCategorys)
+        #idb.put('categorys', newValue, category.id)
   ), true
   ###
