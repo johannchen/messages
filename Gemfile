@@ -39,6 +39,11 @@ gem 'active_link_to'
 # angular js
 gem 'angularjs-rails'
 
+# select2
+gem 'select2-rails'
+# angular ui
+#gem 'angular-ui-rails', github: 'mikepinde/angular-ui-rails'
+
 # json builder
 gem 'jbuilder'
 

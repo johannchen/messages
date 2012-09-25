@@ -68,7 +68,11 @@
                 <i class="icon-ok" title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}"></i>
                 <span title="times memorized">{{verse.memorized}}</span>
               </span>
-              <select data-placehoder="Choose a Category" multiple class="chzn-select span4" jc-chosen ng-model="categories" ng-options="category.name for category in categories"></select>
+              <select multiple data-placehoder="Choose a Category" class="span4" ng-model="verse.categories" ui-select2>
+                <option value="{{category.id}}" ng-repeat="category in categories">
+                {{category.name}}
+                </option>
+              </select>
               
             <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
           </div>

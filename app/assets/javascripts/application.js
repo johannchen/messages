@@ -13,7 +13,7 @@
 //= require cleditor
 //= require jquery.purr
 //= require best_in_place
-//= require chosen.jquery.min
+//= require select2
 //= require diff_match_patch
 //= require angular
 //= require angular-resource
