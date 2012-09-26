@@ -68,15 +68,18 @@
                 <i class="icon-ok" title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}"></i>
                 <span title="times memorized">{{verse.memorized}}</span>
               </span>
-              <i class="icon-list" title="categorize verse" ng-hide="verse.categories"></i>
-              <span>
-              <select multiple data-placehoder="Choose a Category" class="span2" ng-model="verse.categories" ui-select2>
-                <option value="{{category.id}}" ng-repeat="category in categories">
-                {{category.name}}
-                </option>
-              </select>
-            </span>
+              <i class="icon-list" title="categorize verse" ng-hide="isEditingVerseCategories" ng-click="editVerseCategories()"></i>
+              <span class="label label-info" ng-hide="isEditingVerseCategories" ng-repeat="category in verse.category_names">{{category}}</span>
+                           
             <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
+          </div>
+          <div ng-show="isEditingVerseCategories">
+            <select multiple class="span2" ng-model="verse.category_names" ui-select2>
+              <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+            </select>
+            <button ng-click="saveVerseCategories(verse)" class="btn btn-primary">Save</button>
+            <button ng-click="cancelEditVerseCategories()" class="btn">Cancel</button>
+          {{verse.category_names}} 
           </div>
           <hr /> 
           <div class="verse_content">

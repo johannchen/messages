@@ -2,7 +2,9 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
   $scope.newVerse = {} 
   $scope.memorized = false
   $scope.verses = Verses.query() 
-
+  $scope.newCategory = {}
+  $scope.categories = Categories.query() 
+   
   $scope.newVerse = ->
     $scope.isAddingVerse = true
 
@@ -23,19 +25,30 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
   $scope.addVerseOpen = ->
     $scope.addVerse()
     $scope.isAddingVerse = true 
-  
+
   $scope.removeVerse = (verse) ->
     index = $scope.verses.indexOf(verse)
     $scope.verses.splice(index, 1)
     Verse.remove {verse_id: verse.id}
-  
+ 
+  #TODO: to break down to different pieces update
   $scope.updateVerse = (verse) ->
     v = Verse.get {verse_id: verse.id}, ->
       v.ref = verse.ref
       v.content = verse.content
+      v.category_names = verse.category_names if verse.category_names
       v.memorized = verse.memorized if verse.memorized
       v.last_memorized_at = verse.last_memorized_at if verse.last_memorized_at
       v.$update()
+ 
+  $scope.editVerseCategories = ->
+    @isEditingVerseCategories = true
+  $scope.cancelEditVerseCategories = ->
+    @isEditingVerseCategories = false 
+  $scope.saveVerseCategories = (verse) ->
+    $scope.updateVerse(verse)
+    @isEditingVerseCategories = false 
+
 
   $scope.showMemorizeForm = ->
     @isMemorizing = true
@@ -69,8 +82,6 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
   ), 1000
   ###
   #
-  $scope.newCategory = {}
-  $scope.categories = Categories.query() 
   $scope.addCategory = ->
     t = new Categories($scope.newCategory)
     t.$save (category) -> 

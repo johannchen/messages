@@ -1,9 +1,11 @@
 class Verse < ActiveRecord::Base
+  require 'open-uri'
+
   has_and_belongs_to_many :messages
   has_and_belongs_to_many :categories
   belongs_to :user
   
-  attr_accessible :ref, :content, :favorite, :memorized, :last_memorized_at
+  attr_accessible :ref, :content, :favorite, :memorized, :last_memorized_at, :category_names
 
   validates_presence_of :ref, :user
   validates_uniqueness_of :ref, scope: :user_id 
@@ -13,8 +15,6 @@ class Verse < ActiveRecord::Base
 
   attr_accessor :category_names
   after_save :assign_categories
-
-  require 'open-uri'
   
   def self.esv_api(passage)
     uri = self.esv_uri(passage)
@@ -46,13 +46,13 @@ class Verse < ActiveRecord::Base
   end
 
   def category_names
-    @category_names || categories.map(&:name).join(', ')
+    @category_names || categories.map(&:name)
   end
 
   private
   def assign_categories
     if @category_names
-      self.categories = @category_names.split(/,\s+/).map do |name|
+      self.categories = @category_names.map do |name|
         Category.find_or_create_by_name_and_user_id(name, self.user_id)
       end
     end
