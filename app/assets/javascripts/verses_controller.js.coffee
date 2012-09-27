@@ -1,10 +1,17 @@
 angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Verse, Categories, Category) ->
   $scope.newVerse = {} 
-  $scope.memorized = false
   $scope.verses = Verses.query() 
   $scope.newCategory = {}
   $scope.categories = Categories.query() 
-  
+
+  $scope.filterByMemorized = (verse) ->
+    if $scope.memorizedOption is 'memorized'
+      verse.memorized > 0
+    else if $scope.memorizedOption is 'unmemorized'
+      verse.memorized == 0
+    else
+      true
+
   $scope.getESV = ->
     esvUrl = '/verses/api/' + $scope.newVerse.ref + '.json'
     $http(

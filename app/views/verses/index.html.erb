@@ -3,8 +3,8 @@
   <div class="span5">
     <form class="form-inline">
       <button class="btn" ng-click="showNewVerseForm()">New Verse</button>
-      <input type="text" class="span1" placeholder="search">
-      <select class="span1">
+      <input type="text" class="span1" placeholder="search" ng-model="search.$">
+      <select class="span1" ng-model="memorizedOption">
         <option value="">filter</option>
         <option value="unmemorized">Unmemorized</option>
         <option value="memorized">Memorized</option>
@@ -56,7 +56,7 @@
             </form>
           </li>
 
-          <li class="span5" ng-repeat="verse in verses">
+          <li class="span5" ng-repeat="verse in verses | filter:search | filter:filterByMemorized">
           <div ng-model="verseColor" class="span5 thumbnail {{verseColor | verseBgColor:verse.memorized}}">
             <div class="verse-header">
               <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.ref}}</span>
