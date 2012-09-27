@@ -1,11 +1,21 @@
-angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Categories, Category) ->
+angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Verse, Categories, Category) ->
   $scope.newVerse = {} 
   $scope.memorized = false
   $scope.verses = Verses.query() 
   $scope.newCategory = {}
   $scope.categories = Categories.query() 
-   
-  $scope.newVerse = ->
+  
+  $scope.getESV = ->
+    esvUrl = '/verses/api/' + $scope.newVerse.ref + '.json'
+    $http(
+      method: 'GET'
+      url: esvUrl
+    ).success((data, status) ->
+      $scope.newVerse.content = data
+    ).error (data, status) ->
+      $scope.newVerse.content = "Failed to load ESV"
+
+  $scope.showNewVerseForm = ->
     $scope.isAddingVerse = true
 
   $scope.cancelNewVerse = ->
@@ -31,14 +41,14 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
     $scope.verses.splice(index, 1)
     Verse.remove {verse_id: verse.id}
  
-  #TODO: to break down to different pieces update
-  $scope.updateVerse = (verse) ->
+  $scope.updateVerseRef = (verse) ->
     v = Verse.get {verse_id: verse.id}, ->
       v.ref = verse.ref
+      v.$update()
+
+  $scope.updateVerseContent = (verse) ->
+    v = Verse.get {verse_id: verse.id}, ->
       v.content = verse.content
-      v.category_names = verse.category_names if verse.category_names
-      v.memorized = verse.memorized if verse.memorized
-      v.last_memorized_at = verse.last_memorized_at if verse.last_memorized_at
       v.$update()
  
   $scope.editVerseCategories = ->
@@ -46,7 +56,9 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
   $scope.cancelEditVerseCategories = ->
     @isEditingVerseCategories = false 
   $scope.saveVerseCategories = (verse) ->
-    $scope.updateVerse(verse)
+    v = Verse.get {verse_id: verse.id}, ->
+      v.category_names = verse.category_names
+      v.$update()
     @isEditingVerseCategories = false 
 
 
@@ -64,7 +76,10 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
       (if verse.memorized then ++verse.memorized else verse.memorized = 1)
       verse.last_memorized_at = new Date()
       # update verse on server
-      $scope.updateVerse(verse)
+      v = Verse.get {verse_id: verse.id}, ->
+        v.memorized = verse.memorized
+        v.last_memorized_at = verse.last_memorized_at
+        v.$update()
     else
       dmp = new diff_match_patch()
       d = dmp.diff_main(@typedContent, verse.content)
@@ -87,12 +102,10 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Cat
     t.$save (category) -> 
       $scope.categories.push(category)
     $scope.newCategory= {} 
-    #idb.add('categorys', {name:$scope.categoryName})
   $scope.removeCategory = (category) ->
     index = $scope.categories.indexOf(category)
-    $scope.categorys.splice(index, 1)
+    $scope.categories.splice(index, 1)
     Category.remove {category_id: category.id}
-    #idb.delete('categorys', category.id)
   $scope.updateCategory = (category) ->
     t = Category.get {category_id: category.id}, ->
       t.name = category.name
