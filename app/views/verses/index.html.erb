@@ -9,37 +9,40 @@
         <option value="unmemorized">Unmemorized</option>
         <option value="memorized">Memorized</option>
       </select>
-      <select class="span1">
-        <option value="">tag</option>
+      <select class="span1" ng-model="search.category_names">
+        <option value="">category</option>
+        <option ng-repeat="category in categories | orderBy:'name'" value="{{category.name}}">{{category.name}}</option>
       </select>
-      <select class="span1">
+      <select class="span1" ng-model="sort">
         <option value="">sort</option>
-        <option value="-last_memorized_at">Lastest Memorized</option>
-        <option value="last_memorized_at">Oldest Memorized</option>
-        <option value="-memorized">Most Memorized</option>
-        <option value="memorized">Least Memorized</option>
+        <option value="-last_memorized_at" ng-show="{{memorizedOption == 'memorized'}}">Lastest Memorized</option>
+        <option value="last_memorized_at" ng-show="{{memorizedOption == 'memorized'}}">Oldest Memorized</option>
+        <option value="-memorized" ng-show="{{memorizedOption == 'memorized'}}">Most Memorized</option>
+        <option value="memorized" ng-show="{{memorizedOption == 'memorized'}}">Least Memorized</option>
         <option value="-created_at">Lastest Added</option>
         <option value="created_at">Oldest Added</option>
-        <option value="title">Verse Reference</option>
+        <option value="ref">Verse Reference</option>
       </select>
+      <span class="badge" title="result">{{resultCount = (verses | filter:search | filter:filterByMemorized).length}}</span>
     </form>
   </div>
   <div class="span5">
     <div class="pull-right">
-      <span class="badge badge-success" title="Memorized Total">1</span> / 
-      <span class="badge badge-inverse" title="Verse Total">100</span>
+      <span class="badge badge-success" title="Memorized Total">{{memorizedCount()}}</span> / 
+      <span class="badge badge-inverse" title="Verse Total">{{verses.length}}</span>
     </div> 
     <div class="progress progress-success">
-      <div class="bar" style="width: 60%;"></div>
+      <div class="bar" style="width: {{progress()}}%;"></div>
     </div>
   </div>
   <div class="span2">
+    <h4>Categories</h4>
   </div>
 </div>
 <div class="row">
   <div class="span10">
     <div class="row">
-      <div id="verses">
+      <div id="verses" ng-init="limit=10">
         <ul class="thumbnails">
           <li class="span5" ng-show="isAddingVerse">
             <form name="newVerseForm" class="span5 thumbnail">
@@ -56,7 +59,7 @@
             </form>
           </li>
 
-          <li class="span5" ng-repeat="verse in verses | filter:search | filter:filterByMemorized">
+          <li class="span5" ng-repeat="verse in verses | filter:search | filter:filterByMemorized | orderBy:sort | limitTo:limit">
           <div ng-model="verseColor" class="span5 thumbnail {{verseColor | verseBgColor:verse.memorized}}">
             <div class="verse-header">
               <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.ref}}</span>
@@ -74,12 +77,11 @@
             <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
           </div>
           <div ng-show="isEditingVerseCategories">
-            <select multiple class="span2" ng-model="verse.category_names" ui-select2>
+            <select multiple class="span4" ng-model="verse.category_names" ui-select2>
               <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
             </select>
             <button ng-click="saveVerseCategories(verse)" class="btn btn-primary">Save</button>
             <button ng-click="cancelEditVerseCategories()" class="btn">Cancel</button>
-          {{verse.category_names}} 
           </div>
           <hr /> 
           <div class="verse_content">
@@ -101,10 +103,11 @@
       </li>
     </ul>
   </div>
+  <div id="load-more" ng-show="limit < resultCount">
+    <button class="btn" ng-click="limit=limit+10"><i class="icon-arrow-down"></i>Load More</button>
+  </div>
 </div>
 <div class="span2">
-  <h4>Categories</h4>
-  <hr />
   <ul class="unstyled">
     <li ng-repeat="category in categories">
     <span class="label label-info move" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</span>
@@ -114,7 +117,7 @@
     </ul>
     <form>
       <div class="input-append">
-        <input type="text" class="input-small" placeholder="add category" ng-model="newCategory.name">
+        <input type="text" class="input-small" placeholder="new category" ng-model="newCategory.name">
         <button class="btn-primary" ng-click="addCategory()">Add</button>
       </div>
     </form>

@@ -12,6 +12,15 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     else
       true
 
+  $scope.memorizedCount = ->
+    count = 0
+    angular.forEach $scope.verses, (verse) ->
+      count += (if verse.memorized > 0 then 1 else 0)
+    count
+
+  $scope.progress = ->
+    $scope.memorizedCount() / $scope.verses.length * 100
+
   $scope.getESV = ->
     esvUrl = '/verses/api/' + $scope.newVerse.ref + '.json'
     $http(
