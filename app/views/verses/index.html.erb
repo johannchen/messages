@@ -57,7 +57,7 @@
           </li>
 
           <li class="span5" ng-repeat="verse in verses">
-          <div class="span5 thumbnail">
+          <div ng-model="verseColor" class="span5 thumbnail {{verseColor | verseBgColor:verse.memorized}}">
             <div class="verse-header">
               <span ng-hide="editMode" ng-dblclick="editMode=true">{{verse.ref}}</span>
               <input type="text" class="span2" ng-model="verse.ref" ng-show="editMode" ng-dblclick="editMode=false; updateVerseRef(verse)" />
