@@ -1,8 +1,10 @@
 angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Verse, Categories, Category) ->
+  $scope.search = {} 
   $scope.newVerse = {} 
   $scope.verses = Verses.query() 
   $scope.newCategory = {}
   $scope.categories = Categories.query() 
+  $scope.labelColor = 'label label-info'
 
   $scope.filterByMemorized = (verse) ->
     if $scope.memorizedOption is 'memorized'
@@ -113,6 +115,19 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
   ), 1000
   ###
   #
+
+  $scope.$on 'resetLabelColor', ->
+    $scope.labelColor = 'label label-info'
+
+  $scope.filterByCategory = (category) ->
+    if @labelColor is 'label label-info'
+      #$scope.$broadcast('resetLabelColor')
+      @labelColor = 'label label-success'
+      $scope.search.category_names = category.name
+    else
+      @labelColor = 'label label-info'
+      $scope.search.category_names = ''
+
   $scope.addCategory = ->
     t = new Categories($scope.newCategory)
     t.$save (category) -> 

@@ -35,3 +35,15 @@
 .limegreen {
     background-color: #32CD32;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.category .remove {
+  display: none;
+}
+
+.category:hover .remove {
+  display: inline;
+}

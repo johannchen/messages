@@ -9,10 +9,7 @@
         <option value="unmemorized">Unmemorized</option>
         <option value="memorized">Memorized</option>
       </select>
-      <select class="span1" ng-model="search.category_names">
-        <option value="">category</option>
-        <option ng-repeat="category in categories | orderBy:'name'" value="{{category.name}}">{{category.name}}</option>
-      </select>
+      
       <select class="span1" ng-model="sort">
         <option value="">sort</option>
         <option value="-last_memorized_at" ng-show="{{memorizedOption == 'memorized'}}">Lastest Memorized</option>
@@ -110,11 +107,13 @@
 <div class="span2">
   <ul class="unstyled">
     <li ng-repeat="category in categories">
-    <span class="label label-info move" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</span>
-      <input type="text" class="span2" ng-model="tag.name" ng-show="editMode" ng-dblclick="editMode=false; updateCategory(category)" />
-      <span><a ng-click="removeCategory(category)">&times;</a></span>  
-      </li>
-    </ul>
+    <div class="category">
+      <a ng-class="labelColor" ng-click="filterByCategory(category)" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</a>
+      <input type="text" class="span2" ng-model="category.name" ng-show="editMode" ng-dblclick="editMode=false; updateCategory(category)" />
+      <span class="pointer remove" ng-click="removeCategory(category)">&times;</span>  
+    </div>
+    </li>
+  </ul>
     <form>
       <div class="input-append">
         <input type="text" class="input-small" placeholder="new category" ng-model="newCategory.name">
