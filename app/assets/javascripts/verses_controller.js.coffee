@@ -55,20 +55,17 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     $scope.isAddingVerse = true 
 
   $scope.removeVerse = (verse) ->
-    index = $scope.verses.indexOf(verse)
-    $scope.verses.splice(index, 1)
-    Verse.remove {verse_id: verse.id}
+    if confirm('Are you sure to remove this verse?')
+      index = $scope.verses.indexOf(verse)
+      $scope.verses.splice(index, 1)
+      Verse.remove {verse_id: verse.id}
  
-  $scope.updateVerseRef = (verse) ->
+  $scope.updateVerse = (verse) ->
     v = Verse.get {verse_id: verse.id}, ->
       v.ref = verse.ref
-      v.$update()
-
-  $scope.updateVerseContent = (verse) ->
-    v = Verse.get {verse_id: verse.id}, ->
       v.content = verse.content
       v.$update()
- 
+
   $scope.editVerseCategories = ->
     @isEditingVerseCategories = true
   $scope.cancelEditVerseCategories = ->
@@ -136,9 +133,10 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
       $scope.categories.push(category)
     $scope.newCategory= {} 
   $scope.removeCategory = (category) ->
-    index = $scope.categories.indexOf(category)
-    $scope.categories.splice(index, 1)
-    Category.remove {category_id: category.id}
+    if confirm('Are you sure to remove this category?')
+      index = $scope.categories.indexOf(category)
+      $scope.categories.splice(index, 1)
+      Category.remove {category_id: category.id}
   $scope.updateCategory = (category) ->
     t = Category.get {category_id: category.id}, ->
       t.name = category.name

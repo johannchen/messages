@@ -5,26 +5,26 @@
 jQuery ->
   $('.best_in_place').best_in_place()
 
-  split = (val) -> val.split /,\s*/
-  extractLast = (term) -> split(term).pop()
-  $("#message_category_names,#verse_category_names")
-    .bind "keydown", (event) ->
-      if event.keyCode == $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active
-        event.preventDefault
-    .autocomplete
-        minLength: 0
-        source: (request, response) ->
-          $.getJSON "/categories", 
-            term: extractLast request.term
-            response
-        focus: -> false
-        select: (event, ui) ->
-          terms = split(this.value)
-          # remove the current input
-          terms.pop()
-          # add the selected item
-          terms.push ui.item.value
-          # add placeholder to get the comma-and-space at the end
-          terms.push ""
-          this.value = terms.join ", "
-          false
+  split = (val) -> 
+    val.split /,\s*/
+  extractLast = (term) -> 
+    split(term).pop()
+  $("#message_category_names").bind("keydown", (event) ->
+    event.preventDefault if event.keyCode is $.ui.keyCode.TAB and $(this).data("autocomplete").menu.active
+  ).autocomplete
+    minLength: 0
+    source: (request, response) ->
+      $.getJSON "/categories.json", 
+        term: extractLast request.term
+        response
+    focus: -> false
+    select: (event, ui) ->
+      terms = split(@value)
+      # remove the current input
+      terms.pop()
+      # add the selected item
+      terms.push ui.item.value
+      # add placeholder to get the comma-and-space at the end
+      terms.push ""
+      @value = terms.join ", "
+      false

@@ -18,7 +18,7 @@ class Verse < ActiveRecord::Base
   
   def self.esv_api(passage)
     uri = self.esv_uri(passage)
-    open(uri).read
+    open(uri).read.strip
   end
   #TODO: dry esv uri, instance method cannot be called in class method
   def self.esv_uri(passage)

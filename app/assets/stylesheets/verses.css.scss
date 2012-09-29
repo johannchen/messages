@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .white {
     background-color: #FFFFFF;
 }
@@ -40,10 +45,14 @@
   cursor: pointer;
 }
 
-.category .remove {
+.category {
+  margin-bottom: 2px;
+}
+
+.category .edit {
   display: none;
 }
 
-.category:hover .remove {
+.category:hover .edit {
   display: inline;
 }
