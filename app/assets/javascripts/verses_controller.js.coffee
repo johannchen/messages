@@ -4,7 +4,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
   $scope.verses = Verses.query() 
   $scope.newCategory = {}
   $scope.categories = Categories.query() 
-  $scope.labelColor = 'label label-info'
+  $scope.labelColor = 'label-info'
 
   $scope.filterByMemorized = (verse) ->
     if $scope.memorizedOption is 'memorized'
@@ -120,13 +120,15 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     $scope.labelColor = 'label label-info'
 
   $scope.filterByCategory = (category) ->
-    if @labelColor is 'label label-info'
-      #$scope.$broadcast('resetLabelColor')
-      @labelColor = 'label label-success'
-      $scope.search.category_names = category.name
-    else
-      @labelColor = 'label label-info'
+    #category.active = true if category.active is "undefined"
+    if category.active 
+      category.active = false
       $scope.search.category_names = ''
+    else
+      angular.forEach $scope.categories, (cat) ->
+        cat.active = false
+      category.active = true 
+      $scope.search.category_names = category.name
 
   $scope.addCategory = ->
     t = new Categories($scope.newCategory)

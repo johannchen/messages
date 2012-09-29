@@ -108,7 +108,7 @@
   <ul class="unstyled">
     <li ng-repeat="category in categories">
     <div class="category">
-      <a ng-class="labelColor" ng-click="filterByCategory(category)" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</a>
+      <a class="label {{labelColor | labelCategory:category.active}}" ng-click="filterByCategory(category)" ng-hide="editMode" ng-dblclick="editMode=true">{{category.name}}</a>
       <input type="text" class="span2" ng-model="category.name" ng-show="editMode" ng-dblclick="editMode=false; updateCategory(category)" />
       <span class="pointer remove" ng-click="removeCategory(category)">&times;</span>  
     </div>
