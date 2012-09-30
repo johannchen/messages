@@ -40,6 +40,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json { render json: @messages }
       format.csv { render :text => current_user.messages.download_csv }
     end
   end

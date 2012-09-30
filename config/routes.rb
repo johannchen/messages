@@ -7,6 +7,8 @@ Messages::Application.routes.draw do
 
   match "/verses/api/:passage" => "verses#api"
 
+  match "/messages" => "messages#index"
+=begin
   resources :messages do
     get 'calendar', :on => :collection
     get 'note', :on => :member
@@ -14,7 +16,7 @@ Messages::Application.routes.draw do
     put 'remove_verse', :on => :member 
     put 'add_verse', :on => :member 
   end
-
+=end
   resources :feedbacks, :only => :create
   resources :categories
   resources :speakers
