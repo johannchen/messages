@@ -15,6 +15,12 @@ directiveModule.directive 'bibleAutocomplete', ->
   link: (scope, element, attrs) ->
     element.autocomplete source: bible
 
+directiveModule.directive 'jcDatepicker', ->
+  restrict: "A"
+  link: (scope, element, attrs) ->
+    element.datepicker dateFormat: 'yy-mm-dd' 
+
+
 ###
 
 directiveModule.directive 'jcEditableText', () ->

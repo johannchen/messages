@@ -4,6 +4,9 @@ serviceModule.value 'version', '0.1'
 serviceModule.factory 'Messages', ($resource) ->
   $resource 'messages.json'
 
+serviceModule.factory 'Speakers', ($resource) ->
+  $resource 'speakers.json'
+
 serviceModule.factory 'Verses', ($resource) ->
   $resource 'verses.json'
 

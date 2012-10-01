@@ -1,5 +1,7 @@
 Messages::Application.routes.draw do
 
+  get "speakers/index"
+
   match "/feedback" => "feedbacks#new", :as => :feedback
   match "auth/:provider/callback" => "sessions#create"
   match "auth/failure" => "sessions#failure"
@@ -7,7 +9,8 @@ Messages::Application.routes.draw do
 
   match "/verses/api/:passage" => "verses#api"
 
-  match "/messages" => "messages#index"
+  #match "/messages" => "messages#index"
+  resources :messages
 =begin
   resources :messages do
     get 'calendar', :on => :collection

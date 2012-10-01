@@ -11,6 +11,7 @@ class Message < ActiveRecord::Base
   scope :order_by_listened_date, order("listened_on DESC")
   scope :book, lambda { |book| joins(:verses).where("verses.ref like ?", "%#{book}%")}
 
+  attr_accessible :title, :listened_on, :summary, :url, :speaker_name, :category_names
   attr_reader :verse_refs
   attr_writer :speaker_name, :category_names 
   before_save :assign_speaker

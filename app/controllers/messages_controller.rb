@@ -38,11 +38,9 @@ class MessagesController < ApplicationController
       @messages = ms.paginate(page: params[:page], per_page: 10)
     end
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @messages }
-      format.csv { render :text => current_user.messages.download_csv }
-    end
+    #respond_to do |format|
+    #  format.csv { render :text => current_user.messages.download_csv }
+    #end
   end
 
   def show
@@ -58,9 +56,9 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(params[:message])
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.json { render json: @message, status: :created }
       else
-        format.html { render action: "new" }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
