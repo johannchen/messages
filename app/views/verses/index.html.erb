@@ -111,7 +111,7 @@
 <div class="span2">
   <ul class="unstyled">
     <li ng-repeat="category in categories">
-    <div class="category">
+    <div class="side_item">
       <span class="pointer label {{labelColor | labelCategory:category.active}}" ng-click="filterByCategory(category)" ng-hide="editMode">{{category.name}}</span>
       <span class="pointer edit" ng-hide="editMode" ng-click="removeCategory(category)">&times;</span>  
       <span class="pointer edit" ng-hide="editMode" ng-click="editMode=true">

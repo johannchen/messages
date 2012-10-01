@@ -10,7 +10,10 @@ messagesApp.config ($routeProvider) ->
     templateUrl: '/messages/list.html'
   ).when('/new',
     controller: 'MessageCreateCtrl'
-    templateUrl: '/messages/new.html'
+    templateUrl: '/messages/form.html'
+  ).when('/edit/:messageId',
+    controller: 'MessageEditCtrl'
+    templateUrl: '/messages/form.html'
   ).otherwise redirectTo: '/'
 
 jQuery ->

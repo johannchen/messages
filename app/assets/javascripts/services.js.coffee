@@ -4,8 +4,16 @@ serviceModule.value 'version', '0.1'
 serviceModule.factory 'Messages', ($resource) ->
   $resource 'messages.json'
 
+serviceModule.factory 'Message', ($resource) ->
+  $resource '/messages/:message_id.json', {message_id:'@id'},
+    update: { method: 'PUT' }
+
 serviceModule.factory 'Speakers', ($resource) ->
   $resource 'speakers.json'
+
+serviceModule.factory 'Speaker', ($resource) ->
+  $resource '/speakers/:speaker_id.json', {speaker_id:'@id'},
+    update: { method: 'PUT' }
 
 serviceModule.factory 'Verses', ($resource) ->
   $resource 'verses.json'

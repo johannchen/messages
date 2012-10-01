@@ -44,6 +44,9 @@ class MessagesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.json { render json: @message }
+    end
   end
 
   def new
@@ -66,9 +69,9 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update_attributes(params[:message])
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+        format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,7 +79,7 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy
     respond_to do |format|
-      format.html { redirect_to messages_url(:view => "list") }
+      format.json { head :no_content }
     end
   end
 

@@ -113,9 +113,6 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
   ###
   #
 
-  $scope.$on 'resetLabelColor', ->
-    $scope.labelColor = 'label label-info'
-
   $scope.filterByCategory = (category) ->
     #category.active = true if category.active is "undefined"
     if category.active 

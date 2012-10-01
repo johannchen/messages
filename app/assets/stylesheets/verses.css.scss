@@ -45,14 +45,14 @@ hr {
   cursor: pointer;
 }
 
-.category {
+.side_item {
   margin-bottom: 2px;
 }
 
-.category .edit {
+.side_item .edit {
   display: none;
 }
 
-.category:hover .edit {
+.side_item:hover .edit {
   display: inline;
 }
