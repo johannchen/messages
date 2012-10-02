@@ -22,6 +22,10 @@ serviceModule.factory 'Verse', ($resource) ->
   $resource '/verses/:verse_id.json', {verse_id:'@id'},
     update: { method: 'PUT' }
 
+serviceModule.factory 'ESV', ($resource) ->
+  $resource '/verses/api/:ref.json', {ref:'@ref'}
+
+
 serviceModule.factory 'Categories', ($resource) ->
   $resource 'categories.json'
 

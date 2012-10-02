@@ -4,20 +4,7 @@ class VersesController < ApplicationController
   def index 
     @verse = Verse.new
     @categories = current_user.categories.order(:name)
-    
-    vs = current_user.verses
-
-    @count = vs.count
-
-    if params[:cat] && params[:book]
-      vs = vs.book(params[:book]).joins(:categories).where(:categories => {:id => params[:cat]})
-    elsif params[:cat]
-      vs = vs.joins(:categories).where(:categories => {:id => params[:cat]})
-    elsif params[:book]
-      vs = vs.book(params[:book])
-    end
-
-    @verses = vs.order("updated_at DESC").paginate(page: params[:page], per_page: 10)
+    @verses = current_user.verses.favorites.order("updated_at DESC")
   end
 
   def show
@@ -34,20 +21,14 @@ class VersesController < ApplicationController
   end
 
   def create
-    params[:verse][:favorite] = 1 unless params[:verse][:favorite]
-    # handle mobile select 
-    # params[:verse][:ref] = params[:verse_book] + " " + params[:verse_num] if params[:verse_book]
     @verse = current_user.verses.build(params[:verse])
     if @verse.save
       respond_to do |format|
         format.json { render json: @verse, status: :created }
-        format.mobile { redirect_to @verse }
-        format.html { redirect_to verses_path, notice: 'Successfully added verse.' }
       end
     else 
       respond_to do |format|
         format.json { render json: @category.errors, status: :unprocessable_entity }
-        format.html { render 'new' }
       end
     end
   end
@@ -95,7 +76,6 @@ class VersesController < ApplicationController
   def api
     @verse = Verse.esv_api(params[:passage])
     respond_to do |format|
-      format.html
       format.json { render json: @verse }
     end
   end

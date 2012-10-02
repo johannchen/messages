@@ -29,7 +29,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
       method: 'GET'
       url: esvUrl
     ).success((data, status) ->
-      $scope.newVerse.content = data
+      $scope.newVerse.content = data.content
     ).error (data, status) ->
       $scope.newVerse.content = "Failed to load ESV"
 
@@ -41,6 +41,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     $scope.newVerse = {}
 
   $scope.addVerse = ->
+    $scope.newVerse.favorite = true
     v = new Verses($scope.newVerse)
     v.$save (verse) ->
       $scope.verses.unshift(verse)

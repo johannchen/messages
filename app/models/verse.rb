@@ -18,7 +18,8 @@ class Verse < ActiveRecord::Base
   
   def self.esv_api(passage)
     uri = self.esv_uri(passage)
-    open(uri).read.strip
+    result = open(uri).read.strip
+    {ref: passage, content: result}.to_json
   end
   #TODO: dry esv uri, instance method cannot be called in class method
   def self.esv_uri(passage)
@@ -44,6 +45,10 @@ class Verse < ActiveRecord::Base
   def esv_passage
     uri = esv_uri
     open(uri).read
+  end
+
+  def content
+    @content || esv_passage
   end
 
   def category_names

@@ -1,8 +1,14 @@
 <div class="span8">
   <h4>{{message.title}}</h4>
   <p>by {{message.speaker_name}} in categories: {{message.category_names}} | listened on {{message.listened_on | date:'MM/dd/yy'}}</p>
-  <dl>
-    <dt>Summary</dt>
-    <dd>{{message.summary}}</dd>
-  </dl>
+  <p><strong>Summary</strong><br />
+    {{message.summary}}
+  </p>
+  <ul>
+    <li ng-repeat="verse in message.verses">{{verse.ref}} <a ng-click="removeVerse(verse)">x</a><br />
+  {{verse.content}}</li>
+  </ul>
+  <input type="text" placeholder="new verse" ng-model="newVerse" />
+  <button class="btn" ng-click="addVerse()">Add</button>
+  <button class="btn btn-primary" ng-click="saveVerses()" ng-show="versesChanged">Save Verses</button>
 </div>
