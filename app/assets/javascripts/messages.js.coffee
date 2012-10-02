@@ -8,6 +8,9 @@ messagesApp.config ($routeProvider) ->
   $routeProvider.when('/',
     controller: 'MessageListCtrl'
     templateUrl: '/messages/list.html'
+  ).when('/:messageId',
+    controller: 'MessageShowCtrl'
+    templateUrl: '/messages/show.html'
   ).when('/new',
     controller: 'MessageCreateCtrl'
     templateUrl: '/messages/form.html'

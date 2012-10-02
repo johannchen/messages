@@ -27,6 +27,16 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
       s.name = speaker.name
       s.$update()
 
+  $scope.editMessageCategories = ->
+    @isEditingMessageCategories = true
+  $scope.cancelEditMessageCategories = ->
+    @isEditingMessageCategories = false 
+  $scope.saveMessageCategories = (message) ->
+    m = Message.get {message_id: message.id}, ->
+      m.category_names = message.category_names
+      m.$update()
+    @isEditingMessageCategories = false 
+
   # TODO: DRY
   $scope.addCategory = ->
     t = new Categories($scope.newCategory)
@@ -43,6 +53,8 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
       t.name = category.name
       t.$update()
 
+angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $routeParams, Message) ->
+  $scope.message = Message.get {message_id: $routeParams.messageId}
 
 angular.module('messagesApp').controller 'MessageCreateCtrl', ($scope, $location, Messages, Speakers) ->
   $scope.message = {}

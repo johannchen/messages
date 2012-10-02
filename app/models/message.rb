@@ -49,7 +49,7 @@ class Message < ActiveRecord::Base
   end
 
   def category_names
-    @category_names || categories.map(&:name).join(', ')
+    @category_names || categories.map(&:name)
   end
 
   def verse_refs
@@ -66,7 +66,7 @@ class Message < ActiveRecord::Base
 
   def assign_categories
     if @category_names
-      self.categories = @category_names.split(/,\s+/).map do |name|
+      self.categories = @category_names.map do |name|
         Category.find_or_create_by_name_and_user_id(name, self.user_id)
       end
     end

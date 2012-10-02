@@ -16,15 +16,27 @@
       <li class="span8 thumbnail" ng-repeat="message in messages">
       <article>
         <header>
-          <strong>{{message.title}}</strong> 
-          <span class="label">{{message.speaker_name}}</span>
+        <strong><a href="#/{{message.id}}">{{message.title}}</a></strong>
+          <i class="icon-info-sign" title="listened on  {{message.listened_on | date:'MM/dd/yy'}}"></i> 
+          <span class="label" title="speaker">{{message.speaker_name}}</span>
+          <i class="icon-share" title="link"></i>
           <a href="#edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>
+          <span ng-hide="isEditingMessageCategories">
+            <i class="icon-list pointer" title="categorize message" ng-click="editMessageCategories()"></i>
+            <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span>
+          </span>
           <button class="btn btn-large close pull-right" ng-click="removeMessage(message)">&times;</button>  
         </header>
         <hr />
+        <div ng-show="isEditingMessageCategories">
+          <select multiple class="span5" ng-model="message.category_names" ui-select2>
+            <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+          </select>
+          <button ng-click="saveMessageCategories(message)" class="btn btn-primary">Save</button>
+          <button ng-click="cancelEditMessageCategories()" class="btn">Cancel</button>
+        </div>
         <p>{{message.summary}}</p>
         <footer>
-          {{message.listened_on}}
         </footer>
       </article> 
       </li>

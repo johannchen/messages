@@ -7,6 +7,12 @@ class SpeakersController < ApplicationController
     end
   end
 
+  def show
+    respond_to do |format|
+      format.json { render json: @speaker }
+    end
+  end
+
   def create
     @speaker = current_user.speakers.build(params[:speaker])
     if @speaker.save
