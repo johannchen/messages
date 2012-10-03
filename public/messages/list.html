@@ -10,7 +10,7 @@
       <a href="{{message.url}}" ng-show="message.url"><i class="icon-share" title="link"></i></a>
       <a href="#edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>
       <span ng-hide="isEditingMessageCategories">
-        <i class="icon-list pointer" title="categorize message" ng-click="editMessageCategories()"></i>
+        <a ng-click="editMessageCategories()"><i class="icon-list" title="categorize message"></i></a>
         <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span>
       </span>
       <button class="btn btn-large close pull-right" ng-click="removeMessage(message)">&times;</button>  

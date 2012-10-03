@@ -2,15 +2,16 @@
   <div class="span8">
     <h4>{{message.title}}</h4>
     <p>
-    By {{message.speaker_name}} in Category: {{message.category_names.join(', ')}} | listened on {{message.listened_on | date:'MM/dd/yy'}}
+    By <span class="label">{{message.speaker_name}}</span> in category <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span> listened on {{message.listened_on | date:'MM/dd/yy'}}
     </p>
     <p><strong>Summary</strong><br />
     {{message.summary}}
     </p>
     <ul class="unstyled">
       <li ng-repeat="verse in message.verses">
-      <strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">x</a><br />
+      <p><strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">&times;</a><br />
       {{verse.content}}
+      </p>
       </li>
     </ul>
     <form>
