@@ -13,3 +13,7 @@ filterModule.filter 'labelCategory', ->
   (input, active) ->
     if active then 'label-success' else 'label-info'
 
+filterModule.filter 'labelSpeaker', ->
+  (input, active) ->
+    if active then 'label-success' else 'label'
+

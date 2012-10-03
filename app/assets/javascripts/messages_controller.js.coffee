@@ -11,6 +11,17 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
       $scope.messages.splice(index, 1)
       Message.remove {message_id: message.id}
 
+  $scope.filterBySpeaker = (speaker) ->
+    if speaker.active 
+      speaker.active = false
+      $scope.search.speaker_name = ''
+    else
+      angular.forEach $scope.speakers, (s) ->
+        s.active = false
+      speaker.active = true 
+      $scope.search.speaker_name = speaker.name
+
+
   $scope.addSpeaker = (speaker) ->
     s = new Speakers($scope.newSpeaker)
     s.$save (speaker) ->
@@ -38,6 +49,16 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
     @isEditingMessageCategories = false 
 
   # TODO: DRY
+  $scope.filterByCategory = (category) ->
+    if category.active 
+      category.active = false
+      $scope.search.category_names = ''
+    else
+      angular.forEach $scope.categories, (cat) ->
+        cat.active = false
+      category.active = true 
+      $scope.search.category_names = category.name
+
   $scope.addCategory = ->
     t = new Categories($scope.newCategory)
     t.$save (category) -> 
@@ -53,7 +74,7 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
       t.name = category.name
       t.$update()
 
-angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $routeParams, Message, ESV) ->
+angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $route, $routeParams, Message, ESV) ->
   $scope.versesChanged = false 
   $scope.message = Message.get {message_id: $routeParams.messageId}
   $scope.addVerse = ->
@@ -70,6 +91,8 @@ angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $routeParam
   $scope.saveVerses = ->
     $scope.message.$update()
     $scope.versesChanged = false 
+  $scope.cancel = ->
+    $route.reload()
 
 angular.module('messagesApp').controller 'MessageCreateCtrl', ($scope, $location, Messages, Speakers) ->
   $scope.message = {}

@@ -115,7 +115,6 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
   #
 
   $scope.filterByCategory = (category) ->
-    #category.active = true if category.active is "undefined"
     if category.active 
       category.active = false
       $scope.search.category_names = ''

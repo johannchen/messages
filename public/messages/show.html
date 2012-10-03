@@ -1,14 +1,25 @@
-<div class="span8">
-  <h4>{{message.title}}</h4>
-  <p>by {{message.speaker_name}} in categories: {{message.category_names}} | listened on {{message.listened_on | date:'MM/dd/yy'}}</p>
-  <p><strong>Summary</strong><br />
+<div class="row">
+  <div class="span8">
+    <h4>{{message.title}}</h4>
+    <p>
+    By {{message.speaker_name}} in Category: {{message.category_names.join(', ')}} | listened on {{message.listened_on | date:'MM/dd/yy'}}
+    </p>
+    <p><strong>Summary</strong><br />
     {{message.summary}}
-  </p>
-  <ul>
-    <li ng-repeat="verse in message.verses">{{verse.ref}} <a ng-click="removeVerse(verse)">x</a><br />
-  {{verse.content}}</li>
-  </ul>
-  <input type="text" placeholder="new verse" ng-model="newVerse" />
-  <button class="btn" ng-click="addVerse()">Add</button>
-  <button class="btn btn-primary" ng-click="saveVerses()" ng-show="versesChanged">Save Verses</button>
+    </p>
+    <ul class="unstyled">
+      <li ng-repeat="verse in message.verses">
+      <strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">x</a><br />
+      {{verse.content}}
+      </li>
+    </ul>
+    <form>
+      <div class="input-append">
+        <input type="text" placeholder="new verse" ng-model="newVerse" bible-autocomplete />
+        <button class="btn" ng-click="addVerse()">Add</button>
+        <button class="btn btn-primary" ng-click="saveVerses()" ng-show="versesChanged">Save Verses</button>
+        <button class="btn" ng-click="cancel()" ng-show="versesChanged">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
