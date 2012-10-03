@@ -7,4 +7,6 @@ json.array!(@messages) do |json, message|
   json.listened_on message.listened_on
   json.url message.url
   json.summary message.summary
+  #json.start message.listened_on
+  json.allDay true
 end

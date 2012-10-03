@@ -15,34 +15,27 @@ directiveModule.directive 'bibleAutocomplete', ->
   link: (scope, element, attrs) ->
     element.autocomplete source: bible
 
-directiveModule.directive 'jcDatepicker', ->
-  restrict: "A"
-  link: (scope, element, attrs) ->
-    element.datepicker dateFormat: 'yy-mm-dd' 
-
-
-###
-
-directiveModule.directive 'jcEditableText', () ->
-  return {
-    restrict: 'A'
-    scope: { model: '=' }
-    template: '<span ng-hide="editMode" ng-dblclick="editMode=true">{{model}}</span><input type="text" class="span2" autofocus="autofocus" ng-model="model" ng-show="editMode" jc-enter="editMode=false" ng-dblclick="editMode=false" />'
-  }
-
-directiveModule.directive 'jcDraggable', ->
+directiveModule.directive 'fullCalendar', ->
   restrict: 'A'
+  replace: true
+  transclude: true
+  scope: { events: '=' }
+  template: "<div id=\"calendar\"></div>"
   link: (scope, element, attrs) ->
-    element.draggable(revert: true)
+    scope.calendar = $('#calendar').fullCalendar
+      header:
+        left: 'prev,next today'
+        center: 'title'
+        right: 'month,basicWeek'
+      defaultView: 'month'
+      editable: false
+      height: 500
+      loading: (bool) -> 
+        if bool then $("#loading").show() else $("#loading").hide()
+      events: scope.events
+      eventClick: (event) ->
+        window.location = '#/show/' + event.id
+        false
 
-directiveModule.directive 'jcDroppable', ->
-  restrict: 'A'
-  link: (scope, element, attrs) ->
-    element.droppable
-      drop: (event,ui) ->
-        scope.verse.categories = [] if typeof scope.verse.categories is "undefined"
-        scope.verse.categories.push $.trim(ui.draggable.text())
-        scope.$apply()
-        ###
 
 

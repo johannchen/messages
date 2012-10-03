@@ -6,37 +6,7 @@ class MessagesController < ApplicationController
     @categories = current_user.categories.order(:name)
     @verses = current_user.verses
 
-    ms = current_user.messages
-    ms = ms.search(params[:search]) if params[:search]
-    
-    if params[:cat] && params[:speaker] && params[:book]
-      ms = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker]).book(params[:book])
-    elsif params[:cat] && params[:speaker]
-      ms = @categories.find(params[:cat]).messages.where(:speaker_id => params[:speaker])
-    elsif params[:cat] && params[:book]
-      ms = @categories.find(params[:cat]).messages.book(params[:book])
-    elsif params[:speaker] && params[:book]
-      ms = @speaker.find(params[:speaker]).messages.book(params[:book]) 
-    elsif params[:cat]
-      ms = @categories.find(params[:cat]).messages
-    elsif params[:speaker]
-      ms = @speakers.find(params[:speaker]).messages
-    elsif params[:book]
-      ms = ms.book(params[:book])
-    end
-    
-    @count = ms.count
-
-    ms = ms.order("updated_at DESC")
-
-    #pagination
-    if params[:view] == "list"
-      @messages = ms.paginate(page: params[:page], per_page: 30)
-    elsif params[:view] == "calendar"
-      @messages = ms
-    else
-      @messages = ms.paginate(page: params[:page], per_page: 10)
-    end
+    @messages = current_user.messages.order("updated_at DESC")
 
     #respond_to do |format|
     #  format.csv { render :text => current_user.messages.download_csv }

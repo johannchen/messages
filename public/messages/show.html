@@ -2,14 +2,20 @@
   <div class="span8">
     <h4>{{message.title}}</h4>
     <p>
-    By <span class="label">{{message.speaker_name}}</span> in category <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span> listened on {{message.listened_on | date:'MM/dd/yy'}}
+    By <span class="label">{{message.speaker_name}}</span> 
+    <span ng-show="message.category_names">
+      in category <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span>
+    </span>
+    listened on {{message.listened_on | date:'MM/dd/yy'}}
+    <a href="{{message.url}}" target="_blank" ng-show="message.url"><i class="icon-share" title="resource link"></i></a>
+    <a href="#/edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>
     </p>
     <p><strong>Summary</strong><br />
     {{message.summary}}
     </p>
     <ul class="unstyled">
       <li ng-repeat="verse in message.verses">
-      <p><strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">&times;</a><br />
+      <p><strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">&times;</a> <a ng-click="favorVerse(verse)" ng-hide="verse.favorite || versesChanged"><i class="icon-heart" title="favor verse"></i></a><br />
       {{verse.content}}
       </p>
       </li>

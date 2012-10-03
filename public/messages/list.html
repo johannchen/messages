@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="span8">
+  <div class="span8" ng-init="limit=10">
     <ul class="thumbnails">
-      <li class="span8 thumbnail" ng-repeat="message in messages | filter:search">
+      <li class="span8 thumbnail" ng-repeat="message in messages | filter:search | limitTo:limit">
       <article>
       <header>
-      <strong><a href="#/{{message.id}}">{{message.title}}</a></strong>
+      <strong><a href="#/show/{{message.id}}">{{message.title}}</a></strong>
       <i class="icon-info-sign" title="listened on  {{message.listened_on | date:'MM/dd/yy'}}"></i> 
       <span class="label" title="speaker">{{message.speaker_name}}</span>
-      <a href="{{message.url}}" ng-show="message.url"><i class="icon-share" title="link"></i></a>
+      <a href="{{message.url}}" target="_blank" ng-show="message.url"><i class="icon-share" title="resource link"></i></a>
       <a href="#edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>
       <span ng-hide="isEditingMessageCategories">
         <a ng-click="editMessageCategories()"><i class="icon-list" title="categorize message"></i></a>
@@ -31,14 +31,17 @@
       </article> 
       </li>
     </ul>
+    <div id="load-more" ng-show="limit < resultCount">
+      <button class="btn" ng-click="limit=limit+10"><i class="icon-arrow-down"></i>Load More</button>
+    </div>
   </div>
   <div class="span4">
     <div class="row">
       <div class="span4">
         <form class="form-inline">
           <a class="btn" href="#new">New Message</a>
-          <input type="text" class="span2" placeholder="search" ng-model="search.$">
-          <span class="badge" title="result">{{(messages | filter:search).length}}</span> /
+          <input type="text" class="input-small" placeholder="search" ng-model="search.$">
+          <span class="badge" title="result">{{resultCount = (messages | filter:search).length}}</span> /
           <span class="badge badge-inverse" title="total">{{messages.length}}</span>
 
         </form>

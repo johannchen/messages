@@ -8,7 +8,7 @@ messagesApp.config ($routeProvider) ->
   $routeProvider.when('/',
     controller: 'MessageListCtrl'
     templateUrl: '/messages/list.html'
-  ).when('/:messageId',
+  ).when('/show/:messageId',
     controller: 'MessageShowCtrl'
     templateUrl: '/messages/show.html'
   ).when('/new',
@@ -20,20 +20,5 @@ messagesApp.config ($routeProvider) ->
   ).otherwise redirectTo: '/'
 
 jQuery ->
-  $("#calendar").fullCalendar
-    header:
-      left: 'prev,next today'
-      center: 'title'
-      right: 'month,basicWeek'
-    defaultView: 'month'
-    editable: false
-    height: 500
-    loading: (bool) -> 
-      if bool then $("#loading").show() else $("#loading").hide()
-    events: "/messages/calendar"
-    eventClick: (event) ->
-      window.location = '/messages/' + event.id
-      false
-
   $("#message_note").cleditor()
 

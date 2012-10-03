@@ -74,7 +74,7 @@ angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, M
       t.name = category.name
       t.$update()
 
-angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $route, $routeParams, Message, ESV) ->
+angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $route, $routeParams, Message, Verse, ESV) ->
   $scope.versesChanged = false 
   $scope.message = Message.get {message_id: $routeParams.messageId}
   $scope.addVerse = ->
@@ -88,6 +88,12 @@ angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $route, $ro
     refIndex = $scope.message.verse_refs.indexOf(verse.ref)
     $scope.message.verse_refs.splice(refIndex, 1)
     $scope.versesChanged = true
+  $scope.favorVerse = (verse) ->
+    @verse.favorite = true
+    v = Verse.get {verse_id: verse.id}, ->
+      v.favorite = true
+      v.$update()
+
   $scope.saveVerses = ->
     $scope.message.$update()
     $scope.versesChanged = false 
