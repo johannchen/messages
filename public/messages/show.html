@@ -6,7 +6,7 @@
     <span ng-show="message.category_names">
       in category <span class="label label-info" ng-repeat="category_name in message.category_names">{{category_name}}</span>
     </span>
-    listened on {{message.listened_on | date:'MM/dd/yy'}}
+    listened on {{message.listened_on | date: 'mediumDate'}}
     <a href="{{message.url}}" target="_blank" ng-show="message.url"><i class="icon-share" title="resource link"></i></a>
     <a href="#/edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>
     </p>

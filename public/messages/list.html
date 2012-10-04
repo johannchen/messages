@@ -5,7 +5,7 @@
       <article>
       <header>
       <strong><a href="#/show/{{message.id}}">{{message.title}}</a></strong>
-      <i class="icon-info-sign" title="listened on  {{message.listened_on | date:'MM/dd/yy'}}"></i> 
+      <i class="icon-info-sign" title="listened on  {{message.listened_on | date: 'mediumDate'}}"></i> 
       <span class="label" title="speaker">{{message.speaker_name}}</span>
       <a href="{{message.url}}" target="_blank" ng-show="message.url"><i class="icon-share" title="resource link"></i></a>
       <a href="#edit/{{message.id}}"><i class="icon-edit" title="edit message"></i></a>

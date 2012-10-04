@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817184109) do
+ActiveRecord::Schema.define(:version => 20121004013342) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(:version => 20120817184109) do
 
   create_table "messages", :force => true do |t|
     t.string   "title"
-    t.date     "mdate"
+    t.datetime "mdate"
     t.text     "summary"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "speaker_id"
-    t.date     "listened_on"
+    t.datetime "listened_on"
     t.integer  "user_id"
     t.text     "note"
   end
