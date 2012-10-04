@@ -15,6 +15,7 @@ directiveModule.directive 'bibleAutocomplete', ->
   link: (scope, element, attrs) ->
     element.autocomplete source: bible
 
+###
 directiveModule.directive 'fullCalendar', ->
   restrict: 'A'
   replace: true
@@ -38,4 +39,4 @@ directiveModule.directive 'fullCalendar', ->
         false
 
 
-
+    ###

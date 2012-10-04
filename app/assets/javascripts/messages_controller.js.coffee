@@ -111,6 +111,7 @@ angular.module('messagesApp').controller 'MessageCreateCtrl', ($scope, $location
 angular.module('messagesApp').controller 'MessageEditCtrl', ($scope, $location, $routeParams, Message, Speakers) ->
   Message.get {message_id: $routeParams.messageId}, (m) ->
     $scope.message = m
+    $scope.message.listened_on = new Date(m.listened_on)
   $scope.speakers = Speakers.query()
   $scope.saveMessage = ->
     $scope.message.$update ->
