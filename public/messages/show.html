@@ -13,6 +13,9 @@
     <p><strong>Summary</strong><br />
     {{message.summary}}
     </p>
+    <p ng-show="message.note"><strong>Note</strong><br />
+    {{message.note}}
+    </p>
     <ul class="unstyled">
       <li ng-repeat="verse in message.verses">
       <p><strong>{{verse.ref}}</strong> <a ng-click="removeVerse(verse)">&times;</a> <a ng-click="favorVerse(verse)" ng-hide="verse.favorite || versesChanged"><i class="icon-heart" title="favor verse"></i></a><br />

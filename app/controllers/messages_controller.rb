@@ -8,9 +8,11 @@ class MessagesController < ApplicationController
 
     @messages = current_user.messages.order("updated_at DESC")
 
-    #respond_to do |format|
-    #  format.csv { render :text => current_user.messages.download_csv }
-    #end
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { render :text => current_user.messages.download_csv }
+    end
   end
 
   def show

@@ -1,11 +1,20 @@
 <div class="row">
-  <div class="span12">
+  <div class="span3">
     <ul class="nav nav-pills" ng-init="summaryActive='active'">
       <li ng-class="summaryActive"><a ng-click="calendarView=false; summaryActive='active'; calendarActive=''">Summary View</a></li>
       <li ng-class="calendarActive"><a ng-click="calendarView=true; summaryActive=''; calendarActive='active'">Calendar View</a></li>
     </ul>
-  <div>
-<div>
+  </div>
+  <div class="span9" ng-hide="calendarView">
+    <form class="form-inline">
+      <a class="btn" href="#new">New Message</a>
+      <input type="text" class="span2" placeholder="search" ng-model="search.$">
+      <span class="badge" title="result">{{resultCount = (messages | filter:search).length}}</span> /
+      <span class="badge badge-inverse" title="total">{{messages.length}}</span>
+      <a class="btn pull-right" href="/messages.csv">Download Messages</a>
+    </form>
+  </div>
+</div>
 <div class="row" ng-show="calendarView">
   <div class="span12">
     <div dev-calendar ng-model="events"></div>
@@ -48,80 +57,65 @@
       <button class="btn" ng-click="limit=limit+10"><i class="icon-arrow-down"></i>Load More</button>
     </div>
   </div>
-  <div class="span4">
-    <div class="row">
-      <div class="span4">
-        <form class="form-inline">
-          <a class="btn" href="#new">New Message</a>
-          <input type="text" class="input-small" placeholder="search" ng-model="search.$">
-          <span class="badge" title="result">{{resultCount = (messages | filter:search).length}}</span> /
-          <span class="badge badge-inverse" title="total">{{messages.length}}</span>
+  <div class="span2">
+    <h4>Categories</h4>
+    <!-- TODO: create partial DRY -->
+    <ul class="unstyled">
+      <li ng-repeat="category in categories">
+      <div class="side_item">
+        <span class="pointer label {{labelColor | labelCategory:category.active}}" ng-click="filterByCategory(category)" ng-hide="editMode">{{category.name}}</span>
+        <span class="pointer edit" ng-hide="editMode" ng-click="removeCategory(category)">&times;</span>  
+        <span class="pointer edit" ng-hide="editMode" ng-click="editMode=true">
+          <i class="icon-edit"></i>
+        </span> 
 
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span2">
-        <h4>Categories</h4>
-        <!-- TODO: create partial DRY -->
-        <ul class="unstyled">
-          <li ng-repeat="category in categories">
-          <div class="side_item">
-            <span class="pointer label {{labelColor | labelCategory:category.active}}" ng-click="filterByCategory(category)" ng-hide="editMode">{{category.name}}</span>
-            <span class="pointer edit" ng-hide="editMode" ng-click="removeCategory(category)">&times;</span>  
-            <span class="pointer edit" ng-hide="editMode" ng-click="editMode=true">
-              <i class="icon-edit"></i>
-            </span> 
-
-            <form ng-show="editMode">
-              <div class="input-append">
-                <input type="text" class="input-small" ng-model="category.name" />
-                <button class="btn btn-primary" ng-click="editMode=false; updateCategory(category)">Save</button>
-                <button class="btn" ng-click="editMode=false">Cancel</button>
-              </div>
-            </form>
-          </div>
-          </li>
-        </ul>
-        <form>
+        <form ng-show="editMode">
           <div class="input-append">
-            <input type="text" class="input-small" placeholder="new category" ng-model="newCategory.name">
-            <button class="btn btn-primary" ng-click="addCategory()">Add</button>
+            <input type="text" class="input-small" ng-model="category.name" />
+            <button class="btn btn-primary" ng-click="editMode=false; updateCategory(category)">Save</button>
+            <button class="btn" ng-click="editMode=false">Cancel</button>
           </div>
         </form>
       </div>
-      <div class="span2">
-        <h4>Speakers</h4> 
-        <ul class="unstyled">
-          <li ng-repeat="speaker in speakers">
-          <div class="side_item">
-            <div ng-hide="editMode">
-              <span class="pointer label {{labelColor | labelSpeaker:speaker.active}}" ng-click="filterBySpeaker(speaker)">{{speaker.name}}</span>
-              <span class="pointer edit" ng-click="removeSpeaker(speaker)">&times;</span>  
-              <span class="pointer edit" ng-click="editMode=true">
-                <i class="icon-edit"></i>
-              </span> 
-            </div>
+      </li>
+    </ul>
+    <form>
+      <div class="input-append">
+        <input type="text" class="input-small" placeholder="new category" ng-model="newCategory.name">
+        <button class="btn btn-primary" ng-click="addCategory()">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="span2">
+    <h4>Speakers</h4> 
+    <ul class="unstyled">
+      <li ng-repeat="speaker in speakers">
+      <div class="side_item">
+        <div ng-hide="editMode">
+          <span class="pointer label {{labelColor | labelSpeaker:speaker.active}}" ng-click="filterBySpeaker(speaker)">{{speaker.name}}</span>
+          <span class="pointer edit" ng-click="removeSpeaker(speaker)">&times;</span>  
+          <span class="pointer edit" ng-click="editMode=true">
+            <i class="icon-edit"></i>
+          </span> 
+        </div>
 
-            <form ng-show="editMode">
-              <div class="input-append">
-                <input type="text" class="input-small" ng-model="speaker.name" />
-                <button class="btn btn-primary" ng-click="editMode=false; updateSpeaker(speaker)">Save</button>
-                <button class="btn" ng-click="editMode=false">Cancel</button>
-              </div>
-            </form>
-
-          </div>
-          </li>
-        </ul> 
-        <form>
+        <form ng-show="editMode">
           <div class="input-append">
-            <input type="text" class="input-small" placeholder="new speaker" ng-model="newSpeaker.name">
-            <button class="btn btn-primary" ng-click="addSpeaker()">Add</button>
+            <input type="text" class="input-small" ng-model="speaker.name" />
+            <button class="btn btn-primary" ng-click="editMode=false; updateSpeaker(speaker)">Save</button>
+            <button class="btn" ng-click="editMode=false">Cancel</button>
           </div>
         </form>
+
       </div>
-    </div>
+      </li>
+    </ul> 
+    <form>
+      <div class="input-append">
+        <input type="text" class="input-small" placeholder="new speaker" ng-model="newSpeaker.name">
+        <button class="btn btn-primary" ng-click="addSpeaker()">Add</button>
+      </div>
+    </form>
   </div>
 </div>
 
