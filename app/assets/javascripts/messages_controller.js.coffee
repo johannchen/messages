@@ -1,10 +1,11 @@
-angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Messages, Message, Categories, Speakers, Speaker) ->
+angular.module('messagesApp').controller 'MessageListCtrl', ($scope, Calendar, Messages, Message, Categories, Speakers, Speaker) ->
   $scope.search = {}
   $scope.newSpeaker = {}
   $scope.messages = Messages.query()
   $scope.categories = Categories.query()
   $scope.speakers = Speakers.query()
-
+  $scope.events = Calendar.query()
+    
   $scope.removeMessage = (message) ->
     if confirm('Are you sure to remove this message?')
       index = $scope.messages.indexOf(message)

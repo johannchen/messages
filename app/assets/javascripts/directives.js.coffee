@@ -15,15 +15,15 @@ directiveModule.directive 'bibleAutocomplete', ->
   link: (scope, element, attrs) ->
     element.autocomplete source: bible
 
-###
 directiveModule.directive 'fullCalendar', ->
   restrict: 'A'
   replace: true
   transclude: true
-  scope: { events: '=' }
+  #scope: { events: '=' }
   template: "<div id=\"calendar\"></div>"
   link: (scope, element, attrs) ->
-    scope.calendar = $('#calendar').fullCalendar
+    console.log(scope.events)
+    element.fullCalendar
       header:
         left: 'prev,next today'
         center: 'title'
@@ -31,12 +31,81 @@ directiveModule.directive 'fullCalendar', ->
       defaultView: 'month'
       editable: false
       height: 500
-      loading: (bool) -> 
-        if bool then $("#loading").show() else $("#loading").hide()
+      #loading: (bool) -> 
+      #if bool then $("#loading").show() else $("#loading").hide()
+      #events: '/messages/calendar.json' 
       events: scope.events
+      #events: [{title: 'all day event', start: new Date(), allDay: true}] 
       eventClick: (event) ->
         window.location = '#/show/' + event.id
         false
 
+#
+#*  Implementation of JQuery FullCalendar 
+#*  inspired by http://arshaw.com/fullcalendar/ 
+#*  
+#*  Basic Calendar Directive that takes in live events as the ng-model and then calls fullCalendar(options) to render the events correctly. 
+#*  
+#*  Authors
+#*  @andyjoslin
+#*  @joshkurz
+#
+directiveModule.directive "devCalendar", ["ui.config", "$parse", (uiConfig, $parse) ->
+  uiConfig.devCalendar = uiConfig.devCalendar or {}
+  
+  #returns the calendar
+  require: "ngModel"
+  restrict: "A"
+  scope:
+    eventChanged: "=changed"
+    events: "=ngModel"
 
-    ###
+  link: (scope, elm, $attrs) ->
+    
+    #update the calendar with the correct options
+    update = ->
+      
+      #IF the calendar has options added then render them.
+      expression = undefined
+      options =
+        header:
+          left: "prev,next today"
+          center: "title"
+          right: "month,agendaWeek,agendaDay"
+
+        
+        # add event name to title attribute on mouseover. 
+        eventMouseover: (event, jsEvent, view) ->
+          $(jsEvent.target).attr "title", event.title  if view.name isnt "agendaDay"
+
+        
+        # Calling the events from the scope through the ng-model binding attribute. 
+        events: scope.events
+        # jc customized
+        eventClick: (event) ->
+          window.location = '#/show/' + event.id
+          false
+
+      if $attrs.devCalendar
+        expression = scope.$eval($attrs.devCalendar)
+      else
+        expression = {}
+      
+      #Set the options from the directive's configuration
+      angular.extend options, uiConfig.devCalendar, expression
+      elm.html("").fullCalendar options
+    ngModel = $parse($attrs.ngModel)
+    editEvents = []
+    update()
+    
+    #
+    #            *
+    #            *    This is where I get confused. Not sure why you can only watch events.length to update the scope accordingly. If events is watched The console blows to shreds and nothing happens. 
+    #            *    
+    #            *
+    #            
+    scope.$watch "events.length", ((newVal, oldVal) ->
+      console.log "model changed:", newVal, oldVal
+      update()
+    ), true
+]

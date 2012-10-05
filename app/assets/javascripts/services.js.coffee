@@ -1,6 +1,9 @@
 serviceModule = angular.module 'services', ['ngResource']
 serviceModule.value 'version', '0.1'
 
+serviceModule.factory 'Calendar', ($resource) ->
+  $resource '/messages/calendar.json'
+
 serviceModule.factory 'Messages', ($resource) ->
   $resource 'messages.json'
 
