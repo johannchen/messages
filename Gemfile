@@ -31,7 +31,7 @@ gem 'omniauth-facebook'
 gem 'cancan' 
 
 # in place edit
-gem 'best_in_place'
+#gem 'best_in_place'
 
 # active link
 gem 'active_link_to'

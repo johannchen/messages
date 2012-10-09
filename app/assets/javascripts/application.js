@@ -12,7 +12,6 @@
 //= require fullcalendar
 //= require cleditor
 //= require jquery.purr
-//= require best_in_place
 //= require select2
 //= require diff_match_patch
 //= require angular
