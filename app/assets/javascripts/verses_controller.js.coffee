@@ -56,7 +56,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     $scope.isAddingVerse = true 
 
   $scope.removeVerse = (verse) ->
-    if confirm('Are you sure to remove this verse?')
+    if confirm('Are you sure to remove this verse? It will remove its association to messages')
       index = $scope.verses.indexOf(verse)
       $scope.verses.splice(index, 1)
       Verse.remove {verse_id: verse.id}
@@ -66,6 +66,14 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
       v.ref = verse.ref
       v.content = verse.content
       v.$update()
+
+  $scope.unfavorVerse = (verse) ->
+    if confirm('Are you sure to unfavor this verse? It will not show up in the verses page')
+      index = $scope.verses.indexOf(verse)
+      $scope.verses.splice(index, 1)
+      v = Verse.get {verse_id: verse.id}, ->
+        v.favorite = false 
+        v.$update()
 
   $scope.editVerseCategories = ->
     @isEditingVerseCategories = true

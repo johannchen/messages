@@ -44,14 +44,13 @@
           <li class="span5" ng-show="isAddingVerse">
             <form name="newVerseForm" class="span5 thumbnail">
               <div class="form-inline">
-                <input type="text" class="span2" placeholder="verse reference" autofocus="autofocus" ng-model="newVerse.ref" bible-autocomplete>
-                <button class="btn" ng-click="getESV()">Load ESV</button>
+                <input type="text" name="verse_ref" class="span2" required placeholder="verse reference" autofocus="autofocus" ng-model="newVerse.ref" bible-autocomplete>
               </div>
               <button class="btn btn-large close pull-right"  ng-click="cancelNewVerse()">&times;</button>  
               <hr />
-              <textarea rows="5" class="span4 input-xlarge"  ng-model="newVerse.content" placeholder="verse content"></textarea><br />
-              <button ng-click="addVerseClose()" class="btn btn-primary">Add Verse</button>
-              <button ng-click="addVerseOpen()" class="btn btn-success">Add Another</button>
+              <textarea rows="5" class="span4 input-xlarge"  ng-model="newVerse.content" placeholder="verse content by default ESV (can be override)"></textarea><br />
+              <button ng-click="addVerseClose()" class="btn btn-primary" ng-disabled="newVerseForm.$invalid">Add Verse</button>
+              <button ng-click="addVerseOpen()" class="btn btn-success" ng-disabled="newVerseForm.$invalid">Add Another</button>
               <button ng-click="cancelNewVerse()" class="btn">Cancel</button>
             </form>
           </li>
@@ -60,7 +59,10 @@
           <div ng-model="verseColor" class="span5 thumbnail {{verseColor | verseBgColor:verse.memorized}}">
             <div class="verse-header">
               <span ng-hide="editMode">{{verse.ref}}</span>
-              <input type="text" class="span2" ng-model="verse.ref" ng-show="editMode" />
+              <span ng-show="editMode">
+                <input type="text" class="span2" ng-model="verse.ref" />
+                <i class="icon-thumbs-down pointer" title="unfavor verse" ng-click="editMode=false; unfavorVerse(verse)"></i>
+              </span>
               <span ng-hide="editMode">
               <i class="icon-arrow-right pointer" title="to memorize" ng-click="showMemorizeForm()" ng-model="isMemorizing" ng-hide="isMemorizing"></i> 
               <i class="icon-arrow-left pointer" title="to review" ng-click="hideMemorizeForm()" ng-show="isMemorizing"></i> 
@@ -68,10 +70,11 @@
               <span title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}" ng-show="verse.memorized">{{verse.memorized}}</span>
               <i class="icon-edit pointer" title="edit verse" ng-click="editMode=true"></i>
               <i class="icon-list" title="categorize verse" ng-hide="isEditingVerseCategories" ng-click="editVerseCategories()"></i>
-            </span>
               <span class="label label-info" ng-hide="isEditingVerseCategories" ng-repeat="category in verse.category_names">{{category}}</span>
-                           
-            <button class="btn btn-large close pull-right" ng-click="removeVerse(verse)">&times;</button>  
+            </span>
+              <span class="pull-right">            
+                <button class="btn btn-large close" title="remove verse" ng-click="removeVerse(verse)">&times;</button>  
+              <span>
           </div>
           <div ng-show="isEditingVerseCategories">
             <select multiple class="span3" ng-model="verse.category_names" ui-select2>
@@ -86,7 +89,7 @@
               <span ng-hide="editMode">{{verse.content}}</span>
               <div ng-show="editMode">
                 <textarea rows="10" class="span4 input-xlarge" ng-model="verse.content"></textarea><br />
-                <button class="btn-primary" ng-click="editMode=false; updateVerse(verse)">Save</button>
+                <button class="btn btn-primary" ng-click="editMode=false; updateVerse(verse)">Save</button>
                 <button class="btn" ng-click="editMode=false">Cancel</button>
               </div>
             </div>

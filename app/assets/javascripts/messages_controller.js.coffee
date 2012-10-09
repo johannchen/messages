@@ -98,6 +98,7 @@ angular.module('messagesApp').controller 'MessageShowCtrl', ($scope, $route, $ro
   $scope.saveVerses = ->
     $scope.message.$update()
     $scope.versesChanged = false 
+    $route.reload()
   $scope.cancel = ->
     $route.reload()
 

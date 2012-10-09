@@ -44,7 +44,7 @@ class Verse < ActiveRecord::Base
  
   def esv_passage
     uri = esv_uri
-    open(uri).read
+    open(uri).read.strip
   end
 
   def content
