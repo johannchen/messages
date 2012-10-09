@@ -10,8 +10,6 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.autocomplete
 //= require fullcalendar
-//= require cleditor
-//= require jquery.purr
 //= require select2
 //= require diff_match_patch
 //= require_tree .

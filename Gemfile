@@ -17,8 +17,8 @@ gem 'pg'
 # gem 'sunspot_rails'
 
 # pagination
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+#gem 'will_paginate'
+#gem 'will_paginate-bootstrap'
 
 # authentication
 gem 'omniauth'
@@ -31,13 +31,13 @@ gem 'omniauth-facebook'
 gem 'cancan' 
 
 # in place edit
-gem 'best_in_place'
+#gem 'best_in_place'
 
 # active link
 gem 'active_link_to'
 
 # angular js
-gem 'angularjs-rails'
+#gem 'angularjs-rails'
 
 # select2
 gem 'select2-rails'
@@ -50,7 +50,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'twitter-bootstrap-rails'
-gem 'cleditor_rails', "~> 0.0.3"
+#gem 'cleditor_rails', "~> 0.0.3"
 
 # Gems used only for assets and not required
 # in production environments by default.
