@@ -14,7 +14,6 @@
 //= require jquery.purr
 //= require select2
 //= require diff_match_patch
-//= require angular
 //= require angular-resource
 //= require_tree .
 

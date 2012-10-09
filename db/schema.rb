@@ -17,14 +17,14 @@ ActiveRecord::Schema.define(:version => 20121004013342) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
 
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20121004013342) do
     t.datetime "mdate"
     t.text     "summary"
     t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "speaker_id"
     t.datetime "listened_on"
     t.integer  "user_id"
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20121004013342) do
   create_table "speakers", :force => true do |t|
     t.string   "name"
     t.string   "church"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.string   "link"
   end
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20121004013342) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "name"
   end
 
