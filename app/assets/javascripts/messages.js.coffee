@@ -1,11 +1,7 @@
-messagesApp = angular.module 'messagesApp', ['ui', 'directives', 'filters', 'services']
-# allow CSRF
-messagesApp.config ['$httpProvider', ($httpProvider) ->
+angular.module('messagesApp', ['ui', 'directives', 'filters', 'services']
+).config(['$httpProvider', ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-]
-
-
-messagesApp.config ($routeProvider) ->
+]).config(['$routeProvider', ($routeProvider) ->
   $routeProvider.when('/',
     controller: 'MessageListCtrl'
     templateUrl: '/messages/list.html'
@@ -19,3 +15,4 @@ messagesApp.config ($routeProvider) ->
     controller: 'MessageEditCtrl'
     templateUrl: '/messages/form.html'
   ).otherwise redirectTo: '/'
+])
