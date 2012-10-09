@@ -37,7 +37,7 @@ gem 'cancan'
 gem 'active_link_to'
 
 # angular js
-#gem 'angularjs-rails'
+gem 'angularjs-rails'
 
 # select2
 gem 'select2-rails'

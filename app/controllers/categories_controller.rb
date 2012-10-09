@@ -3,19 +3,10 @@ class CategoriesController < ApplicationController
 
   def index
     @category = Category.new
-    if params[:term]
-      # jquery autocomplete
-      @categories = current_user.categories.where("name like ?", "%#{params[:term]}%") if current_user.categories
-    elsif mobile_device?
-      @categories = current_user.categories.order(:name)
-    else
-      cats = current_user.categories
-      @count = cats.count
-      @categories = cats.order(:name).paginate(page: params[:page], per_page: 30) 
-    end
+    @categories = current_user.categories.order(:name)
     respond_to do |format|
       format.html
-      format.json { render json: @categories.order(:name), only: [:id, :name] }
+      format.json { render json: @categories, only: [:id, :name] }
     end
   end
 

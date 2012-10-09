@@ -11,6 +11,8 @@
 //= require jquery.ui.autocomplete
 //= require fullcalendar
 //= require select2
+//= require angular
+//= require angular-resource
 //= require diff_match_patch
 //= require_tree .
 

@@ -1,8 +1,8 @@
 messagesApp = angular.module 'messagesApp', ['ui', 'directives', 'filters', 'services']
 # allow CSRF
-messagesApp.config [ "$httpProvider", (provider) ->
-  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-]
+messagesApp.config  ($httpProvider) ->
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+
 
 messagesApp.config ($routeProvider) ->
   $routeProvider.when('/',
@@ -18,7 +18,3 @@ messagesApp.config ($routeProvider) ->
     controller: 'MessageEditCtrl'
     templateUrl: '/messages/form.html'
   ).otherwise redirectTo: '/'
-
-jQuery ->
-  $("#message_note").cleditor()
-
