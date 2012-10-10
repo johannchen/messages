@@ -5,6 +5,7 @@
  *= require jquery.ui.datepicker
  *= require jquery.ui.autocomplete
  *= require select2
+ *= require angular-ui
  *= require_self
  *= require_tree . 
 */

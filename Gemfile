@@ -43,6 +43,7 @@ gem 'angularjs-rails'
 gem 'select2-rails'
 # angular ui
 #gem 'angular-ui-rails', github: 'mikepinde/angular-ui-rails'
+gem 'angular-ui-rails'
 
 # json builder
 gem 'jbuilder'
