@@ -6,15 +6,15 @@
     </ul>
   </div>
   <div class="span8">
+    <div class="form-inline pull-right">
     <span ng-hide="calendarView">
-      <input type="text" class="span2" placeholder="search" ng-model="search.$">
       <span class="badge" title="result">{{resultCount = (messages | filter:search).length}}</span> /
       <span class="badge badge-inverse" title="total">{{messages.length}}</span>
+      <input type="text" class="span2" placeholder="search" ng-model="search.$">
     </span>
-    <span class="pull-right">
       <a class="btn " href="/messages.csv">Download Messages</a>
       <a class="btn" href="#new">New Message</a>
-    </span>
+    </div>
   </div>
 </div>
 <div class="row" ng-show="calendarView">
