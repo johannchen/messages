@@ -56,7 +56,7 @@
   </div><!--/content-->
   <footer>
   <p>&copy; Gracedimension 2012
-     <% if current_user.admin? %>
+     <% if current_user and current_user.admin? %>
        [<%= User.count %>]
      <% end %>
   </p>
