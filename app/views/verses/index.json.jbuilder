@@ -1,7 +1,11 @@
 json.array!(@verses) do |json, verse|
   json.id verse.id
   json.ref verse.ref
-  json.content verse.content
+  if verse.content.nil?
+    json.content verse.esv_passage
+  else
+    json.content verse.content
+  end
   json.favorite verse.favorite
   json.memorized verse.memorized
   json.last_memorized_at verse.last_memorized_at

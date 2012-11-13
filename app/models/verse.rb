@@ -8,12 +8,13 @@ class Verse < ActiveRecord::Base
   attr_accessible :ref, :content, :favorite, :memorized, :last_memorized_at, :category_names
 
   validates_presence_of :ref, :user
-  validates_uniqueness_of :ref, scope: :user_id 
+  #validates_uniqueness_of :ref, scope: :user_id 
 
   scope :favorites, where(:favorite => true)
   scope :book, lambda { |book| where("ref like ?", "%#{book}%") }
 
   attr_accessor :category_names
+  #attr_writer :content
   after_save :assign_categories
   
   def self.esv_api(passage)
@@ -47,10 +48,10 @@ class Verse < ActiveRecord::Base
     open(uri).read.strip
   end
 
-  def content
-    @content || esv_passage
-  end
-
+  #def content
+  #  @content || esv_passage
+  #end
+  
   def category_names
     @category_names || categories.map(&:name)
   end
