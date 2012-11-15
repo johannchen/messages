@@ -1,4 +1,4 @@
-angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Verse, Categories, Category) ->
+angular.module('versesApp').controller 'VersesCtrl', ($scope, Verses, Verse, Categories, Category, ESV) ->
   $scope.search = {} 
   $scope.newVerse = {} 
   $scope.verses = Verses.query() 
@@ -22,7 +22,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
 
   $scope.progress = ->
     $scope.memorizedCount() / $scope.verses.length * 100
-
+    ###
   $scope.getESV = ->
     esvUrl = '/verses/api/' + $scope.newVerse.ref + '.json'
     $http(
@@ -32,7 +32,7 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
       $scope.newVerse.content = data.content
     ).error (data, status) ->
       $scope.newVerse.content = "Failed to load ESV"
-
+      ###
   $scope.showNewVerseForm = ->
     $scope.isAddingVerse = true
 
@@ -44,6 +44,9 @@ angular.module('versesApp').controller 'VersesCtrl', ($scope, $http, Verses, Ver
     $scope.newVerse.favorite = true
     v = new Verses($scope.newVerse)
     v.$save (verse) ->
+      if not verse.content?
+        esv_verse = ESV.get {ref: verse.ref}, ->
+          verse.content = esv_verse.content
       $scope.verses.unshift(verse)
     $scope.newVerse = {}
 
