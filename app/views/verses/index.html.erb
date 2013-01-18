@@ -64,14 +64,14 @@
                 <i class="icon-thumbs-down pointer" title="unfavor verse" ng-click="editMode=false; unfavorVerse(verse)"></i>
               </span>
               <span ng-hide="editMode">
-              <i class="icon-arrow-right pointer" title="to memorize" ng-click="showMemorizeForm()" ng-model="isMemorizing" ng-hide="isMemorizing"></i> 
-              <i class="icon-arrow-left pointer" title="to review" ng-click="hideMemorizeForm()" ng-show="isMemorizing"></i> 
-              <i class="icon-info-sign" title="created on {{verse.created_at | date:'MM/dd/yy'}}"></i>
-              <span title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}" ng-show="verse.memorized">{{verse.memorized}}</span>
-              <i class="icon-edit pointer" title="edit verse" ng-click="editMode=true"></i>
-              <i class="icon-list" title="categorize verse" ng-hide="isEditingVerseCategories" ng-click="editVerseCategories()"></i>
-              <span class="label label-info" ng-hide="isEditingVerseCategories" ng-repeat="category in verse.category_names">{{category}}</span>
-            </span>
+                <i class="icon-arrow-right pointer" title="to memorize" ng-click="showMemorizeForm()" ng-model="isMemorizing" ng-hide="isMemorizing"></i> 
+                <i class="icon-arrow-left pointer" title="to review" ng-click="hideMemorizeForm()" ng-show="isMemorizing"></i> 
+                <i class="icon-info-sign" title="created on {{verse.created_at | date:'MM/dd/yy'}}"></i>
+                <span title="last memorized on {{verse.last_memorized_at | date:'MM/dd/yy'}}" ng-show="verse.memorized">{{verse.memorized}}</span>
+                <i class="icon-edit pointer" title="edit verse" ng-click="editMode=true" ng-hide="isMemorizing"></i>
+                <i class="icon-list" title="categorize verse" ng-hide="isEditingVerseCategories" ng-click="editVerseCategories()"></i>
+                <span class="label label-info" ng-hide="isEditingVerseCategories" ng-repeat="category in verse.category_names">{{category}}</span>
+              </span>
               <span class="pull-right">            
                 <button class="btn btn-large close" title="remove verse" ng-click="removeVerse(verse)">&times;</button>  
               <span>
